@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  - Troop
+  - Grid
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2276860639
+    locked: 0
+  - name: Enemies
+    uniqueID: 1961965759
+    locked: 0
+  - name: Tokens
+    uniqueID: 3170736983
+    locked: 0
+  - name: Troops
+    uniqueID: 1125191967
+    locked: 0
+  - name: Heroes
+    uniqueID: 2062672621
+    locked: 0
+  - name: UI
+    uniqueID: 1588511409
+    locked: 0

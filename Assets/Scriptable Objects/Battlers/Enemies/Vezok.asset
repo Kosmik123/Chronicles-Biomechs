@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Vezok
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  characterModel: {fileID: 4185583433449443267, guid: f15f0f0e7251ec4489a85a03010fc477,
+    type: 3}
+  elementId: 1
+  baseAttack: 1
+  baseDefence: 1
+  baseMaxHealth: 512
+  colliderSize: 0
+  loot:
+    experience: 18
+    gold: 7
+    items: []
