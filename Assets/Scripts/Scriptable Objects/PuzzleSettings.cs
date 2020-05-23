@@ -39,6 +39,12 @@ public class PuzzleSettings : ScriptableObject
 public class PuzzleElement
 {
     public string name;
-    public Sprite sprite;
+    public Sprite maskSprite;
+
     public Color color;
+    public Color secondaryColor;
+    public Color cardColor;
+
+    public Sprite defaultBackground;
+
 }

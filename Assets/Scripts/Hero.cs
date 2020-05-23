@@ -13,9 +13,16 @@ public class Hero
     public int experience;
 
     public bool isDead;
-
+    
     public int GetMaxHealth()
     {
         return template.GetMaxHealth(level);
     }
+
+    public Sprite GetBackground()
+    {
+        return Settings.main.elements[(int)template.elementId].defaultBackground;
+    }
+
 }
+

@@ -11,12 +11,13 @@ public class HeroController : MonoBehaviour
     public Transform energyBar;
 
     [Header("Sprites")]
-    public SpriteRenderer characterRenderer ;
+    public SpriteRenderer characterRenderer;
     public SpriteRenderer backgroundRenderer;
     public SpriteMask spriteMask;
 
     [Header("States")]
     public int health;
+    public int maxHealth;
     public int energy;
 
     public int battleIndex;
@@ -24,9 +25,12 @@ public class HeroController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = hero.GetMaxHealth();
+        health = maxHealth = hero.GetMaxHealth();
+        energy = 0;
 
         SetSortingOrders();
+
+        backgroundRenderer.sprite = hero.GetBackground();
     }
 
     private void SetSortingOrders()
@@ -43,6 +47,16 @@ public class HeroController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        ResizeBars();
+    }
+
+    private void ResizeBars()
+    {
+        healthBar.localScale =
+            new Vector3(1.0f * health / hero.GetMaxHealth(),
+            healthBar.localScale.y, healthBar.localScale.z);
+        energyBar.localScale =
+                new Vector3(1.0f * energy / 100,
+                energyBar.localScale.y, energyBar.localScale.z);
     }
 }

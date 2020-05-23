@@ -154,11 +154,11 @@ public class PuzzleToken : MonoBehaviour
 
     public void UpdateSprite()
     {
-        normalSprite.sprite = Settings.main.elements[elementId].sprite;
+        normalSprite.sprite = Settings.main.elements[elementId].maskSprite;
     }
     public void UpdateSpriteImmediate()
     {
-        normalSprite.sprite = Settings.GetImmediate().elements[elementId].sprite;
+        normalSprite.sprite = Settings.GetImmediate().elements[elementId].maskSprite;
     }
     public void BeginMovingToPosition(Vector3 newPos, float timeOfMove = -1)
     {

@@ -16,6 +16,7 @@ public class Settings : MonoBehaviour
 
     public static PuzzleSettings GetImmediate()
     {
-        return FindObjectOfType<Settings>().settingsToLink;
+        main = FindObjectOfType<Settings>().settingsToLink;
+        return main;
     }
 }
