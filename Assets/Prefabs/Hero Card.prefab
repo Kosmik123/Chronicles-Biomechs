@@ -52,14 +52,15 @@ MonoBehaviour:
     level: 0
     experience: 0
     isDead: 0
+  battleIndex: 0
   healthBar: {fileID: 3090411673819532656}
   energyBar: {fileID: 8538979057785819863}
   characterRenderer: {fileID: 1959321696028232629}
   backgroundRenderer: {fileID: 1962766975336149474}
   spriteMask: {fileID: 8133324557695123402}
   health: 0
+  maxHealth: 0
   energy: 0
-  battleIndex: 0
 --- !u!1 &2291319983279006764
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,6 +500,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Health Indicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 6580645838175671286, guid: 3f2024c5f2b679b47be11ee88082c4a7,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.25895607
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f2024c5f2b679b47be11ee88082c4a7, type: 3}

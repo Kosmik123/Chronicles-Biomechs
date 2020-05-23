@@ -5,22 +5,21 @@ using UnityEngine;
 public class HeroController : MonoBehaviour
 {
     public Hero hero;
+    public int battleIndex;
 
     [Header("To Link")]
     public Transform healthBar;
     public Transform energyBar;
 
-    [Header("Sprites")]
     public SpriteRenderer characterRenderer;
     public SpriteRenderer backgroundRenderer;
     public SpriteMask spriteMask;
-
+    
     [Header("States")]
     public int health;
     public int maxHealth;
     public int energy;
 
-    public int battleIndex;
 
     // Start is called before the first frame update
     void Start()

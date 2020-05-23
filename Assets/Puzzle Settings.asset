@@ -14,23 +14,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elements:
   - name: Fire
-    sprite: {fileID: 21300000, guid: e9d4fdd76f24ca3429b5f0737b8e0435, type: 3}
+    maskSprite: {fileID: 21300000, guid: e9d4fdd76f24ca3429b5f0737b8e0435, type: 3}
     color: {r: 1, g: 0, b: 0, a: 1}
+    secondaryColor: {r: 0.9647059, g: 0.59269893, b: 0.17654121, a: 1}
+    cardColor: {r: 1, g: 0, b: 0, a: 1}
+    defaultBackground: {fileID: 21300000, guid: 0c99e6651cc40c845b2a82dbd3226a23,
+      type: 3}
   - name: Water
-    sprite: {fileID: 21300000, guid: 18d3ef843c204114f965c83bf029fda4, type: 3}
+    maskSprite: {fileID: 21300000, guid: 18d3ef843c204114f965c83bf029fda4, type: 3}
     color: {r: 0, g: 0.467031, b: 1, a: 1}
+    secondaryColor: {r: 0.561372, g: 0.69641566, b: 0.861, a: 1}
+    cardColor: {r: 0.11764707, g: 0.56078434, b: 1, a: 1}
+    defaultBackground: {fileID: 21300000, guid: 60bfc8bea72e6ae48abec865815b30a1,
+      type: 3}
   - name: Earth
-    sprite: {fileID: 21300000, guid: d72b15db972783145a26f9587bd954f2, type: 3}
+    maskSprite: {fileID: 21300000, guid: d72b15db972783145a26f9587bd954f2, type: 3}
     color: {r: 0, g: 0, b: 0, a: 1}
+    secondaryColor: {r: 0.41960788, g: 0.41176474, b: 0.34901962, a: 1}
+    cardColor: {r: 0.48235297, g: 0.48235297, b: 0.48235297, a: 1}
+    defaultBackground: {fileID: 21300000, guid: 175834ef1c5eb0344bcedf438ed9d599,
+      type: 3}
   - name: Air
-    sprite: {fileID: 21300000, guid: ae69eacd41abc9246ad5830b8e2fd2f7, type: 3}
+    maskSprite: {fileID: 21300000, guid: ae69eacd41abc9246ad5830b8e2fd2f7, type: 3}
     color: {r: 0.09840184, g: 0.8, b: 0, a: 1}
+    secondaryColor: {r: 0.79215693, g: 0.8745099, b: 0.14117648, a: 1}
+    cardColor: {r: 0.07450981, g: 1, b: 0, a: 1}
+    defaultBackground: {fileID: 0}
   - name: Stone
-    sprite: {fileID: 21300000, guid: 5f6c3d7a4db97154a9807819054e93a6, type: 3}
+    maskSprite: {fileID: 21300000, guid: 5f6c3d7a4db97154a9807819054e93a6, type: 3}
     color: {r: 0.4056604, g: 0.30358708, b: 0.112896055, a: 1}
+    secondaryColor: {r: 0.9686275, g: 0.854902, b: 0.5647059, a: 1}
+    cardColor: {r: 0.8196079, g: 0.46274513, b: 0, a: 1}
+    defaultBackground: {fileID: 21300000, guid: 2e0ecd092220aa64895ba2f3408cb84c,
+      type: 3}
   - name: Ice
-    sprite: {fileID: 21300000, guid: e8ec82e6edc13e143afd709f9caff154, type: 3}
+    maskSprite: {fileID: 21300000, guid: e8ec82e6edc13e143afd709f9caff154, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
+    secondaryColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
+    cardColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
+    defaultBackground: {fileID: 21300000, guid: 37e28864e0dc42f449f66d8da6cb98cb,
+      type: 3}
   tokens:
     prefab: {fileID: 3646977354738391838, guid: f2afb55cdb5c37142934af1a1f5069a9,
       type: 3}

@@ -15,9 +15,10 @@ MonoBehaviour:
   characterModel: {fileID: 4185583433449443267, guid: 904a37e6756a7ab47941faf797c5f312,
     type: 3}
   elementId: 0
-  baseAttack: 0
-  baseDefence: 0
-  baseMaxHealth: 0
+  professionId: 0
+  baseAttack: 2
+  baseDefence: 1
+  baseMaxHealth: 10
   rarity: 0
   attackByLevel: 
   defenceByLevel: 
