@@ -6,21 +6,21 @@ using UnityEngine;
 [System.Serializable]
 public class TokenChain
 {
-    public List<PuzzleToken> tokens;
+    public List<SwapPuzzleTokenController> tokens;
     
     public TokenChain()
     {
-        tokens = new List<PuzzleToken>();
+        tokens = new List<SwapPuzzleTokenController>();
     }
 
-    public void Add(PuzzleToken token)
+    public void Add(SwapPuzzleTokenController token)
     {
         tokens.Add(token);
     }
 
     public void Add(TokenChain other)
     {
-        foreach(PuzzleToken token in other.tokens)
+        foreach(SwapPuzzleTokenController token in other.tokens)
         {
             tokens.Add(token);
         }
@@ -35,53 +35,59 @@ public class TokenChain
     {
         if(tokens.Count == 4)
         {
-            PuzzleToken changedToken = tokens[1];
-            foreach(PuzzleToken token in tokens)
+            SwapPuzzleTokenController changedToken = tokens[1];
+            foreach(SwapPuzzleTokenController con in tokens)
             {
-                if (token.wasMoved)
+                if (con.token.wasMoved)
                 {
-                    changedToken = token;
+                    changedToken = con;
                     break;
                 }  
             }
-            changedToken.type = PuzzleToken.TokenType.BOMB;
+            changedToken.type = TokenType.BOMB;
             changedToken.hasJustChangedType = true;
         }
         else if(tokens.Count >= 5)
         {
-            PuzzleToken changedToken = tokens[0];
-            foreach (PuzzleToken token in tokens)
+            SwapPuzzleTokenController changedToken = tokens[0];
+            foreach (SwapPuzzleTokenController con in tokens)
             {
-                if (token.wasMoved)
+                if (con.token.wasMoved)
                 {
-                    changedToken = token;
+                    changedToken = con;
                     break;
                 }
             }
-            changedToken.type = PuzzleToken.TokenType.COLOR;
+            changedToken.type = TokenType.COLOR;
             changedToken.hasJustChangedType = true;
         }
     }
 }
 
 
-public class SwapController : MonoBehaviour
-{ 
-    public static SwapController main;
-
-    private PuzzleGrid grid;
-
-    [Header("Swapped Tokens")]
-    public PuzzleToken selectedToken;
-    public List<TokenChain> tokenChains = new List<TokenChain>();
-
-    [Header("Settings")]
-    public bool debugMode;
+public class PuzzleController : MonoBehaviour
+{
+    public PuzzleGrid grid;
 
     [Header("States")]
     public bool hasJustSwapped;
     public bool matchFound;
     public bool hasJustDestroyed;
+
+}
+
+public class SwapController : PuzzleController
+{ 
+    public static SwapController main;
+
+
+    [Header("Swapped Tokens")]
+    public SwapPuzzleTokenController selectedToken;
+    public List<TokenChain> tokenChains = new List<TokenChain>();
+
+    [Header("Settings")]
+    public bool debugMode;
+
 
     private void Awake()
     {
@@ -118,21 +124,21 @@ public class SwapController : MonoBehaviour
 
                 if (matchFound)
                 {
-                    grid.ChangeMatchedToTroops();
+                    ChangeMatchedToTroops();
                     tokenChains.Clear();
                 }
             }
         }
     }
 
-    public void AddToSwap(PuzzleToken token)
+    public void AddToSwap(SwapPuzzleTokenController swapped)
     {
-        if (selectedToken != null && token.IsNextTo(selectedToken))
+        if (selectedToken != null && swapped.token.IsNextTo(selectedToken.token))
         {
-            SwapTokens(selectedToken, token);
+            SwapTokens(selectedToken, swapped);
         }
         else
-            selectedToken = token;
+            selectedToken = swapped;
     }
 
     public void FindMatches()
@@ -143,11 +149,11 @@ public class SwapController : MonoBehaviour
         {
             for (int i = 0; i < grid.gridSize.x; i++)
             {
-                PuzzleToken token = grid.tokens[j, i];
-                if (!token.isMatched)
+                var cont = grid.tokens[j, i].GetComponent< SwapPuzzleTokenController>();
+                if (!cont.isMatched)
                 {
-                    token.isChecking = true;
-                    TokenChain chain = grid.CheckMatches(token, true);
+                    cont.isChecking = true;
+                    TokenChain chain = CheckMatches(cont, true);
                     if(chain.IsMatchFound())
                     {
                         matchFound = true;
@@ -158,69 +164,230 @@ public class SwapController : MonoBehaviour
             }
         }
 
-        foreach (PuzzleToken tok in grid.tokens)
-            tok.isChecking = false;
+        foreach (Token tok in grid.tokens)
+            tok.GetComponent<SwapPuzzleTokenController>().isChecking = false;
     }
 
     protected void MoveUnmatchedBack()
     {
-        foreach (PuzzleToken token in grid.tokens)
+        foreach (Token token in grid.tokens)
         {
-            if (token != null && token.wasMoved && !token.isMatched)
+            if (token != null && token.wasMoved)
             {
-                PuzzleToken other = grid.tokens[token.previousGridPosition.y, token.previousGridPosition.x];
-                if (other != null)
+                var tokenCont = token.GetComponent<SwapPuzzleTokenController>();
+                if (!tokenCont.isMatched)
                 {
-                    if (!other.isMatched)
+                    var other = grid.tokens[
+                        token.previousGridPosition.y,
+                        token.previousGridPosition.x].GetComponent<
+                            SwapPuzzleTokenController>();
+                    if (other != null)
                     {
-                        grid.MoveBack(token);
-                        grid.MoveBack(other);
+                        if (!other.isMatched)
+                        {
+                            grid.MoveBack(token);
+                            grid.MoveBack(other.token);
+                        }
+                        other.token.wasMoved = false;
                     }
-                    other.wasMoved = false;
+                    token.wasMoved = false;
                 }
-                token.wasMoved = false;
             }
         }
     }
 
-    public void SwapTokens(PuzzleToken token1, PuzzleToken token2)
+    public void SwapTokens(SwapPuzzleTokenController cont1, SwapPuzzleTokenController cont2)
     {
-        token1.previousGridPosition = token1.gridPosition;
-        token2.previousGridPosition = token2.gridPosition;
+        cont1.token.previousGridPosition = cont1.token.gridPosition;
+        cont2.token.previousGridPosition = cont2.token.gridPosition;
 
-        grid.SetTokenInGrid(token1, token2.previousGridPosition);
-        grid.SetTokenInGrid(token2, token1.previousGridPosition);
+        grid.SetTokenInGrid(cont1.token, cont2.token.previousGridPosition);
+        grid.SetTokenInGrid(cont2.token, cont1.token.previousGridPosition);
 
-        grid.UpdateTokenPosition(token1, Settings.main.tokens.swapTime);
-        grid.UpdateTokenPosition(token2, Settings.main.tokens.swapTime);
+        grid.UpdateTokenPosition(cont1.token, Settings.main.tokens.swapTime);
+        grid.UpdateTokenPosition(cont2.token, Settings.main.tokens.swapTime);
 
         hasJustSwapped = true;
     }
 
-    public void SwapTokensBySwipe(PuzzleToken token, Vector2Int direction)
+    public void SwapTokensBySwipe(SwapPuzzleTokenController token, Vector2Int direction)
     {
         if (direction.sqrMagnitude != 1)
         {
             Debug.Log("Wektor krótki");
             return;
         }
-        Vector2Int otherPos = token.gridPosition + direction;
+        Vector2Int otherPos = token.token.gridPosition + direction;
         if (otherPos.x < 0 || otherPos.x >= grid.gridSize.x ||
             otherPos.y < 0 || otherPos.y >= grid.gridSize.y)
             return;
 
-        PuzzleToken otherToken = grid.tokens[otherPos.y, otherPos.x];
+        SwapPuzzleTokenController otherToken = grid.tokens[otherPos.y, otherPos.x].GetComponent<SwapPuzzleTokenController>();
         SwapTokens(token, otherToken);
     }
 
 
+    public void DestroyTokensOfElement(int id)
+    {
+        foreach (Token token in grid.tokens)
+        {
+            if (token.elementId == id)
+            {
+                var cont = token.GetComponent<SwapPuzzleTokenController>();
+                cont.BeginChangeToTroops();
+            }
+        }
+    }
+
+    public void DestroyNeighbours(Vector2Int pos)
+    {
+        grid.tokens[pos.y, pos.x].GetComponent<
+            SwapPuzzleTokenController>().BeginChangeToTroops();
+        if (pos.y + 1 < grid.gridSize.y)
+            grid.tokens[pos.y + 1, pos.x].GetComponent<
+                SwapPuzzleTokenController>().BeginChangeToTroops();
+        if (pos.y > 0)
+            grid.tokens[pos.y - 1, pos.x].GetComponent<
+                SwapPuzzleTokenController>().BeginChangeToTroops();
+        if (pos.x + 1 < grid.gridSize.x)
+            grid.tokens[pos.y, pos.x + 1].GetComponent<
+                SwapPuzzleTokenController>().BeginChangeToTroops();
+        if (pos.x > 0)
+            grid.tokens[pos.y, pos.x - 1].GetComponent<
+                SwapPuzzleTokenController>().BeginChangeToTroops();
+    }
+
+
+    public TokenChain CheckMatches(SwapPuzzleTokenController cont, bool mustAddToChain = false)
+    {
+        TokenChain chain = new TokenChain();
+        bool isAdded = !mustAddToChain;
+
+        Vector2Int[] directions = new Vector2Int[] {
+            Vector2Int.right, Vector2Int.up, Vector2Int.left, Vector2Int.down };
+
+        foreach (Vector2Int dir in directions)
+        {
+            Vector2Int nearPos = cont.token.gridPosition + dir;
+            if (grid.IsInsideGrid(nearPos))
+            {
+                var near = grid.tokens[nearPos.y, nearPos.x].GetComponent<SwapPuzzleTokenController>();
+                // check nearest token 
+                if (!near.isChecking && near.token.elementId == cont.token.elementId)
+                {
+                    Vector2Int furtherPos = nearPos + dir;
+                    Vector2Int backPos = cont.token.gridPosition - dir;
+
+                    if (grid.IsInsideGrid(furtherPos))
+                    {
+                        var further = grid.tokens[furtherPos.y, furtherPos.x].GetComponent<SwapPuzzleTokenController>();
+                        if (further.token.elementId == cont.token.elementId)
+                        {
+                            if (!isAdded)
+                            {
+                                isAdded = true;
+                                chain.Add(cont);
+                            }
+
+                            cont.isMatched = true;
+                            near.isMatched = true;
+                            further.isMatched = true;
+
+                            bool checkNear = false, checkFurther = false;
+                            if (!near.isChecking)
+                            {
+                                chain.Add(near);
+                                Debug.Log("Add near 1");
+                                near.isChecking = true;
+                                checkNear = true;
+                            }
+
+                            if (!further.isChecking)
+                            {
+                                chain.Add(further);
+                                Debug.Log("Add further");
+
+                                further.isChecking = true;
+                                checkFurther = true;
+                            }
+
+                            if (checkNear)
+                                chain.Add(CheckMatches(near));
+
+                            if (checkFurther)
+                                chain.Add(CheckMatches(further));
+                        }
+                    }
+
+                    if (grid.IsInsideGrid(backPos))
+                    {
+                        var back = grid.tokens[backPos.y, backPos.x].GetComponent<SwapPuzzleTokenController>();
+                        if (back.token.elementId == cont.token.elementId)
+                        {
+                            if (!isAdded)
+                            {
+                                isAdded = true;
+                                chain.Add(cont);
+                            }
+
+                            cont.isMatched = true;
+                            near.isMatched = true;
+                            back.isMatched = true;
+
+                            bool checkNear = false, checkBack = false;
+                            if (!near.isChecking)
+                            {
+                                chain.Add(near);
+                                Debug.Log("Add near 2");
+
+                                near.isChecking = true;
+                                checkNear = true;
+                            }
+
+                            if (!back.isChecking)
+                            {
+                                chain.Add(back);
+                                Debug.Log("Add back");
+
+                                back.isChecking = true;
+                                checkBack = true;
+                            }
+
+                            if (checkNear)
+                                chain.Add(CheckMatches(near));
+
+                            if (checkBack)
+                                chain.Add(CheckMatches(back));
+                        }
+                    }
+                }
+            }
+        }
+        return chain;
+    }
 
 
 
+    public void DestroyMatchedAndCollapse()
+    {
+        ChangeMatchedToTroops();
+        grid.Collapse();
+    }
 
-
-
-
+    public void ChangeMatchedToTroops()
+    {
+        foreach (Token token in grid.tokens)
+        {
+            if (token != null)
+            {
+                var cont = token.GetComponent<SwapPuzzleTokenController>();
+                if (cont.isMatched)
+                {
+                    cont.BeginChangeToTroops();
+                }
+            }
+        }
+    }
 
 
 
@@ -252,14 +419,20 @@ public class SwapController : MonoBehaviour
                 {
                     chain.ChangeTokenTypes();
                 }
-
             }
+
             if (GUILayout.Button("Move Unmatched Back (3)"))
             {
                 SwapController controller = target as SwapController;
                 SwapController.main = controller;
                 controller.MoveUnmatchedBack();
+            }
 
+            if (GUILayout.Button("Change To Troops (4)"))
+            {
+                SwapController controller = target as SwapController;
+                SwapController.main = controller;
+                controller.ChangeMatchedToTroops();
             }
 
         }

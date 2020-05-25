@@ -22,7 +22,7 @@ public class PuzzleGrid : MonoBehaviour
     public MoveDirection collapseDirection;
 
     [Header("States")]
-    public PuzzleToken[,] tokens;
+    public Token[,] tokens;
 
     private void Awake()
     {
@@ -41,7 +41,7 @@ public class PuzzleGrid : MonoBehaviour
 
     public void CreateGrid(bool avoidMatches = false, bool withMove = true)
     {
-        tokens = new PuzzleToken[gridSize.y, gridSize.x];
+        tokens = new Token[gridSize.y, gridSize.x];
         for (int i = 0; i < gridSize.x; i++)
         {
             for (int j = 0; j < gridSize.y; j++)
@@ -62,7 +62,7 @@ public class PuzzleGrid : MonoBehaviour
 
                 GameObject tokenObj = Instantiate(Settings.main.tokens.prefab, 
                     newPos, Quaternion.identity, transform);
-                PuzzleToken token = tokenObj.GetComponent<PuzzleToken>();
+                Token token = tokenObj.GetComponent<Token>();
                 token.previousGridPosition = new Vector2Int(-1, -1);
                 SetTokenInGrid(token, i, j);
                 UpdateTokenPosition(token, Settings.main.tokens.collapseTime);
@@ -82,15 +82,13 @@ public class PuzzleGrid : MonoBehaviour
                         if (tokens[j, i - 1].elementId == tokens[j, i - 2].elementId)
                             unwantedElements.Add(tokens[j, i - 1].elementId);
                     }
-                    token.SetRandomType(unwantedElements.ToArray());
+                    token.SetRandomElement(unwantedElements.ToArray());
                 }
                 else
                 {
-                    token.SetRandomType();
+                    token.SetRandomElement();
                 }
-
-                token.UpdateSprite();
-
+                token.UpdateSpriteImmediate();
                 tokenObj.name = token.elementId + "(" + i + ", " + j + ")";
             }
         }
@@ -114,7 +112,7 @@ public class PuzzleGrid : MonoBehaviour
         return new Vector3(x, y);
     }
 
-    public void SetTokenInGrid(PuzzleToken token, int xGrid, int yGrid)
+    public void SetTokenInGrid(Token token, int xGrid, int yGrid)
     {
         try
         {
@@ -136,19 +134,19 @@ public class PuzzleGrid : MonoBehaviour
         return true;
     }
 
-    public void SetTokenInGrid(PuzzleToken token, Vector2Int gridPos)
+    public void SetTokenInGrid(Token token, Vector2Int gridPos)
     {
         SetTokenInGrid(token, gridPos.x, gridPos.y);
     }
 
-    public void UpdateTokenPosition(PuzzleToken token, float time=0)
+    public void UpdateTokenPosition(Token token, float time=0)
     {
         token.BeginMovingToPosition(GridToWorldPosition(token.gridPosition.x, token.gridPosition.y), time);
     }
 
     public void Clear()
     {
-        PuzzleToken[] allTokens = GetComponentsInChildren<PuzzleToken>();
+        Token[] allTokens = GetComponentsInChildren<Token>();
         if (allTokens != null)
         {
             for (int i = 0; i < allTokens.Length; i++)
@@ -158,113 +156,6 @@ public class PuzzleGrid : MonoBehaviour
         }
     }
 
-    public TokenChain CheckMatches(PuzzleToken token, bool mustAddToChain = false)
-    {
-        TokenChain chain = new TokenChain();
-        bool isAdded = !mustAddToChain;
-
-        Vector2Int[] directions = new Vector2Int[] {
-            Vector2Int.right, Vector2Int.up, Vector2Int.left, Vector2Int.down };
-
-        foreach (Vector2Int dir in directions)
-        {
-            Vector2Int nearPos = token.gridPosition + dir;
-            if(IsInsideGrid(nearPos))
-            {
-                PuzzleToken nearToken = tokens[nearPos.y, nearPos.x];
-                // check nearest token 
-                if (!nearToken.isChecking && nearToken.elementId == token.elementId)
-                {
-                    Vector2Int furtherPos = nearPos + dir;
-                    Vector2Int backPos = token.gridPosition - dir;
-
-                    if (IsInsideGrid(furtherPos))
-                    {
-                        PuzzleToken furtherToken = tokens[furtherPos.y, furtherPos.x];
-                        if (furtherToken.elementId == token.elementId)
-                        {
-                            if (!isAdded)
-                            {
-                                isAdded = true;
-                                chain.Add(token);
-                            }
-
-                            token.isMatched = true;
-                            nearToken.isMatched = true;
-                            furtherToken.isMatched = true;
-
-                            bool checkNear = false, checkFurther = false;
-                            if (!nearToken.isChecking)
-                            {
-                                chain.Add(nearToken);
-                                Debug.Log("Add near 1");
-                                nearToken.isChecking = true;
-                                checkNear = true;
-                            }
-
-                            if (!furtherToken.isChecking)
-                            {
-                                chain.Add(furtherToken);
-                                Debug.Log("Add further");
-
-                                furtherToken.isChecking = true;
-                                checkFurther = true;
-                            }
-
-                            if (checkNear)
-                                chain.Add(CheckMatches(nearToken));
-
-                            if (checkFurther)
-                                chain.Add(CheckMatches(furtherToken));
-                        }
-                    }
-
-                    if (IsInsideGrid(backPos))
-                    {
-                        PuzzleToken backToken = tokens[backPos.y, backPos.x];
-                        if (backToken.elementId == token.elementId)
-                        {
-                            if (!isAdded)
-                            {
-                                isAdded = true;
-                                chain.Add(token);
-                            }
-
-                            token.isMatched = true;
-                            nearToken.isMatched = true;
-                            backToken.isMatched = true;
-
-                            bool checkNear = false, checkBack = false;
-                            if (!nearToken.isChecking)
-                            {
-                                chain.Add(nearToken);
-                                Debug.Log("Add near 2");
-
-                                nearToken.isChecking = true;
-                                checkNear = true;
-                            }
-
-                            if (!backToken.isChecking)
-                            {
-                                chain.Add(backToken);
-                                Debug.Log("Add back");
-
-                                backToken.isChecking = true;
-                                checkBack = true;
-                            }
-
-                            if (checkNear)
-                                chain.Add(CheckMatches(nearToken));
-
-                            if (checkBack)
-                                chain.Add(CheckMatches(backToken));
-                        }
-                    }
-                }
-            }
-        }
-        return chain;
-    }
 
     //public bool CheckVerticalMatches(int x, int y, int offset = 0)
     //{
@@ -273,7 +164,7 @@ public class PuzzleGrid : MonoBehaviour
     //    if (maxY >= gridSize.y || minY < 0 || x >= gridSize.x)
     //        return false;
 
-    //    PuzzleToken token0, token1, token2;
+    //    Token token0, token1, token2;
     //    token0 = tokens[minY, x];
     //    token1 = tokens[y + offset, x];
     //    token2 = tokens[maxY, x];
@@ -297,7 +188,7 @@ public class PuzzleGrid : MonoBehaviour
     //    if (maxX >= gridSize.x || minX < 0 || y >= gridSize.y)
     //        return false;
 
-    //    PuzzleToken token0, token1, token2;
+    //    Token token0, token1, token2;
     //    token0 = tokens[y, minX];
     //    token1 = tokens[y, x + offset];
     //    token2 = tokens[y, maxX];
@@ -314,7 +205,7 @@ public class PuzzleGrid : MonoBehaviour
     //    return false;
     //}
 
-    public void MoveBack(PuzzleToken token)
+    public void MoveBack(Token token)
     {
         Debug.Log("Moving back");
         SetTokenInGrid(token, token.previousGridPosition);
@@ -324,7 +215,7 @@ public class PuzzleGrid : MonoBehaviour
 
     public bool IsAnyTokenMoving()
     {
-        foreach (PuzzleToken token in tokens)
+        foreach (Token token in tokens)
         {
             if (token != null && token.isMoving)
                 return true;
@@ -334,7 +225,7 @@ public class PuzzleGrid : MonoBehaviour
 
     public bool IsAnyTokenAnimating()
     {
-        foreach (PuzzleToken token in tokens)
+        foreach (Token token in tokens)
         {
             if (token != null && token.isDisappearing)
                 return true;
@@ -342,22 +233,9 @@ public class PuzzleGrid : MonoBehaviour
         return false;
     }
 
-    public void DestroyMatchedAndCollapse()
-    {
-        ChangeMatchedToTroops();
-        CollapseColumns(collapseDirection);
-    }
 
-    public void ChangeMatchedToTroops()
-    {
-        foreach (PuzzleToken token in tokens)
-        {
-            if (token != null && token.isMatched)
-            {
-                token.BeginChangeToTroops();
-            }
-        }
-    }
+
+
 
     public void Collapse()
     {
@@ -389,9 +267,9 @@ public class PuzzleGrid : MonoBehaviour
             GameObject tokenObj = Instantiate(Settings.main.tokens.prefab,
                 GridToWorldPosition(col, initialRow), Quaternion.identity, transform);
 
-            PuzzleToken token = tokenObj.GetComponent<PuzzleToken>();
+            Token token = tokenObj.GetComponent<Token>();
             token.previousGridPosition = new Vector2Int(-1, -1);
-            token.SetRandomType();
+            token.SetRandomElement();
 
             SetTokenInGrid(token, col, finalRow);
             token.BeginMovingToPosition(GridToWorldPosition(token.gridPosition), Settings.main.tokens.collapseTime);
@@ -405,7 +283,7 @@ public class PuzzleGrid : MonoBehaviour
         for (int j = 0; j < gridSize.y; j++)
         {
             int currentRow = (isDown) ? (gridSize.y - j - 1) : j;
-            PuzzleToken currentToken = tokens[currentRow, col];
+            Token currentToken = tokens[currentRow, col];
 
             if (currentToken == null)
             {
@@ -422,29 +300,6 @@ public class PuzzleGrid : MonoBehaviour
         return nullCount;
     }
 
-    public void DestroyTokensOfElement(int id)
-    {
-        foreach(PuzzleToken token in tokens)
-        {
-            if(token.elementId == id)
-            {
-                token.BeginChangeToTroops();
-            }
-        }
-    }
-
-    public void DestroyNeighbours(Vector2Int pos)
-    {
-        tokens[pos.y, pos.x].BeginChangeToTroops();
-        if (pos.y + 1 < gridSize.y)
-            tokens[pos.y + 1, pos.x].BeginChangeToTroops();
-        if(pos.y > 0)
-            tokens[pos.y - 1, pos.x].BeginChangeToTroops();
-        if(pos.x + 1 < gridSize.x)
-            tokens[pos.y, pos.x + 1].BeginChangeToTroops();
-        if(pos.x > 0)
-            tokens[pos.y, pos.x - 1].BeginChangeToTroops();
-    }
 
 
 
@@ -461,11 +316,7 @@ public class PuzzleGrid : MonoBehaviour
                 else
                 {
                     result += "\t";
-                    if (tokens[j, i].isMatched) result += "[";
                     result += letters[(int)(tokens[j, i].elementId)];
-                    if (tokens[j, i].wasMoved) result += "!";
-                    if (tokens[j, i].isChecking) result += "c";
-                    if (tokens[j, i].isMatched) result += "]";
                 }
             }
             result += "\n";
@@ -508,12 +359,6 @@ public class PuzzleGrid : MonoBehaviour
                 grid.CreateGrid(grid.generateNonMatchedGrid, false);
             }
 
-            if (GUILayout.Button("Change To Troops (4)"))
-            {
-                PuzzleGrid grid = target as PuzzleGrid;
-                PuzzleGrid.main = grid;
-                grid.ChangeMatchedToTroops();
-            }
 
             if (GUILayout.Button("Collapse Columns (in loop)"))
             {

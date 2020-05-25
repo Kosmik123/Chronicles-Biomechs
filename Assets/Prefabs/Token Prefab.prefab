@@ -92,7 +92,8 @@ GameObject:
   - component: {fileID: 7049765336537518042}
   - component: {fileID: 7507737853662401989}
   - component: {fileID: 5167531512746259425}
-  - component: {fileID: 3933336904438716285}
+  - component: {fileID: 7993831385639333094}
+  - component: {fileID: 7486119232220471100}
   m_Layer: 0
   m_Name: Token Prefab
   m_TagString: Untagged
@@ -165,7 +166,28 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3933336904438716285
+--- !u!114 &7993831385639333094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3646977354738391838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee6c03843feaa74d82cb6a6df9902d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puzzleController: {fileID: 0}
+  normalSprite: {fileID: 2158309176885646763}
+  bombSprite: {fileID: 1269886911975454534}
+  colorSprite: {fileID: 5313741584080358053}
+  token: {fileID: 7486119232220471100}
+  type: 0
+  hasJustChangedType: 0
+  isChecking: 0
+  isMatched: 0
+--- !u!114 &7486119232220471100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,23 +199,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc6c6e71a43e6c40b04a3c27a2b8103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSprite: {fileID: 2158309176885646763}
-  bombSprite: {fileID: 1269886911975454534}
-  colorSprite: {fileID: 5313741584080358053}
+  renderer: {fileID: 2158309176885646763}
   elementId: 0
   gridPosition: {x: 0, y: 0}
   previousGridPosition: {x: 0, y: 0}
-  isChecking: 0
-  isMatched: 0
-  type: 0
-  hasJustChangedType: 0
   isClicked: 0
+  holdTime: 0
   isMoving: 0
   wasMoved: 0
-  defaultMoveTime: 0.8
+  defaultMoveTime: 0
   isDisappearing: 0
-  revealAnimation: {fileID: 7400000, guid: 434e85f11bf9c3d45bf8221d942b13c4, type: 2}
-  shakeAnimation: {fileID: 7400000, guid: 27867048160b78d4d82f90392a0887eb, type: 2}
+  animator: {fileID: 0}
+  revealAnimation: {fileID: 0}
+  shakeAnimation: {fileID: 0}
 --- !u!1 &3914091816726806128
 GameObject:
   m_ObjectHideFlags: 0
