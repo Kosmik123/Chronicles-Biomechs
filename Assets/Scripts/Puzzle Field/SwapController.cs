@@ -392,6 +392,7 @@ public class SwapController : PuzzleController
                 }
             }
         }
+        hasJustDestroyed = true;
     }
 
 

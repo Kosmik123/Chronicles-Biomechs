@@ -181,6 +181,7 @@ public class SwapPuzzleTokenController : MonoBehaviour
 
     private void OnMouseUp()
     {
+        Debug.Log("Normal Mouse Up");
         if (token.isMoving)
             return;
 
@@ -199,6 +200,7 @@ public class SwapPuzzleTokenController : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
+        Debug.Log("Button Mouse Up");
         if (!token.isMoving)
         {
             if (type != TokenType.NORMAL && token.holdTime < 0.5f) 

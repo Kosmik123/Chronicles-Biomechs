@@ -915,9 +915,10 @@ MonoBehaviour:
   hasJustSwapped: 0
   matchFound: 0
   hasJustDestroyed: 0
+  bombActivated: 0
   selectedToken: {fileID: 0}
   tokenChains: []
-  debugMode: 1
+  debugMode: 0
 --- !u!4 &833212188 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2240145969871528707, guid: f23a5ed781a78134f9c257007fab77c5,
