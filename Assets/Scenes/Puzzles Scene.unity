@@ -96,7 +96,6 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
-    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -138,17 +137,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tahu Card
-      objectReference: {fileID: 0}
-    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
-        type: 3}
-      propertyPath: hero.template
-      value: 
-      objectReference: {fileID: 11400000, guid: 08afd5065eeea61458157240aea373c1,
-        type: 2}
-    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
-        type: 3}
-      propertyPath: battleIndex
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2240145969871528707, guid: f23a5ed781a78134f9c257007fab77c5,
         type: 3}
@@ -205,6 +193,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
+        type: 3}
+      propertyPath: hero.template
+      value: 
+      objectReference: {fileID: 11400000, guid: 08afd5065eeea61458157240aea373c1,
+        type: 2}
+    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
+        type: 3}
+      propertyPath: battleIndex
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f23a5ed781a78134f9c257007fab77c5, type: 3}
 --- !u!4 &101082505 stripped
@@ -245,7 +244,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -359,7 +357,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -419,18 +416,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Onua Card
       objectReference: {fileID: 0}
-    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
-        type: 3}
-      propertyPath: hero.template
-      value: 
-      objectReference: {fileID: 11400000, guid: 08afd5065eeea61458157240aea373c1,
-        type: 2}
-    - target: {fileID: 1959321696028232629, guid: f23a5ed781a78134f9c257007fab77c5,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 861d79328a11acf40aeaa502e73b8709,
-        type: 3}
     - target: {fileID: 2240145969871528707, guid: f23a5ed781a78134f9c257007fab77c5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -486,6 +471,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
+        type: 3}
+      propertyPath: hero.template
+      value: 
+      objectReference: {fileID: 11400000, guid: 08afd5065eeea61458157240aea373c1,
+        type: 2}
+    - target: {fileID: 1959321696028232629, guid: f23a5ed781a78134f9c257007fab77c5,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 861d79328a11acf40aeaa502e73b8709,
+        type: 3}
     - target: {fileID: 5600269723582721850, guid: f23a5ed781a78134f9c257007fab77c5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -520,6 +517,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1265295630}
     m_Modifications:
+    - target: {fileID: 6699417891177526903, guid: 5281faaa10773444daca0df8df6217cd,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy Prefab
+      objectReference: {fileID: 0}
     - target: {fileID: 220102861058545292, guid: 5281faaa10773444daca0df8df6217cd,
         type: 3}
       propertyPath: m_Size.x
@@ -620,11 +622,6 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 6699417891177526903, guid: 5281faaa10773444daca0df8df6217cd,
-        type: 3}
-      propertyPath: m_Name
-      value: Enemy Prefab
-      objectReference: {fileID: 0}
     - target: {fileID: 7996490525801219972, guid: 5281faaa10773444daca0df8df6217cd,
         type: 3}
       propertyPath: battler
@@ -679,7 +676,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -727,23 +723,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kopaka Card
       objectReference: {fileID: 0}
-    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
-        type: 3}
-      propertyPath: hero.template
-      value: 
-      objectReference: {fileID: 11400000, guid: 08afd5065eeea61458157240aea373c1,
-        type: 2}
-    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
-        type: 3}
-      propertyPath: battleIndex
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1959321696028232629, guid: f23a5ed781a78134f9c257007fab77c5,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 03573d2c0f116864b8fb77e54c653cc1,
-        type: 3}
     - target: {fileID: 2240145969871528707, guid: f23a5ed781a78134f9c257007fab77c5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -799,6 +778,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
+        type: 3}
+      propertyPath: hero.template
+      value: 
+      objectReference: {fileID: 11400000, guid: 08afd5065eeea61458157240aea373c1,
+        type: 2}
+    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
+        type: 3}
+      propertyPath: battleIndex
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959321696028232629, guid: f23a5ed781a78134f9c257007fab77c5,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 03573d2c0f116864b8fb77e54c653cc1,
+        type: 3}
     - target: {fileID: 5600269723582721850, guid: f23a5ed781a78134f9c257007fab77c5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -915,12 +911,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b96775022eb4fe42b31d53951dbf420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedToken: {fileID: 0}
-  tokenChains: []
-  debugMode: 0
+  grid: {fileID: 0}
   hasJustSwapped: 0
   matchFound: 0
   hasJustDestroyed: 0
+  selectedToken: {fileID: 0}
+  tokenChains: []
+  debugMode: 1
 --- !u!4 &833212188 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2240145969871528707, guid: f23a5ed781a78134f9c257007fab77c5,
@@ -972,7 +969,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1053,7 +1049,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1120,7 +1115,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1188,23 +1182,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pohatu Card
       objectReference: {fileID: 0}
-    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
-        type: 3}
-      propertyPath: hero.template
-      value: 
-      objectReference: {fileID: 11400000, guid: 08afd5065eeea61458157240aea373c1,
-        type: 2}
-    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
-        type: 3}
-      propertyPath: battleIndex
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1959321696028232629, guid: f23a5ed781a78134f9c257007fab77c5,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 7eac561c6fe31d447bfc2d70b5679a36,
-        type: 3}
     - target: {fileID: 2240145969871528707, guid: f23a5ed781a78134f9c257007fab77c5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1260,6 +1237,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
+        type: 3}
+      propertyPath: hero.template
+      value: 
+      objectReference: {fileID: 11400000, guid: 08afd5065eeea61458157240aea373c1,
+        type: 2}
+    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
+        type: 3}
+      propertyPath: battleIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959321696028232629, guid: f23a5ed781a78134f9c257007fab77c5,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7eac561c6fe31d447bfc2d70b5679a36,
+        type: 3}
     - target: {fileID: 5600269723582721850, guid: f23a5ed781a78134f9c257007fab77c5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1332,7 +1326,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1413,7 +1406,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1558,7 +1550,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1736,6 +1727,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1265295630}
     m_Modifications:
+    - target: {fileID: 6699417891177526903, guid: 5281faaa10773444daca0df8df6217cd,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy Prefab (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 220102861058545292, guid: 5281faaa10773444daca0df8df6217cd,
         type: 3}
       propertyPath: m_Size.x
@@ -1836,11 +1832,6 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 6699417891177526903, guid: 5281faaa10773444daca0df8df6217cd,
-        type: 3}
-      propertyPath: m_Name
-      value: Enemy Prefab (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 7996490525801219972, guid: 5281faaa10773444daca0df8df6217cd,
         type: 3}
       propertyPath: battler
@@ -1869,6 +1860,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1265295630}
     m_Modifications:
+    - target: {fileID: 6699417891177526903, guid: 5281faaa10773444daca0df8df6217cd,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy Prefab (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 220102861058545292, guid: 5281faaa10773444daca0df8df6217cd,
         type: 3}
       propertyPath: m_Size.x
@@ -1975,11 +1971,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 03573d2c0f116864b8fb77e54c653cc1,
         type: 3}
-    - target: {fileID: 6699417891177526903, guid: 5281faaa10773444daca0df8df6217cd,
-        type: 3}
-      propertyPath: m_Name
-      value: Enemy Prefab (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 7996490525801219972, guid: 5281faaa10773444daca0df8df6217cd,
         type: 3}
       propertyPath: battler
@@ -2034,7 +2025,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2088,23 +2078,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gali Card
       objectReference: {fileID: 0}
-    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
-        type: 3}
-      propertyPath: hero.template
-      value: 
-      objectReference: {fileID: 11400000, guid: 08afd5065eeea61458157240aea373c1,
-        type: 2}
-    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
-        type: 3}
-      propertyPath: battleIndex
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1959321696028232629, guid: f23a5ed781a78134f9c257007fab77c5,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 651c9f7b51e6144459331cbfe0b701b9,
-        type: 3}
     - target: {fileID: 2240145969871528707, guid: f23a5ed781a78134f9c257007fab77c5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2160,6 +2133,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
+        type: 3}
+      propertyPath: hero.template
+      value: 
+      objectReference: {fileID: 11400000, guid: 08afd5065eeea61458157240aea373c1,
+        type: 2}
+    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
+        type: 3}
+      propertyPath: battleIndex
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959321696028232629, guid: f23a5ed781a78134f9c257007fab77c5,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 651c9f7b51e6144459331cbfe0b701b9,
+        type: 3}
     - target: {fileID: 5600269723582721850, guid: f23a5ed781a78134f9c257007fab77c5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2199,23 +2189,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lewa Card
       objectReference: {fileID: 0}
-    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
-        type: 3}
-      propertyPath: hero.template
-      value: 
-      objectReference: {fileID: 11400000, guid: 08afd5065eeea61458157240aea373c1,
-        type: 2}
-    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
-        type: 3}
-      propertyPath: battleIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1959321696028232629, guid: f23a5ed781a78134f9c257007fab77c5,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: ecafe0bd2416423409cab212fcd8d9bb,
-        type: 3}
     - target: {fileID: 2240145969871528707, guid: f23a5ed781a78134f9c257007fab77c5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2271,6 +2244,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
+        type: 3}
+      propertyPath: hero.template
+      value: 
+      objectReference: {fileID: 11400000, guid: 08afd5065eeea61458157240aea373c1,
+        type: 2}
+    - target: {fileID: 1943687876637070795, guid: f23a5ed781a78134f9c257007fab77c5,
+        type: 3}
+      propertyPath: battleIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959321696028232629, guid: f23a5ed781a78134f9c257007fab77c5,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ecafe0bd2416423409cab212fcd8d9bb,
+        type: 3}
     - target: {fileID: 5600269723582721850, guid: f23a5ed781a78134f9c257007fab77c5,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -73,6 +73,7 @@ public class PuzzleController : MonoBehaviour
     public bool hasJustSwapped;
     public bool matchFound;
     public bool hasJustDestroyed;
+    public bool bombActivated;
 
 }
 
@@ -122,16 +123,17 @@ public class SwapController : PuzzleController
                     hasJustDestroyed = false;
                 }
 
-                if (matchFound)
+                if (matchFound || bombActivated)
                 {
                     ChangeMatchedToTroops();
                     tokenChains.Clear();
+                    bombActivated = false;
                 }
             }
         }
     }
 
-    public void AddToSwap(SwapPuzzleTokenController swapped)
+    public void Select(SwapPuzzleTokenController swapped)
     {
         if (selectedToken != null && swapped.token.IsNextTo(selectedToken.token))
         {
@@ -233,28 +235,31 @@ public class SwapController : PuzzleController
         {
             if (token.elementId == id)
             {
-                var cont = token.GetComponent<SwapPuzzleTokenController>();
-                cont.BeginChangeToTroops();
+                token.GetComponent<SwapPuzzleTokenController>().isMatched = true;
             }
         }
+        bombActivated = true;
     }
 
     public void DestroyNeighbours(Vector2Int pos)
     {
         grid.tokens[pos.y, pos.x].GetComponent<
-            SwapPuzzleTokenController>().BeginChangeToTroops();
+            SwapPuzzleTokenController>().isMatched = true;
+
         if (pos.y + 1 < grid.gridSize.y)
             grid.tokens[pos.y + 1, pos.x].GetComponent<
-                SwapPuzzleTokenController>().BeginChangeToTroops();
+                SwapPuzzleTokenController>().isMatched = true;
         if (pos.y > 0)
             grid.tokens[pos.y - 1, pos.x].GetComponent<
-                SwapPuzzleTokenController>().BeginChangeToTroops();
+                SwapPuzzleTokenController>().isMatched = true;
         if (pos.x + 1 < grid.gridSize.x)
             grid.tokens[pos.y, pos.x + 1].GetComponent<
-                SwapPuzzleTokenController>().BeginChangeToTroops();
+                SwapPuzzleTokenController>().isMatched = true;
         if (pos.x > 0)
             grid.tokens[pos.y, pos.x - 1].GetComponent<
-                SwapPuzzleTokenController>().BeginChangeToTroops();
+                SwapPuzzleTokenController>().isMatched = true;
+
+        bombActivated = true;
     }
 
 

@@ -20,6 +20,7 @@ public class SwapPuzzleTokenController : MonoBehaviour
     [Header("Types")]
     public TokenType type;
     public bool hasJustChangedType;
+    public bool wasActivated;
 
     [Header("Matches")]
     public bool isChecking;
@@ -51,8 +52,8 @@ public class SwapPuzzleTokenController : MonoBehaviour
             1 + (type == TokenType.BOMB ? 0.5f : 0),
             1 + (type == TokenType.COLOR ? 0.5f : 0),
             1);
-
-        ManageSprites();
+        if(!hasJustChangedType)
+            ManageSprites();
     }
 
     private void ManageSprites()
@@ -98,11 +99,16 @@ public class SwapPuzzleTokenController : MonoBehaviour
     {
         if (!hasJustChangedType)
         {
-            puzzleController.hasJustDestroyed = true;
             if (type == TokenType.BOMB)
+            {
                 SwapController.main.DestroyNeighbours(token.gridPosition);
+                wasActivated = true;
+            }
             else if (type == TokenType.COLOR)
+            {
                 SwapController.main.DestroyTokensOfElement(token.elementId);
+                wasActivated = true;
+            }
         }
     }
 
@@ -113,7 +119,7 @@ public class SwapPuzzleTokenController : MonoBehaviour
         if (!token.isDisappearing)
         {
             token.isDisappearing = true;
-            if (type != TokenType.NORMAL)
+            if (type != TokenType.NORMAL && !wasActivated)
                 Activate();
 
             isMatched = false;
@@ -122,8 +128,7 @@ public class SwapPuzzleTokenController : MonoBehaviour
             troop.troop = Player.main.troopsByElement[token.elementId];
             troop.UpdateSprite();
 
-            if (type == TokenType.NORMAL)
-                token.animator.SetTrigger("Reveal");
+            token.animator.SetTrigger("Reveal");
         }
     }
 
@@ -196,8 +201,10 @@ public class SwapPuzzleTokenController : MonoBehaviour
     {
         if (!token.isMoving)
         {
-            if (type != TokenType.NORMAL && token.holdTime < 0.5f) Activate();
-            SwapController.main.AddToSwap(this);
+            if (type != TokenType.NORMAL && token.holdTime < 0.5f) 
+                Activate();
+            else
+                puzzleController.Select(this);
         }
         token.animator.SetBool("Shake", false);
     }
