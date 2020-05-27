@@ -117,7 +117,7 @@ public class PuzzleGrid : MonoBehaviour
         try
         {
             tokens[yGrid, xGrid] = token;
-        }catch(Exception e)
+        }catch(Exception)
         {
             Debug.LogError("Problematyczny index:" + xGrid + ", " + yGrid);
         }

@@ -41,7 +41,6 @@ public class SwapPuzzleTokenController : MonoBehaviour
     void Start()
     {
         type = TokenType.NORMAL;
-
     }
     void Update()
     {
@@ -120,9 +119,11 @@ public class SwapPuzzleTokenController : MonoBehaviour
         {
             token.isDisappearing = true;
             if (type != TokenType.NORMAL && !wasActivated)
+            {
                 Activate();
+                isMatched = false;
+            }
 
-            isMatched = false;
             var troopObj = Instantiate(Settings.main.troops.prefab, transform.position, Quaternion.identity);
             troop = troopObj.GetComponent<TroopMover>();
             troop.troop = Player.main.troopsByElement[token.elementId];
@@ -138,38 +139,25 @@ public class SwapPuzzleTokenController : MonoBehaviour
     Vector2Int GetSwipeDirection()
     {
         float dist = Settings.main.tokens.minimalSwipeDistance;
-        Debug.Log("przesunięcie to" + (releasePosition - pressPosition).sqrMagnitude);
         if ((releasePosition - pressPosition).sqrMagnitude < dist)
-        {
-            Debug.Log("No swipe");
             return Vector2Int.zero;
-        }
 
         float angle = Mathf.Atan2(releasePosition.y - pressPosition.y,
             releasePosition.x - pressPosition.x) * Mathf.Rad2Deg;
         if (angle > -135 && angle <= -45)
         {
-            Debug.Log("Swiped up");
             return Vector2Int.up;
         }
         if (angle > -45 && angle <= 45)
         {
-            Debug.Log("Swiped right");
             return Vector2Int.right;
         }
         if (angle > 45 && angle <= 135)
         {
-            Debug.Log("Swiped down");
             return Vector2Int.down;
         }
-        Debug.Log("Swiped left");
         return Vector2Int.left;
     }
-
-
-
-
-
 
     private void OnMouseDown()
     {
@@ -181,13 +169,11 @@ public class SwapPuzzleTokenController : MonoBehaviour
 
     private void OnMouseUp()
     {
-        Debug.Log("Normal Mouse Up");
         if (token.isMoving)
             return;
 
         if (token.isClicked)
         {
-            Debug.Log("Released after click");
             releasePosition = Input.mousePosition;
 
             Vector2Int direction = GetSwipeDirection();
@@ -200,15 +186,16 @@ public class SwapPuzzleTokenController : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        Debug.Log("Button Mouse Up");
         if (!token.isMoving)
         {
-            if (type != TokenType.NORMAL && token.holdTime < 0.5f) 
+            if (type != TokenType.NORMAL && token.holdTime < 0.5f && !wasActivated)
+            {
+                Debug.Log("Aktywuje bombe");
                 Activate();
+            }
             else
                 puzzleController.Select(this);
         }
-        token.animator.SetBool("Shake", false);
     }
 
     private void OnDrawGizmos()

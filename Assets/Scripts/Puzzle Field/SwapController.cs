@@ -75,15 +75,14 @@ public class PuzzleController : MonoBehaviour
     public bool hasJustDestroyed;
     public bool bombActivated;
 
+    [Header("Swapped Tokens")]
+    public SwapPuzzleTokenController selectedToken;
 }
 
 public class SwapController : PuzzleController
 { 
     public static SwapController main;
 
-
-    [Header("Swapped Tokens")]
-    public SwapPuzzleTokenController selectedToken;
     public List<TokenChain> tokenChains = new List<TokenChain>();
 
     [Header("Settings")]
@@ -155,7 +154,7 @@ public class SwapController : PuzzleController
                 if (!cont.isMatched)
                 {
                     cont.isChecking = true;
-                    TokenChain chain = CheckMatches(cont, true);
+                    TokenChain chain = FindMatches(cont, true);
                     if(chain.IsMatchFound())
                     {
                         matchFound = true;
@@ -216,7 +215,6 @@ public class SwapController : PuzzleController
     {
         if (direction.sqrMagnitude != 1)
         {
-            Debug.Log("Wektor krótki");
             return;
         }
         Vector2Int otherPos = token.token.gridPosition + direction;
@@ -226,6 +224,7 @@ public class SwapController : PuzzleController
 
         SwapPuzzleTokenController otherToken = grid.tokens[otherPos.y, otherPos.x].GetComponent<SwapPuzzleTokenController>();
         SwapTokens(token, otherToken);
+
     }
 
 
@@ -263,7 +262,7 @@ public class SwapController : PuzzleController
     }
 
 
-    public TokenChain CheckMatches(SwapPuzzleTokenController cont, bool mustAddToChain = false)
+    public TokenChain FindMatches(SwapPuzzleTokenController cont, bool mustAddToChain = false)
     {
         TokenChain chain = new TokenChain();
         bool isAdded = !mustAddToChain;
@@ -302,7 +301,6 @@ public class SwapController : PuzzleController
                             if (!near.isChecking)
                             {
                                 chain.Add(near);
-                                Debug.Log("Add near 1");
                                 near.isChecking = true;
                                 checkNear = true;
                             }
@@ -310,17 +308,15 @@ public class SwapController : PuzzleController
                             if (!further.isChecking)
                             {
                                 chain.Add(further);
-                                Debug.Log("Add further");
-
                                 further.isChecking = true;
                                 checkFurther = true;
                             }
 
                             if (checkNear)
-                                chain.Add(CheckMatches(near));
+                                chain.Add(FindMatches(near));
 
                             if (checkFurther)
-                                chain.Add(CheckMatches(further));
+                                chain.Add(FindMatches(further));
                         }
                     }
 
@@ -343,8 +339,6 @@ public class SwapController : PuzzleController
                             if (!near.isChecking)
                             {
                                 chain.Add(near);
-                                Debug.Log("Add near 2");
-
                                 near.isChecking = true;
                                 checkNear = true;
                             }
@@ -352,17 +346,15 @@ public class SwapController : PuzzleController
                             if (!back.isChecking)
                             {
                                 chain.Add(back);
-                                Debug.Log("Add back");
-
                                 back.isChecking = true;
                                 checkBack = true;
                             }
 
                             if (checkNear)
-                                chain.Add(CheckMatches(near));
+                                chain.Add(FindMatches(near));
 
                             if (checkBack)
-                                chain.Add(CheckMatches(back));
+                                chain.Add(FindMatches(back));
                         }
                     }
                 }
@@ -370,8 +362,6 @@ public class SwapController : PuzzleController
         }
         return chain;
     }
-
-
 
     public void DestroyMatchedAndCollapse()
     {
@@ -440,7 +430,6 @@ public class SwapController : PuzzleController
                 SwapController.main = controller;
                 controller.ChangeMatchedToTroops();
             }
-
         }
     }
 #endif
