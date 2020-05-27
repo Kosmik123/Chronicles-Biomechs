@@ -178,9 +178,6 @@ public class SwapPuzzleTokenController : MonoBehaviour
 
             Vector2Int direction = GetSwipeDirection();
             SwapController.main.SwapTokensBySwipe(this, direction);
-
-            token.isClicked = false;
-            token.holdTime = 0;
         }
     }
 

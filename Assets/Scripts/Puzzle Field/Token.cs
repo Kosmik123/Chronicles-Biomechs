@@ -41,17 +41,19 @@ public class Token : MonoBehaviour
         if (isMoving)
             MoveToTarget();
 
-        if(isClicked)
+        if (isClicked)
         {
             holdTime += Time.deltaTime;
         }
 
-        animator.SetBool("Shake", isClicked);
+        animator.SetFloat("Shake", holdTime);
     }
+
     public void UpdateSprite()
     {
         renderer.sprite = Settings.main.elements[elementId].maskSprite;
     }
+
     public void UpdateSpriteImmediate()
     {
         renderer.sprite = Settings.GetImmediate().elements[elementId].maskSprite;
@@ -131,9 +133,14 @@ public class Token : MonoBehaviour
     {
         if (!PuzzleGrid.main.IsAnyTokenMoving())
         {
-            animator.SetBool("Shake", true);
             isClicked = true;
         }
+    }
+
+    private void OnMouseUp()
+    {
+        isClicked = false;
+        holdTime = 0;
     }
 }
 
