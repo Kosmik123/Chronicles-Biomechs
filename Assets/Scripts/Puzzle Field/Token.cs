@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
@@ -142,5 +143,25 @@ public class Token : MonoBehaviour
         isClicked = false;
         holdTime = 0;
     }
+
+
+#if UNITY_EDITOR
+    [CustomEditor(typeof(Token))]
+    public class TokenEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+
+            if (GUILayout.Button("Update Sprite"))
+            {
+                Token token = target as Token;
+                token.UpdateSpriteImmediate();
+            }
+        }
+    }
+
+
+#endif
 }
 

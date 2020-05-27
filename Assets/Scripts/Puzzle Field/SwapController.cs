@@ -118,16 +118,20 @@ public class SwapController : PuzzleController
                     }
 
                     MoveUnmatchedBack();
-                    hasJustSwapped = false;
-                    hasJustDestroyed = false;
+                    hasJustDestroyed = false; 
                 }
 
-                if (matchFound || bombActivated)
+                if (matchFound || hasJustSwapped)
                 {
-                    ChangeMatchedToTroops();
-                    tokenChains.Clear();
-                    bombActivated = false;
+                    do
+                    {
+                        bombActivated = false;
+                        ChangeMatchedToTroops();
+                        tokenChains.Clear();
+
+                    } while (bombActivated);
                 }
+                hasJustSwapped = false;
             }
         }
     }
@@ -238,7 +242,9 @@ public class SwapController : PuzzleController
             }
         }
         bombActivated = true;
+        hasJustSwapped = true;
     }
+
 
     public void DestroyNeighbours(Vector2Int pos)
     {
@@ -259,6 +265,7 @@ public class SwapController : PuzzleController
                 SwapPuzzleTokenController>().isMatched = true;
 
         bombActivated = true;
+        hasJustSwapped = true;
     }
 
 

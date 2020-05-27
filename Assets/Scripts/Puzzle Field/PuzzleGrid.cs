@@ -46,52 +46,57 @@ public class PuzzleGrid : MonoBehaviour
         {
             for (int j = 0; j < gridSize.y; j++)
             {
-                Vector3 newPos;
-                if (withMove)
-                {
-                    bool isDown = (collapseDirection == MoveDirection.Down);
-                    newPos = GridToWorldPosition(
-                            i,
-                            j + (isDown ? -1 : 1) * (gridSize.y)) +
-                                Vector3.up * (-Mathf.Abs(i - gridSize.x / 2) * tokenSize.y * 2 - 1);
-                }
-                else
-                {
-                    newPos = GridToWorldPosition(i, j);
-                }
-
-                GameObject tokenObj = Instantiate(Settings.main.tokens.prefab, 
-                    newPos, Quaternion.identity, transform);
-                Token token = tokenObj.GetComponent<Token>();
-                token.previousGridPosition = new Vector2Int(-1, -1);
-                SetTokenInGrid(token, i, j);
-                UpdateTokenPosition(token, Settings.main.tokens.collapseTime);
-                token.wasMoved = false;
-
-                if (avoidMatches)
-                {
-                    List<int> unwantedElements = new List<int>();
-                    if (j > 1)
-                    {
-                        if (tokens[j - 1, i].elementId == tokens[j - 2, i].elementId)
-                            unwantedElements.Add(tokens[j - 1, i].elementId);
-                    }
-
-                    if (i > 1)
-                    {
-                        if (tokens[j, i - 1].elementId == tokens[j, i - 2].elementId)
-                            unwantedElements.Add(tokens[j, i - 1].elementId);
-                    }
-                    token.SetRandomElement(unwantedElements.ToArray());
-                }
-                else
-                {
-                    token.SetRandomElement();
-                }
-                token.UpdateSpriteImmediate();
-                tokenObj.name = token.elementId + "(" + i + ", " + j + ")";
+                CreateToken(i, j, avoidMatches, withMove);
             }
         }
+    }
+
+    private void CreateToken(int gridX, int gridY, bool avoidMatches, bool withMove)
+    {
+        Vector3 newPos;
+        if (withMove)
+        {
+            bool isDown = (collapseDirection == MoveDirection.Down);
+            newPos = GridToWorldPosition(
+                    gridX,
+                    gridY + (isDown ? -1 : 1) * (gridSize.y)) +
+                        Vector3.up * (-Mathf.Abs(gridX - gridSize.x / 2) * tokenSize.y * 2 - 1);
+        }
+        else
+        {
+            newPos = GridToWorldPosition(gridX, gridY);
+        }
+
+        GameObject tokenObj = Instantiate(Settings.main.tokens.prefab,
+            newPos, Quaternion.identity, transform);
+        Token token = tokenObj.GetComponent<Token>();
+        token.previousGridPosition = new Vector2Int(-1, -1);
+        SetTokenInGrid(token, gridX, gridY);
+        UpdateTokenPosition(token, Settings.main.tokens.collapseTime);
+        token.wasMoved = false;
+
+        if (avoidMatches)
+        {
+            List<int> unwantedElements = new List<int>();
+            if (gridY > 1)
+            {
+                if (tokens[gridY - 1, gridX].elementId == tokens[gridY - 2, gridX].elementId)
+                    unwantedElements.Add(tokens[gridY - 1, gridX].elementId);
+            }
+
+            if (gridX > 1)
+            {
+                if (tokens[gridY, gridX - 1].elementId == tokens[gridY, gridX - 2].elementId)
+                    unwantedElements.Add(tokens[gridY, gridX - 1].elementId);
+            }
+            token.SetRandomElement(unwantedElements.ToArray());
+        }
+        else
+        {
+            token.SetRandomElement();
+        }
+        token.UpdateSpriteImmediate();
+        tokenObj.name = Settings.main.elements[token.elementId].name + "(" + gridX + ", " + gridY + ")";
     }
 
     public Vector3 GridToWorldPosition(Vector2Int position)
@@ -270,6 +275,8 @@ public class PuzzleGrid : MonoBehaviour
             Token token = tokenObj.GetComponent<Token>();
             token.previousGridPosition = new Vector2Int(-1, -1);
             token.SetRandomElement();
+
+            tokenObj.name = Settings.main.elements[token.elementId].name + "(" + col + ", " + finalRow + ")";
 
             SetTokenInGrid(token, col, finalRow);
             token.BeginMovingToPosition(GridToWorldPosition(token.gridPosition), Settings.main.tokens.collapseTime);
