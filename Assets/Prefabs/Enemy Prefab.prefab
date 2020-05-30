@@ -123,9 +123,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1020143479
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1961965759
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 50f37dec7e526dc44b48fff17ab98a7e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -236,13 +236,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320b7648ede31b4469cc5ca802603ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battler: {fileID: 0}
+  battler: {fileID: 11400000, guid: d02bfa18e0645a2488029015da3b4bf9, type: 2}
   characterModelObject: {fileID: 3961155895331097700}
   flashSpeed: 5
   renderers: []
   hpBarBracket: {fileID: 3664734318138352739}
   hpBarEmpty: {fileID: 7225067772599639429}
   hpBarFill: {fileID: 3409404001328787534}
+  lowHealth: 0.2
+  lowHealthColor: {r: 1, g: 0, b: 0, a: 1}
+  highHealth: 1
+  highHealthColor: {r: 0.11574066, g: 1, b: 0, a: 1}
   health: 0
 --- !u!1001 &8359670907821777848
 PrefabInstance:
@@ -311,12 +315,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5104905031106398171, guid: 3f2024c5f2b679b47be11ee88082c4a7,
+    - target: {fileID: 1172937829719670333, guid: 3f2024c5f2b679b47be11ee88082c4a7,
         type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1172937829719670333, guid: 3f2024c5f2b679b47be11ee88082c4a7,
+    - target: {fileID: 5104905031106398171, guid: 3f2024c5f2b679b47be11ee88082c4a7,
         type: 3}
       propertyPath: m_Enabled
       value: 0

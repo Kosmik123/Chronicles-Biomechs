@@ -27,7 +27,8 @@ public class SwapPuzzleTokenController : MonoBehaviour
     public bool isMatched;
 
     [Header("Swipe")]
-    private Vector3 pressPosition, releasePosition;
+    public Vector3 pressWorldPosition;
+    public Vector3 releaseWorldPosition;
 
     private TroopMover troop;
 
@@ -53,6 +54,20 @@ public class SwapPuzzleTokenController : MonoBehaviour
             1);
         if(!hasJustChangedType)
             ManageSprites();
+
+        if (token.isClicked)
+        {
+            releaseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float dist = Settings.main.tokens.minimalSwipeSquareDistance;
+
+            if ((releaseWorldPosition - pressWorldPosition).sqrMagnitude > dist)
+            {
+                Vector2Int direction = GetSwipeDirection();
+                SwapController.main.SwapTokensBySwipe(this, direction);
+                token.isClicked = false;
+            }
+        }
+
     }
 
     private void ManageSprites()
@@ -138,12 +153,8 @@ public class SwapPuzzleTokenController : MonoBehaviour
 
     Vector2Int GetSwipeDirection()
     {
-        float dist = Settings.main.tokens.minimalSwipeDistance;
-        if ((releasePosition - pressPosition).sqrMagnitude < dist)
-            return Vector2Int.zero;
-
-        float angle = Mathf.Atan2(releasePosition.y - pressPosition.y,
-            releasePosition.x - pressPosition.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(releaseWorldPosition.y - pressWorldPosition.y,
+            releaseWorldPosition.x - pressWorldPosition.x) * Mathf.Rad2Deg;
         if (angle > -135 && angle <= -45)
         {
             return Vector2Int.up;
@@ -163,10 +174,11 @@ public class SwapPuzzleTokenController : MonoBehaviour
     {
         if (!PuzzleGrid.main.IsAnyTokenMoving())
         {
-            pressPosition = Input.mousePosition;
+            pressWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
     }
 
+    
     private void OnMouseUp()
     {
         if (token.isMoving)
@@ -174,12 +186,18 @@ public class SwapPuzzleTokenController : MonoBehaviour
 
         if (token.isClicked)
         {
-            releasePosition = Input.mousePosition;
+            releaseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            Vector2Int direction = GetSwipeDirection();
-            SwapController.main.SwapTokensBySwipe(this, direction);
+            float dist = Settings.main.tokens.minimalSwipeSquareDistanceWithRelease;
+            if ((releaseWorldPosition - pressWorldPosition).sqrMagnitude > dist)
+            {
+                Vector2Int direction = GetSwipeDirection();
+                SwapController.main.SwapTokensBySwipe(this, direction);
+            }
+            token.isClicked = false;
         }
     }
+
 
     private void OnMouseUpAsButton()
     {

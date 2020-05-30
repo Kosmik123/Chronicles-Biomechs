@@ -18,13 +18,22 @@ public class EnemyController : MonoBehaviour
     public SpriteRenderer hpBarEmpty;
     public SpriteRenderer hpBarFill;
 
+    [Range(0, 1)]
+    public float lowHealth;
+    public Color lowHealthColor;
+
+    [Range(0, 1)]
+    public float highHealth;
+    public Color highHealthColor;
+
+
+
     [Header("Battler State")]
     public int health;
 
     void Awake()
     {
         renderers = characterModelObject.GetComponentsInChildren<SpriteRenderer>();
-
     }
 
     void Start()
@@ -42,13 +51,12 @@ public class EnemyController : MonoBehaviour
 
         // Battler
         health = battler.maxHealth;
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (flash < 1)
             flash += Time.deltaTime * flashSpeed;
 
@@ -58,11 +66,15 @@ public class EnemyController : MonoBehaviour
         } 
         else
         {
+            float healthPercent = 1.0f * health / battler.maxHealth;
+
             hpBarBracket.enabled = hpBarEmpty.enabled = hpBarFill.enabled = true;
             hpBarFill.transform.localScale = new Vector3(
-                1.0f * health / battler.maxHealth,
+                healthPercent,
                 hpBarFill.transform.localScale.y,
                 hpBarFill.transform.localScale.z);
+
+            hpBarFill.color = GetHealthBarColor(healthPercent);
         }
 
 
@@ -103,4 +115,12 @@ public class EnemyController : MonoBehaviour
 
         return damage;
     }
+
+    Color GetHealthBarColor(float percent)
+    {
+        float range = highHealth - lowHealth;
+        return ( (percent - lowHealth) / range  * highHealthColor +
+            (highHealth - percent) / range * lowHealthColor) * 1.8f;
+    }
+
 }

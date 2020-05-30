@@ -14,7 +14,9 @@ public class PuzzleSettings : ScriptableObject
         public GameObject prefab;
         public float swapTime;
         public float collapseTime;
-        public int minimalSwipeDistance;
+        public float minimalSwipeSquareDistance;
+        public float minimalSwipeSquareDistanceWithRelease;
+        public Vector2 radius;
     }
     public TokensSettings tokens;
 

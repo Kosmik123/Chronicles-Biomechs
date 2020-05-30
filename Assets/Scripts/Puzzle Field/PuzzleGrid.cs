@@ -16,7 +16,6 @@ public class PuzzleGrid : MonoBehaviour
     public Vector2Int gridSize;
     [SerializeField]
     private Bounds fieldBounds;
-    [SerializeField]
     private Vector2 tokenSize;
     public bool generateNonMatchedGrid;
     public MoveDirection collapseDirection;
@@ -31,6 +30,7 @@ public class PuzzleGrid : MonoBehaviour
 
     void Start()
     {
+        tokenSize = Settings.main.tokens.radius;
         CreateGrid(generateNonMatchedGrid);
     }
 

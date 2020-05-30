@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Vezok
-  m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  characterModel: {fileID: 4185583433449443267, guid: f15f0f0e7251ec4489a85a03010fc477,
-    type: 3}
+  m_Script: {fileID: 11500000, guid: 73fcafc388253574a8e3f0cb780238ce, type: 3}
+  m_Name: Vezon
+  m_EditorClassIdentifier: 
+  characterModel: {fileID: 0}
   elementId: 1
-  baseAttack: 1
+  professionId: 0
+  baseAttack: 11
   baseDefence: 1
-  baseMaxHealth: 512
+  baseMaxHealth: 600
   colliderSize: 0
   loot:
-    experience: 18
-    gold: 7
+    experience: 0
+    gold: 0
     items: []

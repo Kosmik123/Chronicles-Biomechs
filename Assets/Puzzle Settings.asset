@@ -59,7 +59,8 @@ MonoBehaviour:
       type: 3}
     swapTime: 0.15
     collapseTime: 0.4
-    minimalSwipeDistance: 50
+    minimalSwipeDistance: 5000
+    radius: {x: 0.8, y: 0.8}
   troops:
     prefab: {fileID: 8850085535232027240, guid: a512d13a706546d4fa5c8aad9e111426,
       type: 3}
