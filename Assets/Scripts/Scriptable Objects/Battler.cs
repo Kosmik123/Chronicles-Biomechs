@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Battler : ScriptableObject
 {
+    [Header("Battler")]
     public GameObject characterModel; //prefab
     public int elementId;
     public int professionId;
@@ -16,9 +17,18 @@ public class Battler : ScriptableObject
     [SerializeField]
     protected int baseMaxHealth;
 
+    public string element;
 
-    
     //public Skill specialSkills;
+
+    private void OnValidate()
+    {
+        if (elementId < Settings.GetImmediate().elements.Length)
+            element = Settings.GetImmediate().elements[elementId].name;
+        else
+            element = "Unknown";
+    }
+
 
 }
 

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73fcafc388253574a8e3f0cb780238ce, type: 3}
-  m_Name: Vezon
+  m_Name: Infected Lewa
   m_EditorClassIdentifier: 
-  characterModel: {fileID: 4185583433449443267, guid: f15f0f0e7251ec4489a85a03010fc477,
+  characterModel: {fileID: 4185583433449443267, guid: 762792fdd9308594589a92e4891c5dd5,
     type: 3}
-  elementId: 1
+  elementId: 3
   professionId: 0
   baseAttack: 11
   baseDefence: 1
   baseMaxHealth: 400
-  element: Water
+  element: Air
   colliderSize: 1
   loot:
     experience: 0

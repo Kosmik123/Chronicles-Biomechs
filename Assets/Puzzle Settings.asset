@@ -18,7 +18,7 @@ MonoBehaviour:
     color: {r: 1, g: 0, b: 0, a: 1}
     secondaryColor: {r: 0.9647059, g: 0.59269893, b: 0.17654121, a: 1}
     cardColor: {r: 1, g: 0, b: 0, a: 1}
-    defaultBackground: {fileID: 21300000, guid: 0c99e6651cc40c845b2a82dbd3226a23,
+    defaultBackground: {fileID: 21300000, guid: c2541af277c7eb841b462d37e2844065,
       type: 3}
   - name: Water
     maskSprite: {fileID: 21300000, guid: 18d3ef843c204114f965c83bf029fda4, type: 3}
@@ -39,7 +39,8 @@ MonoBehaviour:
     color: {r: 0.09840184, g: 0.8, b: 0, a: 1}
     secondaryColor: {r: 0.79215693, g: 0.8745099, b: 0.14117648, a: 1}
     cardColor: {r: 0.07450981, g: 1, b: 0, a: 1}
-    defaultBackground: {fileID: 0}
+    defaultBackground: {fileID: 21300000, guid: 30c3a39a23719524783fa135751e006e,
+      type: 3}
   - name: Stone
     maskSprite: {fileID: 21300000, guid: 5f6c3d7a4db97154a9807819054e93a6, type: 3}
     color: {r: 0.4056604, g: 0.30358708, b: 0.112896055, a: 1}
@@ -52,21 +53,27 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     secondaryColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
     cardColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
-    defaultBackground: {fileID: 21300000, guid: 37e28864e0dc42f449f66d8da6cb98cb,
+    defaultBackground: {fileID: 21300000, guid: ecd4e2b810da6114abdfb267817ad738,
       type: 3}
   tokens:
     prefab: {fileID: 3646977354738391838, guid: f2afb55cdb5c37142934af1a1f5069a9,
       type: 3}
     swapTime: 0.15
     collapseTime: 0.4
-    minimalSwipeDistance: 5000
+    minimalSwipeSquareDistance: 10
+    minimalSwipeSquareDistanceWithRelease: 2
+    relativeDistanceAtGeneration: 2
     radius: {x: 0.8, y: 0.8}
   troops:
     prefab: {fileID: 8850085535232027240, guid: a512d13a706546d4fa5c8aad9e111426,
       type: 3}
-    moveSpeed: 15
+    moveSpeed: 14
+  particles:
+    prefab: {fileID: 8473169437803101798, guid: e3fd7ea8375be4d4992ae3da9f86fe5b,
+      type: 3}
   enemies:
     colliderWidths:
+    - 2
     - 3.8
     - 6
     - 7.8

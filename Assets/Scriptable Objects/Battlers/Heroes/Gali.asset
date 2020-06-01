@@ -9,19 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73fcafc388253574a8e3f0cb780238ce, type: 3}
-  m_Name: Vezon
+  m_Script: {fileID: 11500000, guid: 7faae1edcdd981d4fa660f7afd37627d, type: 3}
+  m_Name: Gali
   m_EditorClassIdentifier: 
-  characterModel: {fileID: 4185583433449443267, guid: f15f0f0e7251ec4489a85a03010fc477,
+  characterModel: {fileID: 4185583433449443267, guid: cfa192f491d42364ba769fb80f92de0d,
     type: 3}
   elementId: 1
   professionId: 0
-  baseAttack: 11
+  baseAttack: 1
   baseDefence: 1
-  baseMaxHealth: 400
+  baseMaxHealth: 10
   element: Water
-  colliderSize: 1
-  loot:
-    experience: 0
-    gold: 0
-    items: []
+  rarity: 4
+  attackByLevel: 
+  defenceByLevel: 
+  maxHealthByLevel: 

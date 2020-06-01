@@ -236,14 +236,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320b7648ede31b4469cc5ca802603ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battler: {fileID: 11400000, guid: d02bfa18e0645a2488029015da3b4bf9, type: 2}
+  battler: {fileID: 0}
   characterModelObject: {fileID: 3961155895331097700}
   flashSpeed: 5
   renderers: []
   hpBarBracket: {fileID: 3664734318138352739}
   hpBarEmpty: {fileID: 7225067772599639429}
+  hpBarCurrent: {fileID: 8508255246935682164}
   hpBarFill: {fileID: 3409404001328787534}
-  lowHealth: 0.2
+  lowHealth: 0
   lowHealthColor: {r: 1, g: 0, b: 0, a: 1}
   highHealth: 1
   highHealthColor: {r: 0.11574066, g: 1, b: 0, a: 1}
@@ -330,6 +331,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 148866691874820044, guid: 3f2024c5f2b679b47be11ee88082c4a7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f2024c5f2b679b47be11ee88082c4a7, type: 3}
 --- !u!4 &3245095269576006618 stripped
@@ -347,6 +353,12 @@ SpriteRenderer:
 --- !u!212 &7225067772599639429 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 1172937829719670333, guid: 3f2024c5f2b679b47be11ee88082c4a7,
+    type: 3}
+  m_PrefabInstance: {fileID: 8359670907821777848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &8508255246935682164 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 148866691874820044, guid: 3f2024c5f2b679b47be11ee88082c4a7,
     type: 3}
   m_PrefabInstance: {fileID: 8359670907821777848}
   m_PrefabAsset: {fileID: 0}

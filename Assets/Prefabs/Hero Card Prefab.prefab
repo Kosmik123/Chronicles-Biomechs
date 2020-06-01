@@ -647,6 +647,21 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 148866691874820044, guid: 3f2024c5f2b679b47be11ee88082c4a7,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 148866691874820044, guid: 3f2024c5f2b679b47be11ee88082c4a7,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 148866691874820044, guid: 3f2024c5f2b679b47be11ee88082c4a7,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.7568628
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f2024c5f2b679b47be11ee88082c4a7, type: 3}
 --- !u!4 &3592963069125844795 stripped

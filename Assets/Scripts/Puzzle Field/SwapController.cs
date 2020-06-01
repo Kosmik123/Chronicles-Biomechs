@@ -179,23 +179,26 @@ public class SwapController : PuzzleController
         {
             if (token != null && token.wasMoved)
             {
-                var tokenCont = token.GetComponent<SwapPuzzleTokenController>();
-                if (!tokenCont.isMatched)
+                if (token.previousGridPosition.x != -1 && token.previousGridPosition.y != -1)
                 {
-                    var other = grid.tokens[
-                        token.previousGridPosition.y,
-                        token.previousGridPosition.x].GetComponent<
-                            SwapPuzzleTokenController>();
-                    if (other != null)
+                    var tokenCont = token.GetComponent<SwapPuzzleTokenController>();
+                    if (!tokenCont.isMatched)
                     {
-                        if (!other.isMatched)
+                        var other = grid.tokens[
+                            token.previousGridPosition.y,
+                            token.previousGridPosition.x].GetComponent<
+                                SwapPuzzleTokenController>();
+                        if (other != null)
                         {
-                            grid.MoveBack(token);
-                            grid.MoveBack(other.token);
+                            if (!other.isMatched)
+                            {
+                                grid.MoveBack(token);
+                                grid.MoveBack(other.token);
+                            }
+                            other.token.wasMoved = false;
                         }
-                        other.token.wasMoved = false;
+                        token.wasMoved = false;
                     }
-                    token.wasMoved = false;
                 }
             }
         }
@@ -228,7 +231,6 @@ public class SwapController : PuzzleController
 
         SwapPuzzleTokenController otherToken = grid.tokens[otherPos.y, otherPos.x].GetComponent<SwapPuzzleTokenController>();
         SwapTokens(token, otherToken);
-
     }
 
 

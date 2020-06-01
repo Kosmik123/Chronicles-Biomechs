@@ -17,6 +17,8 @@ public class PuzzleGrid : MonoBehaviour
     [SerializeField]
     private Bounds fieldBounds;
     private Vector2 tokenSize;
+
+    private float generationTokensRelativeDistance; 
     public bool generateNonMatchedGrid;
     public MoveDirection collapseDirection;
 
@@ -41,6 +43,7 @@ public class PuzzleGrid : MonoBehaviour
 
     public void CreateGrid(bool avoidMatches = false, bool withMove = true)
     {
+        generationTokensRelativeDistance = Settings.main.tokens.relativeDistanceAtGeneration;
         tokens = new Token[gridSize.y, gridSize.x];
         for (int i = 0; i < gridSize.x; i++)
         {
@@ -57,10 +60,14 @@ public class PuzzleGrid : MonoBehaviour
         if (withMove)
         {
             bool isDown = (collapseDirection == MoveDirection.Down);
+
+            float columnsVerticalOffset = 
+                -Mathf.Abs(gridX - gridSize.x / 2) * tokenSize.y * 2 * generationTokensRelativeDistance - 1;
+
             newPos = GridToWorldPosition(
                     gridX,
-                    gridY + (isDown ? -1 : 1) * (gridSize.y)) +
-                        Vector3.up * (-Mathf.Abs(gridX - gridSize.x / 2) * tokenSize.y * 2 - 1);
+                    gridY + (isDown ? -1 : 1) * (gridSize.y)) + 
+                    Vector3.up * columnsVerticalOffset;
         }
         else
         {
@@ -362,7 +369,9 @@ public class PuzzleGrid : MonoBehaviour
             if (GUILayout.Button("Generate"))
             {
                 PuzzleGrid grid = target as PuzzleGrid;
-                PuzzleGrid.main = grid;
+                PuzzleGrid.main = grid; 
+                Settings.main = Settings.GetImmediate();
+                grid.tokenSize = Settings.main.tokens.radius;
                 grid.CreateGrid(grid.generateNonMatchedGrid, false);
             }
 

@@ -3,8 +3,9 @@
 [CreateAssetMenu(fileName = "New Hero", menuName = "Puzzles/Battlers/Hero")]
 public class HeroTemplate : Battler
 {
-    public int rarity;
+    [Header("Hero")]
 
+    public int rarity;
 
     [SerializeField]
     private int[] attackByLevel;

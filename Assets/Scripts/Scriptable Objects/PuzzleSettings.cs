@@ -12,10 +12,14 @@ public class PuzzleSettings : ScriptableObject
     public class TokensSettings
     {
         public GameObject prefab;
+
         public float swapTime;
         public float collapseTime;
+        
         public float minimalSwipeSquareDistance;
         public float minimalSwipeSquareDistanceWithRelease;
+
+        public float relativeDistanceAtGeneration;
         public Vector2 radius;
     }
     public TokensSettings tokens;
@@ -27,6 +31,19 @@ public class PuzzleSettings : ScriptableObject
         public float moveSpeed;
     }
     public TroopsSettings troops;
+
+    [System.Serializable]
+    public class ParticleSettings
+    {
+        public GameObject prefab;
+    }
+    public ParticleSettings particles;
+
+
+
+
+
+
 
     [System.Serializable]
     public class EnemiesSettings
@@ -43,9 +60,11 @@ public class PuzzleElement
     public string name;
     public Sprite maskSprite;
 
+    [Header("Colors")]
     public Color color;
     public Color secondaryColor;
     public Color cardColor;
+    public Color particlesColor;
 
     public Sprite defaultBackground;
 
