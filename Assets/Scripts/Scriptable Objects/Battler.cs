@@ -38,7 +38,7 @@ public class Loot
     [System.Serializable]
     public class ItemLoot
     {
-        public Object item; // TODO zmiana object na klasę Item 
+        public Item item;
         public float probability;
     }
 

@@ -55,7 +55,6 @@ public class TroopMover : MonoBehaviour
 
     private void UpdateTransparency()
     {
-
         foreach (var rend in renderers)
             rend.color = new Color(1, 1, 1, currentAlpha);
     }
@@ -82,7 +81,7 @@ public class TroopMover : MonoBehaviour
     {
         GameObject particle = Instantiate(Settings.main.particles.prefab,
             transform.position, Quaternion.identity);
-        particle.GetComponent<EnergyParticleController>().elementId = troop.elementId;
+        particle.GetComponent<EnergyParticleController>().InitiateParticle(troop.elementId);
 
         Destroy(gameObject);
     }

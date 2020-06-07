@@ -20,17 +20,12 @@ public class Player : MonoBehaviour
     public int experience;
     public int level;
 
-    public Team[] teams;
+    public List<Team> teams;
 
     public List<Hero> ownedHeroes = new List<Hero>();
     public List<Troop> ownedTroops = new List<Troop>();
 
-
     public Troop[] troopsByElement;
-
-
-
-
 
 
 

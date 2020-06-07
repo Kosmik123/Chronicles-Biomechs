@@ -22,18 +22,21 @@ public class EnergyParticleController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Tworzenie particli");
-
-        ParticleSystem.MainModule main = particleSystem.main;
-        //main.startColor = Settings.main.elements[elementId].color;
-        
         ParticleSystem.ColorOverLifetimeModule colorModule = particleSystem.colorOverLifetime;
         colorModule.color = Settings.main.elements[elementId].particlesColor;
 
+    }
+
+    public void InitiateParticle(int elementId)
+    {
+        this.elementId = elementId;
         startPosition = transform.position;
-        targetPosition = new Vector3(0, -13);
+        targetPosition = BattleController.main.GetHeroCardPositions(elementId);
         isMoving = true;
     }
+
+
+
 
     // Update is called once per frame
     void Update()
