@@ -105,6 +105,11 @@ public class SwapController : PuzzleController
     // Update is called once per frame
     void Update()
     {
+        DoUpdate();
+    }
+
+    void DoUpdate()
+    {
         if (!debugMode)
         {
             if (!grid.IsAnyTokenMoving() && !grid.IsAnyTokenAnimating())

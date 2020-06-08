@@ -79,17 +79,19 @@ public class TroopMover : MonoBehaviour
 
     public void Destruct()
     {
-        GameObject particle = Instantiate(Settings.main.particles.prefab,
-            transform.position, Quaternion.identity);
-        particle.GetComponent<EnergyParticleController>().InitiateParticle(troop.elementId);
-
+        if (BattleData.main.heroesByElement != null && BattleData.main.heroesByElement.Length > 0)
+        {
+            int index = 0;
+            foreach (HeroController hero in BattleData.main.heroesByElement[troop.elementId].heroes)
+            {
+                GameObject particle = Instantiate(Settings.main.particles.prefab,
+                    transform.position, Quaternion.identity);
+                particle.GetComponent<EnergyParticleController>().InitiateParticle(hero);
+                index++;
+            }
+        }
         Destroy(gameObject);
     }
-
-
-
-
-
 
 
 

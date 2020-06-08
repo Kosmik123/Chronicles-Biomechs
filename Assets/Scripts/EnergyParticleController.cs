@@ -8,6 +8,7 @@ public class EnergyParticleController : MonoBehaviour
     
     [Header("Settings")]
     public int elementId;
+    public HeroController targetHero;
     
     [Header("Movement")]
     public bool isMoving;
@@ -22,16 +23,23 @@ public class EnergyParticleController : MonoBehaviour
 
     void Start()
     {
-        ParticleSystem.ColorOverLifetimeModule colorModule = particleSystem.colorOverLifetime;
-        colorModule.color = Settings.main.elements[elementId].particlesColor;
-
+        UpdateColor();
     }
 
-    public void InitiateParticle(int elementId)
+    private void UpdateColor()
     {
-        this.elementId = elementId;
+        ParticleSystem.ColorOverLifetimeModule colorModule = particleSystem.colorOverLifetime;
+        colorModule.color = Settings.main.elements[elementId].particlesColor;
+    }
+
+    public void InitiateParticle(HeroController target)
+    {
+        targetHero = target;
+        elementId = target.hero.elementId;
+        UpdateColor();
+
         startPosition = transform.position;
-        targetPosition = BattleController.main.GetHeroCardPositions(elementId);
+        targetPosition = BattleData.main.GetHeroCardPositionByIndex(target.battleIndex);
         isMoving = true;
     }
 
@@ -52,12 +60,16 @@ public class EnergyParticleController : MonoBehaviour
             {
                 transform.position = targetPosition;
                 isMoving = false;
-                Destroy(gameObject);
+                Destruct();
             }
         }
     }
 
-
+    void Destruct()
+    {
+        targetHero.energy++;
+        Destroy(gameObject);
+    }
 
 
 }

@@ -36,14 +36,19 @@ public class PuzzleSettings : ScriptableObject
     public class ParticleSettings
     {
         public GameObject prefab;
+        public string tagName;
     }
     public ParticleSettings particles;
 
-
-
-
-
-
+    [System.Serializable]
+    public class HeroCardSettings
+    {
+        public GameObject prefab;
+        public float horizontalDistance;
+        public float verticalPosition;
+        public string modelLayerName;
+    }
+    public HeroCardSettings heroCards;
 
     [System.Serializable]
     public class EnemiesSettings
@@ -51,7 +56,6 @@ public class PuzzleSettings : ScriptableObject
         public float[] colliderWidths;
     }
     public EnemiesSettings enemies;
-
 }
 
 [System.Serializable]

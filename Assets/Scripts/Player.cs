@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
         public Troop troop;
     }
 
+    [System.Serializable]
     public class Team
     {
         public HeroSet[] members;
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
 
     public int experience;
     public int level;
+
 
     public List<Team> teams;
 

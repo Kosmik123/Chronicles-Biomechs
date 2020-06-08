@@ -77,6 +77,13 @@ MonoBehaviour:
   particles:
     prefab: {fileID: 8473169437803101798, guid: e3fd7ea8375be4d4992ae3da9f86fe5b,
       type: 3}
+    tagName: Energy Particles
+  heroCards:
+    prefab: {fileID: 1638740552807862113, guid: f23a5ed781a78134f9c257007fab77c5,
+      type: 3}
+    horizontalDistance: 2.82
+    verticalPosition: -12.76
+    modelLayerName: Heroes
   enemies:
     colliderWidths:
     - 2

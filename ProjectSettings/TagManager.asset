@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Troop
   - Grid
+  - Hero Card
+  - Energy Particles
   layers:
   - Default
   - TransparentFX

@@ -7,5 +7,5 @@ public class Team
 {
     public Hero[] heroes;
 
-
+    public int size => heroes.Length;
 }
