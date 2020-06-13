@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class DamageTextController : MonoBehaviour
 { 
     [Header("To Link")]
-    public TextMeshProUGUI weakDamageText;
-    public TextMeshProUGUI strongDamageText;
-
+    public Animation weakTextAnimation;
+    public Animation strongTextAnimation;
+    private TextMeshProUGUI weakDamageText;
+    private TextMeshProUGUI strongDamageText;
+    
     [Header("Settings")]
     public Bounds textGenerationBounds;
 
@@ -21,6 +23,10 @@ public class DamageTextController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        weakDamageText = weakTextAnimation.GetComponentInChildren<TextMeshProUGUI>();
+        strongDamageText = strongTextAnimation.GetComponentInChildren<TextMeshProUGUI>();
+
+
         weakDamageText.enabled = false;
         weakDamageText.outlineColor = Settings.main.damageTextSettings.weakFillColor;
         weakDamageText.outlineColor = Settings.main.damageTextSettings.weakOutlineColor;
@@ -46,11 +52,16 @@ public class DamageTextController : MonoBehaviour
             }
         }
 
-        if(isWeak && weakDamageText.color.a <= 0)
+        if (isWeak && weakDamageText.color.a <= 0)
+        {
+            weakDamageText.enabled = false;
             isWeak = false;
-
+        }
         if (isStrong && strongDamageText.color.a <= 0)
+        {
+            strongDamageText.enabled = false;
             isStrong = false;
+        }
     }
 
     public void ShowDamage(int damage, DamageStrength type = DamageStrength.NORMAL)
@@ -73,7 +84,8 @@ public class DamageTextController : MonoBehaviour
                 damageText.outlineColor = Settings.main.damageTextSettings.weakOutlineColor;
                 if (!isWeak)
                 {
-                    // show weak text
+                    weakDamageText.enabled = true;
+                    weakTextAnimation.Play();
                     isWeak = true;
                 }
 
@@ -84,8 +96,9 @@ public class DamageTextController : MonoBehaviour
                 damageText.outlineColor = Settings.main.damageTextSettings.strongOutlineColor;
                 if(!isStrong)
                 {
-                    // show strong text
-                    isWeak = true;
+                    strongDamageText.enabled = true;
+                    strongTextAnimation.Play();
+                    isStrong = true;
                 }
                 break;
             default:
