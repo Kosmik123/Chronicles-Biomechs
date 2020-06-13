@@ -7,40 +7,30 @@ public class EnemyController : MonoBehaviour
 {
     public Enemy battler;
 
-
     public GameObject characterModelObject;
 
+    [Header("Settings")]
     public float flashSpeed;
     public float flash;
     public SpriteRenderer[] renderers;
 
-    [Header("Hp Bar")]
-    public SpriteRenderer hpBarBracket;
-    public SpriteRenderer hpBarEmpty;
-    public SpriteRenderer hpBarCurrent;
-    public SpriteRenderer hpBarFill;
-    private float displayedHealth;
-
-    [Range(0, 1)]
-    public float lowHealth;
-    public Color lowHealthColor;
-
-    [Range(0, 1)]
-    public float highHealth;
-    public Color highHealthColor;
-
+    [Header("To Link")]
+    public StatusBarController hpBar;
+    private DamageTextController damageTextController;
 
     [Header("Battler State")]
     public int health;
 
     void Awake()
     {
-
         UpdateModel();
+
     }
 
     void Start()
     {
+        damageTextController = GetComponentInChildren<DamageTextController>();
+
         // Collider
         BoxCollider2D collider = GetComponentInChildren<BoxCollider2D>();
         collider.size = new Vector2(
@@ -54,7 +44,7 @@ public class EnemyController : MonoBehaviour
 
         // Battler
         health = battler.maxHealth;
-        displayedHealth = health;
+        hpBar.SetValue(health, true);
     }
 
     // Update is called once per frame
@@ -66,68 +56,41 @@ public class EnemyController : MonoBehaviour
         if (flash < 1)
             flash += Time.deltaTime * flashSpeed;
 
-        if (displayedHealth > health)
-            displayedHealth--;
-        else if (displayedHealth < health)
-            displayedHealth++;
-
         UpdateHealthBar();
 
-        if (displayedHealth <= 0)
+        if (hpBar.GetDisplayedValue() <= 0)
             Destroy(gameObject);
     }
 
     private void UpdateHealthBar()
     {
-        if (health >= battler.maxHealth)
-        {
-            hpBarBracket.enabled = hpBarEmpty.enabled = hpBarCurrent.enabled = hpBarFill.enabled = false;
-        }
-        else 
-        {
-            float realPercent = Mathf.Max(0, 1.0f * health / battler.maxHealth);
-            float displayPercent = Mathf.Max(0, 1.0f * displayedHealth / battler.maxHealth);
-
-            hpBarBracket.enabled = hpBarEmpty.enabled = hpBarCurrent.enabled = hpBarFill.enabled = true;
-
-            hpBarCurrent.transform.localScale = new Vector3(
-                displayPercent,
-                hpBarCurrent.transform.localScale.y,
-                hpBarCurrent.transform.localScale.z);
-
-            hpBarFill.transform.localScale = new Vector3(
-                realPercent,
-                hpBarFill.transform.localScale.y,
-                hpBarFill.transform.localScale.z);
-
-            hpBarCurrent.color = GetHealthBarColor(displayPercent, hpBarCurrent.color.a);
-            hpBarFill.color = GetHealthBarColor(realPercent, hpBarFill.color.a);
-        }
+        hpBar.SetValue(1.0f * health / battler.maxHealth);
     }
 
     private int CalculateDamage(Troop troop)
     {
-        // do ogarnięcia atak bohatera
+        // do ogarnięcia wartosc ataku bohatera
         int heroAttack = 3;
     
         int damage = (int) (heroAttack * (1 + troop.attackBonus))*4;
         damage -= 2*battler.defence;
 
+        DamageStrength type = DamageStrength.NORMAL;
         if (troop.elementId - 1 == battler.elementId)
+        {
+            type = DamageStrength.STRONG;
             damage *= 2;
+        }
         else if (troop.elementId + 1 == battler.elementId)
+        {
+            type = DamageStrength.WEAK;
             damage /= 2;
+        }
+        damage += Random.Range(-3, +4);
 
+
+        damageTextController.ShowDamage(damage, type);
         return damage;
-    }
-
-    Color GetHealthBarColor(float percent, float colorAlpha = 1f)
-    {
-        float range = highHealth - lowHealth;
-        Color result = ((percent - lowHealth) / range * highHealthColor +
-            (highHealth - percent) / range * lowHealthColor) * 1.8f;
-        result.a = colorAlpha;
-        return result;
     }
 
 

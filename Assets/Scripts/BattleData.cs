@@ -14,6 +14,12 @@ public class BattleData : MonoBehaviour
     }
     public HeroControllersList[] heroesByElement;
 
+    public List<EnemyController> enemies;
+    public int waveIndex;
+
+
+
+
     // Start is called before the first frame update
     void Awake()
     {

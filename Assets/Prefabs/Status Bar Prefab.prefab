@@ -107,7 +107,7 @@ Transform:
   m_GameObject: {fileID: 3584473778876666419}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.35, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.81, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6416328276020738146}
   m_RootOrder: 2
@@ -155,7 +155,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 2.7, y: 0.4}
+  m_Size: {x: 2.71, y: 0.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -170,8 +170,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6416328276020738146}
+  - component: {fileID: 701483331648574880}
   m_Layer: 0
-  m_Name: Status Bar
+  m_Name: Status Bar Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,7 +186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4628948739709437024}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.22, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2769441710193950099}
@@ -195,6 +196,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &701483331648574880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4628948739709437024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef167274b622e046ad26853ce3cd64a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowValue: 0
+  lowValueColor: {r: 1, g: 0, b: 0, a: 1}
+  highValue: 1
+  highValueColor: {r: 0, g: 1, b: 0, a: 1}
+  showAlways: 0
+  changeSpeed: 0.1
+  hpBarBracket: {fileID: 5104905031106398171}
+  hpBarEmpty: {fileID: 1172937829719670333}
+  hpBarCurrent: {fileID: 148866691874820044}
+  hpBarFill: {fileID: 6580645838175671286}
+  value: 0
+  displayedValue: 0
 --- !u!1 &7407191796244047537
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,7 +246,7 @@ Transform:
   m_GameObject: {fileID: 7407191796244047537}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.35, y: 0, z: 0}
-  m_LocalScale: {x: 0.68, y: 1, z: 1}
+  m_LocalScale: {x: 0.54, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6416328276020738146}
   m_RootOrder: 3
@@ -269,7 +294,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 2.7, y: 0.4}
+  m_Size: {x: 2.71, y: 0.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

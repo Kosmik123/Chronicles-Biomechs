@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   experience: 0
   level: 0
+  teams: []
   ownedHeroes:
   - template: {fileID: 0}
     level: 0

@@ -866,7 +866,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 8
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4767,6 +4767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elementId: 3
+  targetHero: {fileID: 0}
   isMoving: 0
   moveSpeed: 0.6
   targetPosition: {x: 0, y: 0, z: 0}

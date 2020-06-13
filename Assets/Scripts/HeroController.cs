@@ -8,8 +8,8 @@ public class HeroController : MonoBehaviour
     public int battleIndex;
 
     [Header("To Link")]
-    public Transform healthBar;
-    public Transform energyBar;
+    public StatusBarController healthBar;
+    public StatusBarController energyBar;
 
     public SpriteRenderer cardRenderer;
     public GameObject model;
@@ -35,7 +35,10 @@ public class HeroController : MonoBehaviour
 
         health = maxHealth = hero.GetMaxHealth();
         energy = 0;
-        
+
+        healthBar.SetValue(1, true);
+        energyBar.SetValue(0, true);
+ 
         Instantiate(hero.GetTemplate().characterModel, model.transform.position,
             Quaternion.identity, model.transform);
         backgroundRenderer.sprite = hero.GetBackground();
@@ -64,16 +67,12 @@ public class HeroController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ResizeBars();
+        UpdateStatusBars();
     }
 
-    private void ResizeBars()
+    private void UpdateStatusBars()
     {
-        healthBar.localScale =
-            new Vector3(1.0f * health / hero.GetMaxHealth(),
-            healthBar.localScale.y, healthBar.localScale.z);
-        energyBar.localScale =
-                new Vector3(1.0f * energy / 40,
-                energyBar.localScale.y, energyBar.localScale.z);
+        healthBar.SetValue(1.0f * health / maxHealth);
+        energyBar.SetValue(energy / 40f);
     }
 }

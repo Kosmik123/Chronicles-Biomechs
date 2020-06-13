@@ -6,12 +6,11 @@ using UnityEngine;
 public class BattleController : MonoBehaviour
 {
     public BattleData data;
+    public PuzzleController currentController;
 
     [Header("To link")]
     public SwapController swapController;
     public Transform heroField;
-
-
 
     void Awake()
     {
@@ -21,7 +20,7 @@ public class BattleController : MonoBehaviour
     void Start()
     {
         data.CreateLists();
-
+        currentController = swapController;
         CreateHeroCards();
     }
 
@@ -32,7 +31,19 @@ public class BattleController : MonoBehaviour
 
 
 
+        /*
+         WaitForPlayerMove()
+         CheckMatches()
+            ChangeTokensToTroops()
+            MoveTroops()
+            DestroyDeadEnemies()
 
+
+
+
+
+
+        */
     }
 
 

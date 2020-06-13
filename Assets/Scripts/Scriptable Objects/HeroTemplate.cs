@@ -20,8 +20,8 @@ public class HeroTemplate : Battler
         if (maxHealthByLevel == null || maxHealthByLevel.Length == 0)
             return baseMaxHealth;
 
-        lv = Mathf.Min(lv, maxHealthByLevel.Length - 1);
-        return baseMaxHealth + maxHealthByLevel[lv];
+        int lvl = Mathf.Min(lv, maxHealthByLevel.Length - 1);
+        return baseMaxHealth + maxHealthByLevel[lvl];
     }
 
 }

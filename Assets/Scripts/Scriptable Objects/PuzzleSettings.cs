@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [System.Serializable, CreateAssetMenu(fileName = "New Settings", menuName = "Puzzles/Settings")]
@@ -56,6 +57,24 @@ public class PuzzleSettings : ScriptableObject
         public float[] colliderWidths;
     }
     public EnemiesSettings enemies;
+
+    [System.Serializable]
+    public class DamageTextSettings
+    {
+        public GameObject prefab;
+
+        public Color normalFillColor;
+        public Color normalOutlineColor;
+
+        public Color weakFillColor;
+        public Color weakOutlineColor;
+
+        public Color strongFillColor;
+        public Color strongOutlineColor;
+    }
+    public DamageTextSettings damageTextSettings;
+
+
 }
 
 [System.Serializable]

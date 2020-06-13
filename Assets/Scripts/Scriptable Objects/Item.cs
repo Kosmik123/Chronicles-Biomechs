@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+
+[CreateAssetMenu(fileName = "New Item", menuName = "RPG/Items")]
 public class Item : ScriptableObject
 {    
     [Header("General")]
-    public string name;
+    public new string name;
     public Sprite sprite;
 
     [Header("Effects")]
@@ -17,9 +21,6 @@ public class Item : ScriptableObject
     public int healthBonus;
 
     public Effect effect; 
-
-
-
 }
 
 

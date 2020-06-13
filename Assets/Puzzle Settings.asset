@@ -26,7 +26,7 @@ MonoBehaviour:
     color: {r: 0, g: 0.467031, b: 1, a: 1}
     secondaryColor: {r: 0.561372, g: 0.69641566, b: 0.861, a: 1}
     cardColor: {r: 0.11764707, g: 0.56078434, b: 1, a: 1}
-    particlesColor: {r: 0, g: 0.76, b: 0.81, a: 1}
+    particlesColor: {r: 0, g: 0.6315246, b: 0.7075472, a: 1}
     defaultBackground: {fileID: 21300000, guid: 60bfc8bea72e6ae48abec865815b30a1,
       type: 3}
   - name: Earth
@@ -42,7 +42,7 @@ MonoBehaviour:
     color: {r: 0.09840184, g: 0.8, b: 0, a: 1}
     secondaryColor: {r: 0.79215693, g: 0.8745099, b: 0.14117648, a: 1}
     cardColor: {r: 0.07450981, g: 1, b: 0, a: 1}
-    particlesColor: {r: 0.25, g: 1, b: 0, a: 1}
+    particlesColor: {r: 0, g: 1, b: 0, a: 1}
     defaultBackground: {fileID: 21300000, guid: 30c3a39a23719524783fa135751e006e,
       type: 3}
   - name: Stone
@@ -50,7 +50,7 @@ MonoBehaviour:
     color: {r: 0.4056604, g: 0.30358708, b: 0.112896055, a: 1}
     secondaryColor: {r: 0.9686275, g: 0.854902, b: 0.5647059, a: 1}
     cardColor: {r: 0.8196079, g: 0.46274513, b: 0, a: 1}
-    particlesColor: {r: 1, g: 0.47663552, b: 0, a: 1}
+    particlesColor: {r: 0.754717, g: 0.45721447, b: 0, a: 1}
     defaultBackground: {fileID: 21300000, guid: 2e0ecd092220aa64895ba2f3408cb84c,
       type: 3}
   - name: Ice
@@ -91,3 +91,12 @@ MonoBehaviour:
     - 6
     - 7.8
     - 10
+  damageTextSettings:
+    prefab: {fileID: 2156833700091811755, guid: b2f9971cf7b79514e8b0284128f3a484,
+      type: 3}
+    normalFillColor: {r: 1, g: 0.99069834, b: 0.7216981, a: 1}
+    normalOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    weakFillColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    weakOutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    strongFillColor: {r: 1, g: 0.40930235, b: 0, a: 1}
+    strongOutlineColor: {r: 0.4056604, g: 0.09918195, b: 0, a: 1}
