@@ -94,9 +94,9 @@ MonoBehaviour:
   damageTextSettings:
     prefab: {fileID: 2156833700091811755, guid: b2f9971cf7b79514e8b0284128f3a484,
       type: 3}
-    normalFillColor: {r: 1, g: 0.99069834, b: 0.7216981, a: 1}
+    normalFillColor: {r: 1, g: 0.97183096, b: 0, a: 1}
     normalOutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    weakFillColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    weakFillColor: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
     weakOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     strongFillColor: {r: 1, g: 0.40930235, b: 0, a: 1}
     strongOutlineColor: {r: 0.4056604, g: 0.09918195, b: 0, a: 1}

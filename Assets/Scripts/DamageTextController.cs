@@ -26,7 +26,6 @@ public class DamageTextController : MonoBehaviour
         weakDamageText = weakTextAnimation.GetComponentInChildren<TextMeshProUGUI>();
         strongDamageText = strongTextAnimation.GetComponentInChildren<TextMeshProUGUI>();
 
-
         weakDamageText.enabled = false;
         weakDamageText.outlineColor = Settings.main.damageTextSettings.weakFillColor;
         weakDamageText.outlineColor = Settings.main.damageTextSettings.weakOutlineColor;
@@ -80,6 +79,7 @@ public class DamageTextController : MonoBehaviour
         {
             case DamageStrength.WEAK:
                 damageText.fontStyle = FontStyles.Italic;
+                damageText.fontSize = 18;
                 damageText.faceColor = Settings.main.damageTextSettings.weakFillColor;
                 damageText.outlineColor = Settings.main.damageTextSettings.weakOutlineColor;
                 if (!isWeak)
@@ -88,10 +88,10 @@ public class DamageTextController : MonoBehaviour
                     weakTextAnimation.Play();
                     isWeak = true;
                 }
-
                 break;
             case DamageStrength.STRONG:
                 damageText.fontStyle = FontStyles.Bold;
+                damageText.fontSize = 24;
                 damageText.faceColor = Settings.main.damageTextSettings.strongFillColor;
                 damageText.outlineColor = Settings.main.damageTextSettings.strongOutlineColor;
                 if(!isStrong)

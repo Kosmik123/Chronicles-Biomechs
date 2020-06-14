@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 { 
+    [System.Serializable]
     public class HeroSet
     {
         public HeroController hero;
@@ -20,7 +21,6 @@ public class Player : MonoBehaviour
 
     public int experience;
     public int level;
-
 
     public List<Team> teams;
 
