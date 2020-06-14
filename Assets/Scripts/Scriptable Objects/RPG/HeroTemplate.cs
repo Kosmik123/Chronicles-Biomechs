@@ -1,27 +1,45 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Hero", menuName = "Puzzles/Battlers/Hero")]
 public class HeroTemplate : Battler
 {
     [Header("Hero")]
-
     public int rarity;
+    public int maxLevel = 100;
 
     [SerializeField]
-    private int[] attackByLevel;
+    private IntStatCurve attackByLevel;
     [SerializeField]
-    private int[] defenceByLevel;
+    private IntStatCurve defenceByLevel;
     [SerializeField]
-    private int[] maxHealthByLevel;
-
+    private IntStatCurve maxHealthByLevel;
 
     public int GetMaxHealth(int lv)
     {
-        if (maxHealthByLevel == null || maxHealthByLevel.Length == 0)
-            return baseMaxHealth;
+        return baseMaxHealth + maxHealthByLevel.Get(1.0f * lv / maxLevel);
+    }
 
-        int lvl = Mathf.Min(lv, maxHealthByLevel.Length - 1);
-        return baseMaxHealth + maxHealthByLevel[lvl];
+    public int GetAttack(int lv)
+    {
+        return baseAttack + attackByLevel.Get(1.0f * lv / maxLevel);
+    }
+
+    public int GetDefence(int lv)
+    {
+        return baseDefence + defenceByLevel.Get(1.0f * lv / maxLevel);
+    }
+}
+
+[System.Serializable]
+public class IntStatCurve
+{
+    public AnimationCurve curve = AnimationCurve.Linear(0, 0, 1, 1);
+    public int modifier;
+
+    public int Get(float percent)
+    {
+        return (int)(modifier * curve.Evaluate(percent));
     }
 
 }

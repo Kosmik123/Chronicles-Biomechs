@@ -22,6 +22,11 @@ public class Hero
         return template.GetMaxHealth(level);
     }
 
+    public int GetAttack()
+    {
+        return template.GetAttack(level);
+    }
+
     public Sprite GetBackground()
     {
         return Settings.main.elements[(int)template.elementId].defaultBackground;

@@ -17,9 +17,6 @@ public class BattleData : MonoBehaviour
     public List<EnemyController> enemies;
     public int waveIndex;
 
-
-
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -45,7 +42,6 @@ public class BattleData : MonoBehaviour
         }
         return positions;
     }
-
     public Vector3 GetHeroCardPositionByIndex(int index)
     {
         float center = 0;
@@ -57,6 +53,15 @@ public class BattleData : MonoBehaviour
         return new Vector3(cardX, Settings.main.heroCards.verticalPosition);
     }
 
+    public int GetHeroesAttack(int elemId)
+    {
+        int result = 0;
+        foreach(HeroController h in heroesByElement[elemId].heroes)
+        {
+            result += h.hero.GetAttack();
+        }
+        return result;
+    }
 
 
 }

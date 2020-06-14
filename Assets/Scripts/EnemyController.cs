@@ -69,11 +69,10 @@ public class EnemyController : MonoBehaviour
 
     private int CalculateDamage(Troop troop)
     {
-        // do ogarnięcia wartosc ataku bohatera
-        int heroAttack = 3;
+        int heroAttack = BattleData.main.GetHeroesAttack(troop.elementId);    
     
-        int damage = (int) (heroAttack * (1 + troop.attackBonus))*4;
-        damage -= 2*battler.defence;
+        int damage = (int) (heroAttack * (1 + troop.attackBonus)) * 4;
+        damage -= 2 * battler.defence;
 
         DamageStrength type = DamageStrength.NORMAL;
         if (troop.elementId - 1 == battler.elementId)
@@ -86,8 +85,7 @@ public class EnemyController : MonoBehaviour
             type = DamageStrength.WEAK;
             damage /= 2;
         }
-        damage += Random.Range(-3, +4);
-
+        damage += Random.Range(-damage / 3, damage / 3 + 1);
 
         damageTextController.ShowDamage(damage, type);
         return damage;

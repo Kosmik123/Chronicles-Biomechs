@@ -4,21 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DamageTextController : MonoBehaviour
+public class DamageTextMeshController : DamageTextController
 { 
-    [Header("To Link")]
-    public Animation weakTextAnimation;
-    public Animation strongTextAnimation;
     private TextMeshProUGUI weakDamageText;
     private TextMeshProUGUI strongDamageText;
-    
-    [Header("Settings")]
-    public Bounds textGenerationBounds;
 
-    [Header("States")]
     public List<TextMeshProUGUI> damageIndicators = new List<TextMeshProUGUI>();
-    public bool isWeak;
-    public bool isStrong;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +18,7 @@ public class DamageTextController : MonoBehaviour
         strongDamageText = strongTextAnimation.GetComponentInChildren<TextMeshProUGUI>();
 
         weakDamageText.enabled = false;
-        weakDamageText.outlineColor = Settings.main.damageTextSettings.weakFillColor;
+        weakDamageText.faceColor = Settings.main.damageTextSettings.weakFillColor;
         weakDamageText.outlineColor = Settings.main.damageTextSettings.weakOutlineColor;
 
         strongDamageText.enabled = false;
@@ -63,7 +54,7 @@ public class DamageTextController : MonoBehaviour
         }
     }
 
-    public void ShowDamage(int damage, DamageStrength type = DamageStrength.NORMAL)
+    public override void ShowDamage(int damage, DamageStrength type = DamageStrength.NORMAL)
     {
         Vector3 randomPosition = transform.position + new Vector3(
             Random.Range(textGenerationBounds.min.x, textGenerationBounds.max.x),
@@ -78,8 +69,7 @@ public class DamageTextController : MonoBehaviour
         switch (type)
         {
             case DamageStrength.WEAK:
-                damageText.fontStyle = FontStyles.Italic;
-                damageText.fontSize = 18;
+                damageText.fontSize = Settings.main.damageTextSettings.weakFontSize;
                 damageText.faceColor = Settings.main.damageTextSettings.weakFillColor;
                 damageText.outlineColor = Settings.main.damageTextSettings.weakOutlineColor;
                 if (!isWeak)
@@ -91,7 +81,7 @@ public class DamageTextController : MonoBehaviour
                 break;
             case DamageStrength.STRONG:
                 damageText.fontStyle = FontStyles.Bold;
-                damageText.fontSize = 24;
+                damageText.fontSize = Settings.main.damageTextSettings.strongFontSize;
                 damageText.faceColor = Settings.main.damageTextSettings.strongFillColor;
                 damageText.outlineColor = Settings.main.damageTextSettings.strongOutlineColor;
                 if(!isStrong)
@@ -102,6 +92,7 @@ public class DamageTextController : MonoBehaviour
                 }
                 break;
             default:
+                damageText.fontSize = Settings.main.damageTextSettings.normalFontSize;
                 damageText.faceColor = Settings.main.damageTextSettings.normalFillColor;
                 damageText.outlineColor = Settings.main.damageTextSettings.normalOutlineColor;
                 break;

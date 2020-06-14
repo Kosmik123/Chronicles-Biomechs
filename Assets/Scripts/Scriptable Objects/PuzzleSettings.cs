@@ -63,14 +63,20 @@ public class PuzzleSettings : ScriptableObject
     {
         public GameObject prefab;
 
+        [Header("Normal Damage")]
         public Color normalFillColor;
         public Color normalOutlineColor;
+        public int normalFontSize;
 
+        [Header("Weak Damage")]
         public Color weakFillColor;
         public Color weakOutlineColor;
+        public int weakFontSize;
 
+        [Header("Strong Damage")]
         public Color strongFillColor;
         public Color strongOutlineColor;
+        public int strongFontSize;
     }
     public DamageTextSettings damageTextSettings;
 
@@ -86,6 +92,7 @@ public class PuzzleElement
     [Header("Colors")]
     public Color color;
     public Color secondaryColor;
+    public Color maskColor;
     public Color cardColor;
     public Color particlesColor;
 

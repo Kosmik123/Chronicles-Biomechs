@@ -80,7 +80,7 @@ public class SwapPuzzleTokenController : MonoBehaviour
             normalSprite.color = isMatched ? Color.grey : Color.white;
         else
             colorSprite.color = bombSprite.color =
-                Settings.main.elements[token.elementId].color;
+                Settings.main.elements[token.elementId].maskColor;
     }
 
     private void ManageDisappearing()

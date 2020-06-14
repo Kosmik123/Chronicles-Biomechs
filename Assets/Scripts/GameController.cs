@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public bool debugMode;
     public Scene currentScene;
 
+    public GameObject test;
 
     // Start is called before the first frame update
     void Start()
@@ -16,9 +17,18 @@ public class GameController : MonoBehaviour
         debugMode = true;
 #endif
 
+        test = Instantiate(Settings.main.damageTextSettings.prefab,
+            new Vector3(100,100), Quaternion.identity);
+
         if (!debugMode) SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
         currentScene = SceneManager.GetActiveScene();
+    
+    
     }
 
+    void Update()
+    {
+
+    }
     
 }
