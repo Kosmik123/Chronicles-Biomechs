@@ -154,8 +154,19 @@ MonoBehaviour:
   experience: 0
   level: 0
   teams:
-  - members:
-    - hero: {fileID: 0}
+  - heroes: []
+    maskSets:
+    - kanohi: {fileID: 0}
+      troop: {fileID: 0}
+    - kanohi: {fileID: 0}
+      troop: {fileID: 0}
+    - kanohi: {fileID: 0}
+      troop: {fileID: 0}
+    - kanohi: {fileID: 0}
+      troop: {fileID: 0}
+    - kanohi: {fileID: 0}
+      troop: {fileID: 0}
+    - kanohi: {fileID: 0}
       troop: {fileID: 0}
   ownedHeroes:
   - template: {fileID: 0}
@@ -163,6 +174,13 @@ MonoBehaviour:
     experience: 0
     isDead: 0
   ownedTroops: []
+  ownedMasks:
+  - {fileID: 11400000, guid: 5586b3721eaa5fb45ad00615110250c8, type: 2}
+  - {fileID: 11400000, guid: 75735c77a7edbad48b8edb48c9f6d8a1, type: 2}
+  - {fileID: 11400000, guid: c08232b4919a46942ab6d84aea6173e4, type: 2}
+  - {fileID: 11400000, guid: c8a4ebeea3a40a445876b61a9151e804, type: 2}
+  - {fileID: 11400000, guid: 8825cf58994b35f4a92e1906b12abb2e, type: 2}
+  - {fileID: 11400000, guid: 21c013eab99ea654582acd79528cf62f, type: 2}
   troopsByElement:
   - {fileID: 11400000, guid: 8674b543550e4d84e873f6cb0c3865d8, type: 2}
   - {fileID: 11400000, guid: 0990fab38f2478c4d961c279a11e6614, type: 2}
@@ -212,3 +230,4 @@ MonoBehaviour:
   debugMode: 0
   currentScene:
     m_Handle: 0
+  test: {fileID: 0}

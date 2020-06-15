@@ -6,7 +6,7 @@ public enum TokenType
 {
     NONE, NORMAL, BOMB, COLOR
 }
-[RequireComponent(typeof(Token))]
+[RequireComponent(typeof(MaskToken))]
 public class SwapPuzzleTokenController : MonoBehaviour
 {
     public SwapController puzzleController;
@@ -15,7 +15,7 @@ public class SwapPuzzleTokenController : MonoBehaviour
     public SpriteRenderer normalSprite;
     public SpriteRenderer bombSprite;
     public SpriteRenderer colorSprite;
-    public Token token;
+    public MaskToken token;
 
     [Header("Types")]
     public TokenType type;
@@ -36,7 +36,7 @@ public class SwapPuzzleTokenController : MonoBehaviour
     public void Awake()
     {
         puzzleController = SwapController.main;
-        token = GetComponent<Token>();    
+        token = GetComponent<MaskToken>();    
     }
 
     void Start()
@@ -76,11 +76,9 @@ public class SwapPuzzleTokenController : MonoBehaviour
         bombSprite.enabled = (type == TokenType.BOMB);
         colorSprite.enabled = (type == TokenType.COLOR);
 
-        if (type == TokenType.NORMAL)
-            normalSprite.color = isMatched ? Color.grey : Color.white;
-        else
-            colorSprite.color = bombSprite.color =
-                Settings.main.elements[token.elementId].maskColor;
+
+        normalSprite.color = colorSprite.color = bombSprite.color =
+             Settings.main.elements[token.elementId].maskColor;
     }
 
     private void ManageDisappearing()
@@ -141,7 +139,7 @@ public class SwapPuzzleTokenController : MonoBehaviour
 
             var troopObj = Instantiate(Settings.main.troops.prefab, transform.position, Quaternion.identity);
             troop = troopObj.GetComponent<TroopMover>();
-            troop.troop = Player.main.troopsByElement[token.elementId];
+            troop.troop = BattleData.main.battlingTeam.maskSets[token.elementId].troop;
             troop.UpdateSprite();
 
             token.animator.SetTrigger("Reveal");

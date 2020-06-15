@@ -23,7 +23,7 @@ public class PuzzleGrid : MonoBehaviour
     public MoveDirection collapseDirection;
 
     [Header("States")]
-    public Token[,] tokens;
+    public MaskToken[,] tokens;
 
     private void Awake()
     {
@@ -44,7 +44,7 @@ public class PuzzleGrid : MonoBehaviour
     public void CreateGrid(bool avoidMatches = false, bool withMove = true)
     {
         generationTokensRelativeDistance = Settings.main.tokens.relativeDistanceAtGeneration;
-        tokens = new Token[gridSize.y, gridSize.x];
+        tokens = new MaskToken[gridSize.y, gridSize.x];
         for (int i = 0; i < gridSize.x; i++)
         {
             for (int j = 0; j < gridSize.y; j++)
@@ -76,7 +76,7 @@ public class PuzzleGrid : MonoBehaviour
 
         GameObject tokenObj = Instantiate(Settings.main.tokens.prefab,
             newPos, Quaternion.identity, transform);
-        Token token = tokenObj.GetComponent<Token>();
+        MaskToken token = tokenObj.GetComponent<MaskToken>();
         token.previousGridPosition = new Vector2Int(-1, -1);
         SetTokenInGrid(token, gridX, gridY);
         UpdateTokenPosition(token, Settings.main.tokens.collapseTime);
@@ -124,7 +124,7 @@ public class PuzzleGrid : MonoBehaviour
         return new Vector3(x, y);
     }
 
-    public void SetTokenInGrid(Token token, int xGrid, int yGrid)
+    public void SetTokenInGrid(MaskToken token, int xGrid, int yGrid)
     {
         try
         {
@@ -146,19 +146,19 @@ public class PuzzleGrid : MonoBehaviour
         return true;
     }
 
-    public void SetTokenInGrid(Token token, Vector2Int gridPos)
+    public void SetTokenInGrid(MaskToken token, Vector2Int gridPos)
     {
         SetTokenInGrid(token, gridPos.x, gridPos.y);
     }
 
-    public void UpdateTokenPosition(Token token, float time=0)
+    public void UpdateTokenPosition(MaskToken token, float time=0)
     {
         token.BeginMovingToPosition(GridToWorldPosition(token.gridPosition.x, token.gridPosition.y), time);
     }
 
     public void Clear()
     {
-        Token[] allTokens = GetComponentsInChildren<Token>();
+        MaskToken[] allTokens = GetComponentsInChildren<MaskToken>();
         if (allTokens != null)
         {
             for (int i = 0; i < allTokens.Length; i++)
@@ -217,7 +217,7 @@ public class PuzzleGrid : MonoBehaviour
     //    return false;
     //}
 
-    public void MoveBack(Token token)
+    public void MoveBack(MaskToken token)
     {
         Debug.Log("Moving back");
         SetTokenInGrid(token, token.previousGridPosition);
@@ -227,7 +227,7 @@ public class PuzzleGrid : MonoBehaviour
 
     public bool IsAnyTokenMoving()
     {
-        foreach (Token token in tokens)
+        foreach (MaskToken token in tokens)
         {
             if (token != null && token.isMoving)
                 return true;
@@ -237,7 +237,7 @@ public class PuzzleGrid : MonoBehaviour
 
     public bool IsAnyTokenAnimating()
     {
-        foreach (Token token in tokens)
+        foreach (MaskToken token in tokens)
         {
             if (token != null && token.isDisappearing)
                 return true;
@@ -279,7 +279,7 @@ public class PuzzleGrid : MonoBehaviour
             GameObject tokenObj = Instantiate(Settings.main.tokens.prefab,
                 GridToWorldPosition(col, initialRow), Quaternion.identity, transform);
 
-            Token token = tokenObj.GetComponent<Token>();
+            MaskToken token = tokenObj.GetComponent<MaskToken>();
             token.previousGridPosition = new Vector2Int(-1, -1);
             token.SetRandomElement();
 
@@ -297,7 +297,7 @@ public class PuzzleGrid : MonoBehaviour
         for (int j = 0; j < gridSize.y; j++)
         {
             int currentRow = (isDown) ? (gridSize.y - j - 1) : j;
-            Token currentToken = tokens[currentRow, col];
+            MaskToken currentToken = tokens[currentRow, col];
 
             if (currentToken == null)
             {

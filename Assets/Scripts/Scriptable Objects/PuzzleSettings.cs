@@ -8,6 +8,7 @@ public class PuzzleSettings : ScriptableObject
 { 
     [Header("General")]
     public PuzzleElement[] elements;
+    public Profession[] professions;
 
     [System.Serializable]
     public class TokensSettings
@@ -98,4 +99,11 @@ public class PuzzleElement
 
     public Sprite defaultBackground;
 
+}
+
+[System.Serializable]
+public class Profession
+{
+    public string name;
+    public Sprite icon;
 }

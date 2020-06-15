@@ -73,6 +73,7 @@ public class EnemyController : MonoBehaviour
     
         int damage = (int) (heroAttack * (1 + troop.attackBonus)) * 4;
         damage -= 2 * battler.defence;
+        damage = Mathf.Max(0, damage);
 
         DamageStrength type = DamageStrength.NORMAL;
         if (troop.elementId - 1 == battler.elementId)

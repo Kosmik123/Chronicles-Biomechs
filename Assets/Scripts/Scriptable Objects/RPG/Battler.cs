@@ -17,16 +17,21 @@ public class Battler : ScriptableObject
     [SerializeField]
     protected int baseMaxHealth;
 
-    public string element;
+    public string description;
 
     //public Skill specialSkills;
 
     private void OnValidate()
     {
-        if (elementId < Settings.GetImmediate().elements.Length)
-            element = Settings.GetImmediate().elements[elementId].name;
+        if (elementId < Settings.GetImmediate().elements.Length && elementId > -1)
+            description = Settings.GetImmediate().elements[elementId].name;
         else
-            element = "Unknown";
+            description = "Unknown";
+        description += " ";
+        if (professionId < Settings.GetImmediate().professions.Length && professionId > -1)
+            description += Settings.GetImmediate().professions[professionId].name;
+        else
+            description += "Nobody";
     }
 
 

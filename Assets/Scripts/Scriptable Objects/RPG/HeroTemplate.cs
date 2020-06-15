@@ -15,6 +15,10 @@ public class HeroTemplate : Battler
     [SerializeField]
     private IntStatCurve maxHealthByLevel;
 
+    public int energySpeed;
+
+
+
     public int GetMaxHealth(int lv)
     {
         return baseMaxHealth + maxHealthByLevel.Get(1.0f * lv / maxLevel);

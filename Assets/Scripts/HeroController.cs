@@ -21,6 +21,7 @@ public class HeroController : MonoBehaviour
     public int maxHealth;
     public int energy;
 
+    //public List<State> states;
 
     // Start is called before the first frame update
     void Start()
@@ -73,6 +74,11 @@ public class HeroController : MonoBehaviour
     private void UpdateStatusBars()
     {
         healthBar.SetValue(1.0f * health / maxHealth);
-        energyBar.SetValue(energy / 40f);
+        energyBar.SetValue(energy / 100f);
+    }
+
+    public void AddEnergy()
+    {
+        energy += hero.GetTemplate().energySpeed;
     }
 }

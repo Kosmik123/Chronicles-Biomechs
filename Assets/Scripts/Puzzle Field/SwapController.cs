@@ -174,13 +174,13 @@ public class SwapController : PuzzleController
             }
         }
 
-        foreach (Token tok in grid.tokens)
+        foreach (MaskToken tok in grid.tokens)
             tok.GetComponent<SwapPuzzleTokenController>().isChecking = false;
     }
 
     protected void MoveUnmatchedBack()
     {
-        foreach (Token token in grid.tokens)
+        foreach (MaskToken token in grid.tokens)
         {
             if (token != null && token.wasMoved)
             {
@@ -241,7 +241,7 @@ public class SwapController : PuzzleController
 
     public void DestroyTokensOfElement(int id)
     {
-        foreach (Token token in grid.tokens)
+        foreach (MaskToken token in grid.tokens)
         {
             if (token.elementId == id)
             {
@@ -385,7 +385,7 @@ public class SwapController : PuzzleController
 
     public void ChangeMatchedToTroops()
     {
-        foreach (Token token in grid.tokens)
+        foreach (MaskToken token in grid.tokens)
         {
             if (token != null)
             {

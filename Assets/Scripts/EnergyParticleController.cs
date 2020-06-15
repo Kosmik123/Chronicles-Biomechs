@@ -67,7 +67,7 @@ public class EnergyParticleController : MonoBehaviour
 
     void Destruct()
     {
-        targetHero.energy++;
+        targetHero.AddEnergy();
         Destroy(gameObject);
     }
 

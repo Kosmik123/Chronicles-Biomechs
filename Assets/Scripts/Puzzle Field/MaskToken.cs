@@ -4,12 +4,14 @@ using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class Token : MonoBehaviour
+public class MaskToken : MonoBehaviour
 {
     public new SpriteRenderer renderer;
 
     [Header("Settings")]
-    public int elementId;
+    public Mask mask;
+
+    [Header("States")]
     public Vector2Int gridPosition;
     public Vector2Int previousGridPosition;
 
@@ -30,6 +32,7 @@ public class Token : MonoBehaviour
     public Animator animator;
     public AnimationClip revealAnimation, shakeAnimation;
 
+    public int elementId => mask.elementId;
 
     void Start()
     {
@@ -52,12 +55,14 @@ public class Token : MonoBehaviour
 
     public void UpdateSprite()
     {
-        renderer.sprite = Settings.main.elements[elementId].maskSprite;
+        renderer.sprite = mask.kanohi.sprite;
+        renderer.color = Settings.main.elements[mask.elementId].maskColor;
     }
 
     public void UpdateSpriteImmediate()
     {
-        renderer.sprite = Settings.GetImmediate().elements[elementId].maskSprite;
+        renderer.sprite = mask.kanohi.sprite;
+        renderer.color = Settings.GetImmediate().elements[mask.elementId].maskColor;
     }
     private void MoveToTarget()
     {
@@ -79,11 +84,12 @@ public class Token : MonoBehaviour
         bool hasBadElement;
         do
         {
-            elementId = Random.Range(0, allElementsCount);
+            int elemId = Random.Range(0, allElementsCount);
+            mask = BattleData.main.battlingTeam.maskSets[elemId].mask;
             hasBadElement = false;
             foreach (int id in exceptionIds)
             {
-                if (id == elementId)
+                if (id == elemId)
                 {
                     hasBadElement = true;
                     break;
@@ -95,7 +101,8 @@ public class Token : MonoBehaviour
 
     public void SetRandomElement()
     {
-        elementId = Random.Range(0, Settings.main.elements.Length);
+        int elemId = Random.Range(0, Settings.main.elements.Length);
+        mask = BattleData.main.battlingTeam.maskSets[elemId].mask;
         UpdateSprite();
     }
 
@@ -120,7 +127,7 @@ public class Token : MonoBehaviour
         }
     }
 
-    public bool IsNextTo(Token other)
+    public bool IsNextTo(MaskToken other)
     {
         int xDiff = Mathf.Abs(gridPosition.x - other.gridPosition.x);
         int yDiff = Mathf.Abs(gridPosition.y - other.gridPosition.y);
@@ -146,7 +153,7 @@ public class Token : MonoBehaviour
 
 
 #if UNITY_EDITOR
-    [CustomEditor(typeof(Token))]
+    [CustomEditor(typeof(MaskToken))]
     public class TokenEditor : Editor
     {
         public override void OnInspectorGUI()
@@ -155,7 +162,7 @@ public class Token : MonoBehaviour
 
             if (GUILayout.Button("Update Sprite"))
             {
-                Token token = target as Token;
+                MaskToken token = target as MaskToken;
                 token.UpdateSpriteImmediate();
             }
         }

@@ -13,7 +13,6 @@ public class Hero
     public int level;
     public int experience;
 
-
     public bool isDead;
     public int elementId => template.elementId;
 

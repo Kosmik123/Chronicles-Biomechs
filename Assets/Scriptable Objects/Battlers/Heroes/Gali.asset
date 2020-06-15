@@ -15,13 +15,13 @@ MonoBehaviour:
   characterModel: {fileID: 4185583433449443267, guid: cfa192f491d42364ba769fb80f92de0d,
     type: 3}
   elementId: 1
-  professionId: 0
+  professionId: 4
   baseAttack: 1
   baseDefence: 1
   baseMaxHealth: 10
-  element: Water
+  description: Water Hook
   rarity: 4
-  maxLevel: 0
+  maxLevel: 100
   attackByLevel:
     curve:
       serializedVersion: 2
@@ -47,7 +47,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    modifier: 0
+    modifier: 90
   defenceByLevel:
     curve:
       serializedVersion: 2
@@ -73,7 +73,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    modifier: 0
+    modifier: 140
   maxHealthByLevel:
     curve:
       serializedVersion: 2
@@ -99,4 +99,4 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    modifier: 0
+    modifier: 70
