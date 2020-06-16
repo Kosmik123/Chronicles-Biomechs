@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Hero", menuName = "Puzzles/Battlers/Hero")]
+[CreateAssetMenu(fileName = "New Hero", menuName = "Battlers/Hero")]
 public class HeroTemplate : Battler
 {
     [Header("Hero")]

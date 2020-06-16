@@ -49,6 +49,7 @@ public class PuzzleSettings : ScriptableObject
         public float horizontalDistance;
         public float verticalPosition;
         public string modelLayerName;
+        public float energyRotationSpeed;
     }
     public HeroCardSettings heroCards;
 
@@ -84,22 +85,6 @@ public class PuzzleSettings : ScriptableObject
 
 }
 
-[System.Serializable]
-public class PuzzleElement
-{
-    public string name;
-    public Sprite maskSprite;
-
-    [Header("Colors")]
-    public Color color;
-    public Color secondaryColor;
-    public Color maskColor;
-    public Color cardColor;
-    public Color particlesColor;
-
-    public Sprite defaultBackground;
-
-}
 
 [System.Serializable]
 public class Profession

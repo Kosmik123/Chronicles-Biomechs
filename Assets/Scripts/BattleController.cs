@@ -53,7 +53,7 @@ public class BattleController : MonoBehaviour
         {
             Vector3 pos = data.GetHeroCardPositionByIndex(i);
             GameObject card = Instantiate(Settings.main.heroCards.prefab, pos, Quaternion.identity, heroField);
-            HeroController heroController = card.GetComponent<HeroController>();
+            HeroCardController heroController = card.GetComponent<HeroCardController>();
             heroController.Initialize(i, data.battlingTeam.heroes[i]);
             card.name = heroController.hero.name;
             data.heroesByElement[heroController.hero.elementId].heroes.Add(heroController);

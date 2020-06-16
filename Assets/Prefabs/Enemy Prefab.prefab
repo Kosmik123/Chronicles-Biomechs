@@ -685,7 +685,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 1588511409
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &3463197302609163724
 MonoBehaviour:
@@ -741,8 +741,8 @@ MonoBehaviour:
   weakTextAnimation: {fileID: 7931375079374500912}
   strongTextAnimation: {fileID: 3078047582072040774}
   textGenerationBounds:
-    m_Center: {x: 0, y: 1, z: 0}
-    m_Extent: {x: 2, y: 2.5, z: 0}
+    m_Center: {x: 0, y: 1.2, z: 0}
+    m_Extent: {x: 2, y: 2.2, z: 0}
   isWeak: 0
   isStrong: 0
   damageIndicators: []

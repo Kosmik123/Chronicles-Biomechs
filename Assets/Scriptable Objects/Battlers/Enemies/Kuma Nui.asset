@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73fcafc388253574a8e3f0cb780238ce, type: 3}
-  m_Name: Vezon
+  m_Name: Kuma Nui
   m_EditorClassIdentifier: 
-  characterModel: {fileID: 4185583433449443267, guid: f15f0f0e7251ec4489a85a03010fc477,
+  characterModel: {fileID: 4185583433449443267, guid: 42f02d4e1b84ca948bca11813812a194,
     type: 3}
-  elementId: 1
-  professionId: 0
-  baseAttack: 11
-  baseDefence: 1
-  baseMaxHealth: 400
-  element: Water
-  colliderSize: 1
+  elementId: 0
+  professionId: 5
+  baseAttack: 60
+  baseDefence: 2
+  baseMaxHealth: 1000
+  description: Fire Claw
+  colliderSize: 3
   loot:
     experience: 0
     gold: 0

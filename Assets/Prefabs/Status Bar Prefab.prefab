@@ -213,7 +213,9 @@ MonoBehaviour:
   highValue: 1
   highValueColor: {r: 0, g: 1, b: 0, a: 1}
   showAlways: 0
-  changeSpeed: 0.1
+  instantChange: 0
+  riseSpeed: 0.1
+  fallSpeed: 0.1
   hpBarBracket: {fileID: 5104905031106398171}
   hpBarEmpty: {fileID: 1172937829719670333}
   hpBarCurrent: {fileID: 148866691874820044}

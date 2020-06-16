@@ -46,6 +46,7 @@ public class TokenChain
             }
             changedToken.type = TokenType.BOMB;
             changedToken.hasJustChangedType = true;
+            changedToken.token.wasMoved = false;
         }
         else if(tokens.Count >= 5)
         {
@@ -60,6 +61,7 @@ public class TokenChain
             }
             changedToken.type = TokenType.COLOR;
             changedToken.hasJustChangedType = true;
+            changedToken.token.wasMoved = false;
         }
     }
 }
@@ -114,7 +116,7 @@ public class SwapController : PuzzleController
         {
             if (!grid.IsAnyTokenMoving() && !grid.IsAnyTokenAnimating())
             {
-                if (hasJustSwapped || hasJustDestroyed || matchFound)
+                if (hasJustSwapped || hasJustDestroyed || matchFound || grid.isFresh)
                 {
                     FindMatches();
                     foreach (TokenChain chain in tokenChains)
@@ -123,7 +125,8 @@ public class SwapController : PuzzleController
                     }
 
                     MoveUnmatchedBack();
-                    hasJustDestroyed = false; 
+                    hasJustDestroyed = false;
+                    grid.isFresh = false;
                 }
 
                 if (matchFound || hasJustSwapped)

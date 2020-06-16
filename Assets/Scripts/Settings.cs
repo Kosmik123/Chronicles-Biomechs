@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Settings : MonoBehaviour
 {
+
+
+
     public static PuzzleSettings main;
 
     [SerializeField]

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroController : MonoBehaviour
+public class HeroCardController : MonoBehaviour
 {
     public Hero hero;
     public int battleIndex;
@@ -16,9 +16,13 @@ public class HeroController : MonoBehaviour
     public SpriteRenderer backgroundRenderer;
     public SpriteMask spriteMask;
 
+    public SpriteRenderer energyRenderer;
+    public SpriteMask energyMask;
+
     [Header("States")]
-    public int health;
     public int maxHealth;
+    public int health;
+    public int maxEnergy = 100;
     public int energy;
 
     //public List<State> states;
@@ -26,6 +30,7 @@ public class HeroController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        energyRenderer.enabled = false;
 
     }
 
@@ -44,41 +49,77 @@ public class HeroController : MonoBehaviour
             Quaternion.identity, model.transform);
         backgroundRenderer.sprite = hero.GetBackground();
         cardRenderer.color = Settings.main.elements[hero.elementId].cardColor;
+        energyRenderer.color = Settings.main.elements[hero.elementId].cardEnergyColor;
 
         SetSortingOrders();
     }
 
     private void SetSortingOrders()
     {
-        backgroundRenderer.sortingOrder = battleIndex * 10 + 1;
+        int layerCount = 100;
+        cardRenderer.sortingOrder = battleIndex * layerCount;
+        backgroundRenderer.sortingOrder = battleIndex * layerCount + 11;
 
         SpriteRenderer[] modelRenderers = model.GetComponentsInChildren<SpriteRenderer>();
         foreach (SpriteRenderer renderer in modelRenderers)
         {
             renderer.sortingLayerName = Settings.main.heroCards.modelLayerName;
             renderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
-            renderer.sortingOrder = battleIndex * 10 + 2 + renderer.sortingOrder;
+            renderer.sortingOrder = battleIndex * layerCount + 20 + renderer.sortingOrder;
         }
         spriteMask.isCustomRangeActive = true;
         spriteMask.backSortingLayerID = spriteMask.frontSortingLayerID = modelRenderers[0].sortingLayerID;
-        spriteMask.frontSortingOrder = battleIndex * 10 + 9;
-        spriteMask.backSortingOrder = battleIndex * 10;
+        spriteMask.frontSortingOrder = battleIndex * layerCount + 50;
+        spriteMask.backSortingOrder = battleIndex * layerCount + 10;
+
+        energyRenderer.sortingOrder = battleIndex * layerCount + 4;
+        energyMask.backSortingLayerID = energyMask.frontSortingLayerID = modelRenderers[0].sortingLayerID;
+        energyMask.frontSortingOrder = battleIndex * layerCount + 5;
+        energyMask.backSortingOrder = battleIndex * layerCount + 3;
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateStatusBars();
+
+        if(energy >= 100)
+        {
+            energyRenderer.enabled = true;
+            energyRenderer.transform.rotation = Quaternion.AngleAxis(
+                Settings.main.heroCards.energyRotationSpeed * Time.time,
+                Vector3.forward);
+        }
+        else
+        {
+            energyRenderer.enabled = false;
+        }
+
     }
 
     private void UpdateStatusBars()
     {
-        healthBar.SetValue(1.0f * health / maxHealth);
-        energyBar.SetValue(energy / 100f);
+        healthBar.SetValue(1f * health / maxHealth);
+        energyBar.SetValue(1f * energy / maxEnergy);
     }
 
     public void AddEnergy()
     {
         energy += hero.GetTemplate().energySpeed;
     }
+
+    void OnMouseUpAsButton()
+    {
+        if (energy >= maxEnergy)
+        {
+            energy = 0;
+
+            Activate();
+        }
+    }
+
+    private void Activate()
+    { 
+    }
+
 }

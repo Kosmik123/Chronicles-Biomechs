@@ -8,7 +8,7 @@ public class EnergyParticleController : MonoBehaviour
     
     [Header("Settings")]
     public int elementId;
-    public HeroController targetHero;
+    public HeroCardController targetHero;
     
     [Header("Movement")]
     public bool isMoving;
@@ -32,7 +32,7 @@ public class EnergyParticleController : MonoBehaviour
         colorModule.color = Settings.main.elements[elementId].particlesColor;
     }
 
-    public void InitiateParticle(HeroController target)
+    public void InitiateParticle(HeroCardController target)
     {
         targetHero = target;
         elementId = target.hero.elementId;

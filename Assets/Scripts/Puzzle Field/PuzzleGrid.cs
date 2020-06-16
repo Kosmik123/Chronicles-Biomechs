@@ -24,6 +24,7 @@ public class PuzzleGrid : MonoBehaviour
 
     [Header("States")]
     public MaskToken[,] tokens;
+    public bool isFresh;
 
     private void Awake()
     {
@@ -52,6 +53,7 @@ public class PuzzleGrid : MonoBehaviour
                 CreateToken(i, j, avoidMatches, withMove);
             }
         }
+        isFresh = true;
     }
 
     private void CreateToken(int gridX, int gridY, bool avoidMatches, bool withMove)
@@ -364,6 +366,7 @@ public class PuzzleGrid : MonoBehaviour
                 PuzzleGrid grid = target as PuzzleGrid;
                 PuzzleGrid.main = grid;
                 grid.Clear();
+                grid.isFresh = true;
             }
 
             if (GUILayout.Button("Generate"))
@@ -374,7 +377,6 @@ public class PuzzleGrid : MonoBehaviour
                 grid.tokenSize = Settings.main.tokens.radius;
                 grid.CreateGrid(grid.generateNonMatchedGrid, false);
             }
-
 
             if (GUILayout.Button("Collapse Columns (in loop)"))
             {

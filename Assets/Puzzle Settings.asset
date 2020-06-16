@@ -19,6 +19,7 @@ MonoBehaviour:
     secondaryColor: {r: 0.9647059, g: 0.59269893, b: 0.17654121, a: 1}
     maskColor: {r: 1, g: 0.22344798, b: 0.18396229, a: 1}
     cardColor: {r: 1, g: 0, b: 0, a: 1}
+    cardEnergyColor: {r: 1, g: 0.7210716, b: 0, a: 1}
     particlesColor: {r: 0.96, g: 0, b: 0.05, a: 1}
     defaultBackground: {fileID: 21300000, guid: c2541af277c7eb841b462d37e2844065,
       type: 3}
@@ -28,6 +29,7 @@ MonoBehaviour:
     secondaryColor: {r: 0.561372, g: 0.69641566, b: 0.861, a: 1}
     maskColor: {r: 0, g: 0.6533134, b: 1, a: 1}
     cardColor: {r: 0.11764705, g: 0.4656783, b: 1, a: 1}
+    cardEnergyColor: {r: 0.3254717, g: 1, b: 0.7918004, a: 1}
     particlesColor: {r: 0, g: 0.6315246, b: 0.7075472, a: 1}
     defaultBackground: {fileID: 21300000, guid: 60bfc8bea72e6ae48abec865815b30a1,
       type: 3}
@@ -37,6 +39,7 @@ MonoBehaviour:
     secondaryColor: {r: 0.41960788, g: 0.41176474, b: 0.34901962, a: 1}
     maskColor: {r: 0.34574878, g: 0.32800817, b: 0.3679245, a: 1}
     cardColor: {r: 0.14430667, g: 0.06194376, b: 0.1509434, a: 1}
+    cardEnergyColor: {r: 0.1238875, g: 0.8207547, b: 0, a: 1}
     particlesColor: {r: 0.16, g: 0, b: 0.16, a: 1}
     defaultBackground: {fileID: 21300000, guid: 175834ef1c5eb0344bcedf438ed9d599,
       type: 3}
@@ -46,6 +49,7 @@ MonoBehaviour:
     secondaryColor: {r: 0.79215693, g: 0.8745099, b: 0.14117648, a: 1}
     maskColor: {r: 0.17865445, g: 0.8679245, b: 0.07778566, a: 1}
     cardColor: {r: 0.060451396, g: 0.8113208, b: 0, a: 1}
+    cardEnergyColor: {r: 0.956295, g: 1, b: 0, a: 1}
     particlesColor: {r: 0, g: 1, b: 0, a: 1}
     defaultBackground: {fileID: 21300000, guid: 30c3a39a23719524783fa135751e006e,
       type: 3}
@@ -53,8 +57,9 @@ MonoBehaviour:
     maskSprite: {fileID: 21300000, guid: 5f6c3d7a4db97154a9807819054e93a6, type: 3}
     color: {r: 0.4056604, g: 0.30358708, b: 0.112896055, a: 1}
     secondaryColor: {r: 0.9686275, g: 0.854902, b: 0.5647059, a: 1}
-    maskColor: {r: 0.5754717, g: 0.34989196, b: 0.024430392, a: 1}
+    maskColor: {r: 0.6603774, g: 0.38893062, b: 0.09656461, a: 1}
     cardColor: {r: 0.764151, g: 0.43143454, b: 0, a: 1}
+    cardEnergyColor: {r: 1, g: 0.9760119, b: 0.43867922, a: 1}
     particlesColor: {r: 0.754717, g: 0.45721447, b: 0, a: 1}
     defaultBackground: {fileID: 21300000, guid: 2e0ecd092220aa64895ba2f3408cb84c,
       type: 3}
@@ -64,6 +69,7 @@ MonoBehaviour:
     secondaryColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
     maskColor: {r: 0.90334636, g: 0.9409454, b: 0.9433962, a: 1}
     cardColor: {r: 0.8591136, g: 0.9245283, b: 0.92400134, a: 1}
+    cardEnergyColor: {r: 0.19999999, g: 0.842634, b: 1, a: 1}
     particlesColor: {r: 0.8, g: 1, b: 1, a: 1}
     defaultBackground: {fileID: 21300000, guid: ecd4e2b810da6114abdfb267817ad738,
       type: 3}
@@ -103,6 +109,7 @@ MonoBehaviour:
     horizontalDistance: 2.81
     verticalPosition: -12.76
     modelLayerName: Heroes
+    energyRotationSpeed: 200
   enemies:
     colliderWidths:
     - 2

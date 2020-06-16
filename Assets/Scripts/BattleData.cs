@@ -10,7 +10,7 @@ public class BattleData : MonoBehaviour
     [System.Serializable]
     public class HeroControllersList
     {
-        public List<HeroController> heroes = new List<HeroController>();
+        public List<HeroCardController> heroes = new List<HeroCardController>();
     }
     public HeroControllersList[] heroesByElement;
 
@@ -56,7 +56,7 @@ public class BattleData : MonoBehaviour
     public int GetHeroesAttack(int elemId)
     {
         int result = 0;
-        foreach(HeroController h in heroesByElement[elemId].heroes)
+        foreach(HeroCardController h in heroesByElement[elemId].heroes)
         {
             result += h.hero.GetAttack();
         }

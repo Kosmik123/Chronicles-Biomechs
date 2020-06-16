@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Enemy", menuName = "Puzzles/Battlers/Enemy")]
+[CreateAssetMenu(fileName = "New Enemy", menuName = "Battlers/Enemy")]
 public class Enemy : Battler
 {
     public enum EnemyColliderSize

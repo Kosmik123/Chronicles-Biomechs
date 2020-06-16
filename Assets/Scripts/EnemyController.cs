@@ -29,13 +29,17 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        damageTextController = GetComponentInChildren<DamageTextController>();
-
         // Collider
         BoxCollider2D collider = GetComponentInChildren<BoxCollider2D>();
         collider.size = new Vector2(
             Settings.main.enemies.colliderWidths[(int)battler.colliderSize],
             collider.size.y);
+
+        // Damage Text Controller
+        damageTextController = GetComponentInChildren<DamageTextController>();
+        damageTextController.textGenerationBounds.extents = new Vector2(
+            collider.size.x / 2,
+            damageTextController.textGenerationBounds.extents.y);
 
         // Sprites
         foreach (SpriteRenderer rend in renderers)
@@ -76,12 +80,13 @@ public class EnemyController : MonoBehaviour
         damage = Mathf.Max(0, damage);
 
         DamageStrength type = DamageStrength.NORMAL;
-        if (troop.elementId - 1 == battler.elementId)
+        int elementCount = Settings.main.elements.Length;
+        if ((troop.elementId - 1) % elementCount == battler.elementId)
         {
             type = DamageStrength.STRONG;
             damage *= 2;
         }
-        else if (troop.elementId + 1 == battler.elementId)
+        else if ((troop.elementId + 1) % elementCount == battler.elementId)
         {
             type = DamageStrength.WEAK;
             damage /= 2;

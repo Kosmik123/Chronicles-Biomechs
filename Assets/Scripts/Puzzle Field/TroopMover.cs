@@ -82,7 +82,7 @@ public class TroopMover : MonoBehaviour
         if (BattleData.main.heroesByElement != null && BattleData.main.heroesByElement.Length > 0)
         {
             int index = 0;
-            foreach (HeroController hero in BattleData.main.heroesByElement[troop.elementId].heroes)
+            foreach (HeroCardController hero in BattleData.main.heroesByElement[troop.elementId].heroes)
             {
                 GameObject particle = Instantiate(Settings.main.particles.prefab,
                     transform.position, Quaternion.identity);

@@ -20,15 +20,31 @@ public class GameController : MonoBehaviour
         test = Instantiate(Settings.main.damageTextSettings.prefab,
             new Vector3(100,100), Quaternion.identity);
 
-        if (!debugMode) SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
-        currentScene = SceneManager.GetActiveScene();
+        if (!debugMode) SceneManager.LoadSceneAsync(
+            SceneIndex.Puzzle, LoadSceneMode.Additive);
     
     
     }
 
     void Update()
     {
+        if(test != null && Time.time > 2)
+        {
+            Destroy(test);
+            test = null;
+        }
+
 
     }
     
+}
+
+public class SceneIndex
+{
+    public const int
+        Global = 0,
+        Puzzle = 1,
+        Dialogue = 2
+        //Map,
+        ;
 }

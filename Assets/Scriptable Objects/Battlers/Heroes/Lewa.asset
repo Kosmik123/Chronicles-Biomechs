@@ -19,7 +19,7 @@ MonoBehaviour:
   baseAttack: 1
   baseDefence: 1
   baseMaxHealth: 10
-  element: Air
+  description: Air Axe
   rarity: 4
   maxLevel: 100
   attackByLevel:
@@ -100,3 +100,4 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     modifier: 90
+  energySpeed: 2

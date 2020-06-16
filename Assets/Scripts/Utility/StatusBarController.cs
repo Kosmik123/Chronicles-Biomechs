@@ -15,9 +15,13 @@ public class StatusBarController : MonoBehaviour
     public Color highValueColor = Color.green;
 
     public bool showAlways = false;
+    public bool instantChange;
 
     [Range(0, 1)]
-    public float changeSpeed;
+    public float riseSpeed;
+    
+    [Range(0, 1)]
+    public float fallSpeed;
 
 
     [Header("To Link")]
@@ -31,7 +35,6 @@ public class StatusBarController : MonoBehaviour
     private SpriteRenderer hpBarFill;
 
     [Header("States")]
-
     [SerializeField]
     private float value;
     [SerializeField]  
@@ -47,10 +50,10 @@ public class StatusBarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (displayedValue - value > 0.005f)
-            displayedValue -= changeSpeed * Time.deltaTime;
-        else if (displayedValue - value < -0.005f)
-            displayedValue += changeSpeed * Time.deltaTime;
+        if (displayedValue > value + 0.005f)
+            displayedValue -= fallSpeed * Time.deltaTime;
+        else if (displayedValue < value - 0.005f)
+            displayedValue += riseSpeed * Time.deltaTime;
         else
             displayedValue = value;
 
@@ -66,8 +69,6 @@ public class StatusBarController : MonoBehaviour
         {
             hpBarBracket.enabled = hpBarEmpty.enabled = hpBarCurrent.enabled = hpBarFill.enabled = true;
 
-
-
             hpBarCurrent.transform.localScale = new Vector3(
                 Mathf.Max(displayedValue, value),
                 hpBarCurrent.transform.localScale.y,
@@ -78,7 +79,7 @@ public class StatusBarController : MonoBehaviour
                 hpBarFill.transform.localScale.y,
                 hpBarFill.transform.localScale.z);
 
-            hpBarCurrent.color = GetBarColor(displayedValue, hpBarCurrent.color.a);
+            hpBarCurrent.color = GetBarColor(displayedValue, hpBarCurrent.color.a);    
             hpBarFill.color = GetBarColor(value, hpBarFill.color.a);
         }
     }

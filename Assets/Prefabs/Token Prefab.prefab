@@ -69,7 +69,7 @@ SpriteRenderer:
   m_SortingLayerID: -1124230313
   m_SortingLayer: 3
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: e9d4fdd76f24ca3429b5f0737b8e0435, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2bf5cff26817db840be8e2fceaec7252, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -213,7 +213,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderer: {fileID: 2158309176885646763}
-  elementId: 0
+  mask:
+    kanohi: {fileID: 0}
+    elementId: 0
   gridPosition: {x: 0, y: 0}
   previousGridPosition: {x: 0, y: 0}
   isClicked: 0
@@ -250,7 +252,7 @@ Transform:
   m_GameObject: {fileID: 3914091816726806128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.12, y: 1.12, z: 1}
   m_Children:
   - {fileID: 8016068732468701565}
   - {fileID: 4887656529896740928}

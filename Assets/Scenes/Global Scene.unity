@@ -156,17 +156,29 @@ MonoBehaviour:
   teams:
   - heroes: []
     maskSets:
-    - kanohi: {fileID: 0}
+    - mask:
+        kanohi: {fileID: 0}
+        elementId: 0
       troop: {fileID: 0}
-    - kanohi: {fileID: 0}
+    - mask:
+        kanohi: {fileID: 0}
+        elementId: 0
       troop: {fileID: 0}
-    - kanohi: {fileID: 0}
+    - mask:
+        kanohi: {fileID: 0}
+        elementId: 0
       troop: {fileID: 0}
-    - kanohi: {fileID: 0}
+    - mask:
+        kanohi: {fileID: 0}
+        elementId: 0
       troop: {fileID: 0}
-    - kanohi: {fileID: 0}
+    - mask:
+        kanohi: {fileID: 0}
+        elementId: 0
       troop: {fileID: 0}
-    - kanohi: {fileID: 0}
+    - mask:
+        kanohi: {fileID: 0}
+        elementId: 0
       troop: {fileID: 0}
   ownedHeroes:
   - template: {fileID: 0}
@@ -175,19 +187,18 @@ MonoBehaviour:
     isDead: 0
   ownedTroops: []
   ownedMasks:
-  - {fileID: 11400000, guid: 5586b3721eaa5fb45ad00615110250c8, type: 2}
-  - {fileID: 11400000, guid: 75735c77a7edbad48b8edb48c9f6d8a1, type: 2}
-  - {fileID: 11400000, guid: c08232b4919a46942ab6d84aea6173e4, type: 2}
-  - {fileID: 11400000, guid: c8a4ebeea3a40a445876b61a9151e804, type: 2}
-  - {fileID: 11400000, guid: 8825cf58994b35f4a92e1906b12abb2e, type: 2}
-  - {fileID: 11400000, guid: 21c013eab99ea654582acd79528cf62f, type: 2}
-  troopsByElement:
-  - {fileID: 11400000, guid: 8674b543550e4d84e873f6cb0c3865d8, type: 2}
-  - {fileID: 11400000, guid: 0990fab38f2478c4d961c279a11e6614, type: 2}
-  - {fileID: 11400000, guid: facac2fdd1037284292863af58f405b4, type: 2}
-  - {fileID: 11400000, guid: 05bfb15b503abe44aa59d26d4971b704, type: 2}
-  - {fileID: 11400000, guid: fdc0dffcb9d9869448366b4d7dcc5fe7, type: 2}
-  - {fileID: 11400000, guid: f72821c6f5be1504c976419c9ae8bea7, type: 2}
+  - kanohi: {fileID: 0}
+    elementId: 0
+  - kanohi: {fileID: 0}
+    elementId: 0
+  - kanohi: {fileID: 0}
+    elementId: 0
+  - kanohi: {fileID: 0}
+    elementId: 0
+  - kanohi: {fileID: 0}
+    elementId: 0
+  - kanohi: {fileID: 0}
+    elementId: 0
 --- !u!114 &2103664701
 MonoBehaviour:
   m_ObjectHideFlags: 0
