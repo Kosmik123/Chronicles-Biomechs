@@ -42,7 +42,9 @@ public class SwapPuzzleTokenController : MonoBehaviour
     void Start()
     {
         type = TokenType.NORMAL;
+        GetComponent<BoxCollider2D>().size = Settings.main.tokens.size;
     }
+
     void Update()
     {
         if (token.isDisappearing)
@@ -75,7 +77,6 @@ public class SwapPuzzleTokenController : MonoBehaviour
         normalSprite.enabled = (type == TokenType.NORMAL);
         bombSprite.enabled = (type == TokenType.BOMB);
         colorSprite.enabled = (type == TokenType.COLOR);
-
 
         normalSprite.color = colorSprite.color = bombSprite.color =
              Settings.main.elements[token.elementId].maskColor;

@@ -67,7 +67,7 @@ public class TokenChain
 }
 
 
-public class PuzzleController : MonoBehaviour
+public abstract class  PuzzleController : MonoBehaviour
 {
     public PuzzleGrid grid;
 
@@ -79,6 +79,8 @@ public class PuzzleController : MonoBehaviour
 
     [Header("Swapped Tokens")]
     public SwapPuzzleTokenController selectedToken;
+
+    public abstract void DoUpdate();
 }
 
 public class SwapController : PuzzleController
@@ -110,38 +112,40 @@ public class SwapController : PuzzleController
         DoUpdate();
     }
 
-    void DoUpdate()
+    public override void DoUpdate()
     {
-        if (!debugMode)
+        if (debugMode)
+            return;
+
+
+        if (!grid.IsAnyTokenMoving() && !grid.IsAnyTokenAnimating())
         {
-            if (!grid.IsAnyTokenMoving() && !grid.IsAnyTokenAnimating())
+            if (hasJustSwapped || hasJustDestroyed || matchFound || grid.isFresh)
             {
-                if (hasJustSwapped || hasJustDestroyed || matchFound || grid.isFresh)
+                FindMatches();
+                foreach (TokenChain chain in tokenChains)
                 {
-                    FindMatches();
-                    foreach (TokenChain chain in tokenChains)
-                    {
-                        chain.ChangeTokenTypes();
-                    }
-
-                    MoveUnmatchedBack();
-                    hasJustDestroyed = false;
-                    grid.isFresh = false;
+                    chain.ChangeTokenTypes();
                 }
 
-                if (matchFound || hasJustSwapped)
-                {
-                    do
-                    {
-                        bombActivated = false;
-                        ChangeMatchedToTroops();
-                        tokenChains.Clear();
-
-                    } while (bombActivated);
-                }
-                hasJustSwapped = false;
+                MoveUnmatchedBack();
+                hasJustDestroyed = false;
+                grid.isFresh = false;
             }
+
+            if (matchFound || hasJustSwapped)
+            {
+                do
+                {
+                    bombActivated = false;
+                    ChangeMatchedToTroops();
+                    tokenChains.Clear();
+
+                } while (bombActivated);
+            }
+            hasJustSwapped = false;
         }
+
     }
 
     public void Select(SwapPuzzleTokenController swapped)
@@ -200,8 +204,8 @@ public class SwapController : PuzzleController
                         {
                             if (!other.isMatched)
                             {
-                                grid.MoveBack(token);
-                                grid.MoveBack(other.token);
+                                MoveBack(token);
+                                MoveBack(other.token);
                             }
                             other.token.wasMoved = false;
                         }
@@ -402,8 +406,13 @@ public class SwapController : PuzzleController
         hasJustDestroyed = true;
     }
 
-
-
+    public void MoveBack(MaskToken token)
+    {
+        Debug.Log("Moving back");
+        grid.SetTokenInGrid(token, token.previousGridPosition);
+        token.BeginMovingToPosition(grid.GridToWorldPosition(token.gridPosition), 
+            Settings.main.tokens.swapTime);
+    }
 
 
 

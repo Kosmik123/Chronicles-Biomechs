@@ -47,7 +47,7 @@ MonoBehaviour:
     maskSprite: {fileID: 21300000, guid: ae69eacd41abc9246ad5830b8e2fd2f7, type: 3}
     color: {r: 0.09840184, g: 0.8, b: 0, a: 1}
     secondaryColor: {r: 0.79215693, g: 0.8745099, b: 0.14117648, a: 1}
-    maskColor: {r: 0.17865445, g: 0.8679245, b: 0.07778566, a: 1}
+    maskColor: {r: 0.1009256, g: 0.7924528, b: 0.21550125, a: 1}
     cardColor: {r: 0.060451396, g: 0.8113208, b: 0, a: 1}
     cardEnergyColor: {r: 0.956295, g: 1, b: 0, a: 1}
     particlesColor: {r: 0, g: 1, b: 0, a: 1}
@@ -69,7 +69,7 @@ MonoBehaviour:
     secondaryColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
     maskColor: {r: 0.90334636, g: 0.9409454, b: 0.9433962, a: 1}
     cardColor: {r: 0.8591136, g: 0.9245283, b: 0.92400134, a: 1}
-    cardEnergyColor: {r: 0.19999999, g: 0.842634, b: 1, a: 1}
+    cardEnergyColor: {r: 0.33333337, g: 0.5937208, b: 1, a: 1}
     particlesColor: {r: 0.8, g: 1, b: 1, a: 1}
     defaultBackground: {fileID: 21300000, guid: ecd4e2b810da6114abdfb267817ad738,
       type: 3}
@@ -93,8 +93,8 @@ MonoBehaviour:
     collapseTime: 0.4
     minimalSwipeSquareDistance: 10
     minimalSwipeSquareDistanceWithRelease: 2
-    relativeDistanceAtGeneration: 2
-    radius: {x: 0.8, y: 0.8}
+    relativeDistanceAtGeneration: 1
+    size: {x: 2.11, y: 2.11}
   troops:
     prefab: {fileID: 8850085535232027240, guid: a512d13a706546d4fa5c8aad9e111426,
       type: 3}

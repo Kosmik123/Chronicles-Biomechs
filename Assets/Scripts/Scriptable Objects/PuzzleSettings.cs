@@ -22,7 +22,7 @@ public class PuzzleSettings : ScriptableObject
         public float minimalSwipeSquareDistanceWithRelease;
 
         public float relativeDistanceAtGeneration;
-        public Vector2 radius;
+        public Vector2 size;
     }
     public TokensSettings tokens;
 

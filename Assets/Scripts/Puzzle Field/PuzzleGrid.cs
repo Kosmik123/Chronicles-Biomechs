@@ -10,11 +10,11 @@ public class PuzzleGrid : MonoBehaviour
     static public PuzzleGrid main;
 
     [Header("To Link")]
-    public GameObject toDoSthToLink;
+    public SpriteRenderer brightSquares; 
+    public SpriteRenderer darkSquares; 
 
     [Header("Settings")]
     public Vector2Int gridSize;
-    [SerializeField]
     private Bounds fieldBounds;
     private Vector2 tokenSize;
 
@@ -33,7 +33,7 @@ public class PuzzleGrid : MonoBehaviour
 
     void Start()
     {
-        tokenSize = Settings.main.tokens.radius;
+        tokenSize = Settings.main.tokens.size;
         CreateGrid(generateNonMatchedGrid);
     }
 
@@ -44,6 +44,8 @@ public class PuzzleGrid : MonoBehaviour
 
     public void CreateGrid(bool avoidMatches = false, bool withMove = true)
     {
+        ResizeSquares();
+
         generationTokensRelativeDistance = Settings.main.tokens.relativeDistanceAtGeneration;
         tokens = new MaskToken[gridSize.y, gridSize.x];
         for (int i = 0; i < gridSize.x; i++)
@@ -56,6 +58,13 @@ public class PuzzleGrid : MonoBehaviour
         isFresh = true;
     }
 
+    void ResizeSquares()
+    {
+        brightSquares.size = new Vector3(gridSize.x * tokenSize.x, gridSize.y * tokenSize.y);
+        darkSquares.transform.localScale = tokenSize;
+        darkSquares.size = gridSize;
+    }
+
     private void CreateToken(int gridX, int gridY, bool avoidMatches, bool withMove)
     {
         Vector3 newPos;
@@ -63,13 +72,13 @@ public class PuzzleGrid : MonoBehaviour
         {
             bool isDown = (collapseDirection == MoveDirection.Down);
 
-            float columnsVerticalOffset = 
-                -Mathf.Abs(gridX - gridSize.x / 2) * tokenSize.y * 2 * generationTokensRelativeDistance - 1;
+            float columnsVerticalOffset = -Mathf.Abs(gridX - gridSize.x / 2) * 
+            tokenSize.y * generationTokensRelativeDistance;
 
             newPos = GridToWorldPosition(
                     gridX,
-                    gridY + (isDown ? -1 : 1) * (gridSize.y)) + 
-                    Vector3.up * columnsVerticalOffset;
+                    gridY + (isDown ? -1 : 1) * (gridSize.y )) 
+                + Vector3.up * (isDown ? -1 : 1) * columnsVerticalOffset;
         }
         else
         {
@@ -118,10 +127,21 @@ public class PuzzleGrid : MonoBehaviour
         float relativeX = (1.0f * xGrid) / (gridSize.x - 1);
         float relativeY = (1.0f * yGrid) / (gridSize.y - 1);
 
+        Vector3 center = transform.position;
+        float firstTokenX = center.x - tokenSize.x * (gridSize.x - 1) / 2;
+        float firstTokenY = center.y + tokenSize.y * (gridSize.y - 1) / 2;
+
+        float x = firstTokenX + xGrid * tokenSize.x;
+        float y = firstTokenY - yGrid * tokenSize.y;
+
+
+
+        /*
         float x = Mathf.LerpUnclamped(fieldBounds.min.x + tokenSize.x,
             fieldBounds.max.x - tokenSize.x, relativeX);
         float y = Mathf.LerpUnclamped(fieldBounds.max.y - tokenSize.y,
             fieldBounds.min.y + tokenSize.y, relativeY);
+            */
 
         return new Vector3(x, y);
     }
@@ -131,7 +151,8 @@ public class PuzzleGrid : MonoBehaviour
         try
         {
             tokens[yGrid, xGrid] = token;
-        }catch(Exception)
+        }
+        catch(Exception)
         {
             Debug.LogError("Problematyczny index:" + xGrid + ", " + yGrid);
         }
@@ -219,12 +240,7 @@ public class PuzzleGrid : MonoBehaviour
     //    return false;
     //}
 
-    public void MoveBack(MaskToken token)
-    {
-        Debug.Log("Moving back");
-        SetTokenInGrid(token, token.previousGridPosition);
-        token.BeginMovingToPosition(GridToWorldPosition(token.gridPosition), Settings.main.tokens.swapTime);
-    }
+
 
 
     public bool IsAnyTokenMoving()
@@ -317,8 +333,7 @@ public class PuzzleGrid : MonoBehaviour
     }
 
 
-
-
+#if UNITY_EDITOR
     public void Print()
     {
         string[] letters = { "F", "W", "E", "A", "S", "I" };
@@ -341,11 +356,10 @@ public class PuzzleGrid : MonoBehaviour
     }
 
 
-
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireCube(fieldBounds.center, fieldBounds.extents * 2);
+        tokenSize = Settings.GetImmediate().tokens.size;
+        ResizeSquares();   
     }
 
     [CustomEditor(typeof(PuzzleGrid))]
@@ -373,8 +387,7 @@ public class PuzzleGrid : MonoBehaviour
             {
                 PuzzleGrid grid = target as PuzzleGrid;
                 PuzzleGrid.main = grid; 
-                Settings.main = Settings.GetImmediate();
-                grid.tokenSize = Settings.main.tokens.radius;
+                grid.tokenSize = Settings.GetImmediate().tokens.size;
                 grid.CreateGrid(grid.generateNonMatchedGrid, false);
             }
 

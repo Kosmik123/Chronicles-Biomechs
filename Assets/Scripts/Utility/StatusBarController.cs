@@ -6,13 +6,7 @@ public class StatusBarController : MonoBehaviour
 {
     [Header("Settings")]
 
-    [Range(0, 1)]
-    public float lowValue = 0;
-    public Color lowValueColor = Color.red;
-
-    [Range(0, 1)]
-    public float highValue = 1;
-    public Color highValueColor = Color.green;
+    public Gradient colorByValueGradient;
 
     public bool showAlways = false;
     public bool instantChange;
@@ -23,16 +17,15 @@ public class StatusBarController : MonoBehaviour
     [Range(0, 1)]
     public float fallSpeed;
 
-
     [Header("To Link")]
     [SerializeField] 
     private SpriteRenderer hpBarBracket;
     [SerializeField] 
     private SpriteRenderer hpBarEmpty;
     [SerializeField] 
-    private SpriteRenderer hpBarCurrent;
+    private SpriteRenderer barCurrent;
     [SerializeField] 
-    private SpriteRenderer hpBarFill;
+    private SpriteRenderer barFill;
 
     [Header("States")]
     [SerializeField]
@@ -40,12 +33,9 @@ public class StatusBarController : MonoBehaviour
     [SerializeField]  
     private float displayedValue;
 
-
     void Start()
     {
-
     }
-
 
     // Update is called once per frame
     void Update()
@@ -63,24 +53,33 @@ public class StatusBarController : MonoBehaviour
 
         if (value >= 1 && !showAlways)
         {
-            hpBarBracket.enabled = hpBarEmpty.enabled = hpBarCurrent.enabled = hpBarFill.enabled = false;
+            hpBarBracket.enabled = hpBarEmpty.enabled = barCurrent.enabled = barFill.enabled = false;
         }
         else
         {
-            hpBarBracket.enabled = hpBarEmpty.enabled = hpBarCurrent.enabled = hpBarFill.enabled = true;
+            hpBarBracket.enabled = hpBarEmpty.enabled = barCurrent.enabled = barFill.enabled = true;
 
-            hpBarCurrent.transform.localScale = new Vector3(
+            barCurrent.transform.localScale = new Vector3(
                 Mathf.Max(displayedValue, value),
-                hpBarCurrent.transform.localScale.y,
-                hpBarCurrent.transform.localScale.z);
+                barCurrent.transform.localScale.y,
+                barCurrent.transform.localScale.z);
 
-            hpBarFill.transform.localScale = new Vector3(
-                Mathf.Min(displayedValue, value),
-                hpBarFill.transform.localScale.y,
-                hpBarFill.transform.localScale.z);
+            float fillPercent = instantChange ?
+            value :
+            Mathf.Min(displayedValue, value);
+           
+            barFill.transform.localScale = new Vector3(
+                fillPercent,
+                barFill.transform.localScale.y,
+                barFill.transform.localScale.z);
 
-            hpBarCurrent.color = GetBarColor(displayedValue, hpBarCurrent.color.a);    
-            hpBarFill.color = GetBarColor(value, hpBarFill.color.a);
+            Color currentColor = colorByValueGradient.Evaluate(displayedValue);
+            currentColor.a = barCurrent.color.a;
+            barCurrent.color = currentColor;
+            
+            Color fillColor = colorByValueGradient.Evaluate(value);
+            fillColor.a = barFill.color.a;
+            barFill.color = fillColor;
         }
     }
 
@@ -100,17 +99,4 @@ public class StatusBarController : MonoBehaviour
     {
         return displayedValue <= 0;
     }
-
-
-    public Color GetBarColor(float percent, float colorAlpha = 1f)
-    {
-        float range = highValue - lowValue;
-        Color result = ((percent - lowValue) / range * highValueColor +
-            (highValue - percent) / range * lowValueColor) * 1.8f;
-        result.a = colorAlpha;
-        return result;
-    }
-
-
-
 }

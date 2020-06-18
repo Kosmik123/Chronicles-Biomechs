@@ -9,11 +9,11 @@ public class HeroTemplate : Battler
     public int maxLevel = 100;
 
     [SerializeField]
-    private IntStatCurve attackByLevel;
+    private Stat attackByLevel;
     [SerializeField]
-    private IntStatCurve defenceByLevel;
+    private Stat defenceByLevel;
     [SerializeField]
-    private IntStatCurve maxHealthByLevel;
+    private Stat maxHealthByLevel;
 
     public int energySpeed;
 
@@ -36,7 +36,7 @@ public class HeroTemplate : Battler
 }
 
 [System.Serializable]
-public class IntStatCurve
+public class Stat
 {
     public AnimationCurve curve = AnimationCurve.Linear(0, 0, 1, 1);
     public int modifier;

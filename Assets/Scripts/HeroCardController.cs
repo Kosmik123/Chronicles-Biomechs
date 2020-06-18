@@ -16,7 +16,8 @@ public class HeroCardController : MonoBehaviour
     public SpriteRenderer backgroundRenderer;
     public SpriteMask spriteMask;
 
-    public SpriteRenderer energyRenderer;
+    public Transform energyRotator;
+    private SpriteRenderer[] energyRenderers;
     public SpriteMask energyMask;
 
     [Header("States")]
@@ -30,8 +31,9 @@ public class HeroCardController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        energyRenderer.enabled = false;
-
+        energyRenderers = energyRotator.GetComponentsInChildren<SpriteRenderer>();
+        foreach(var rend in energyRenderers)
+            rend.enabled = false;
     }
 
     public void Initialize(int index, Hero hero)
@@ -49,7 +51,9 @@ public class HeroCardController : MonoBehaviour
             Quaternion.identity, model.transform);
         backgroundRenderer.sprite = hero.GetBackground();
         cardRenderer.color = Settings.main.elements[hero.elementId].cardColor;
-        energyRenderer.color = Settings.main.elements[hero.elementId].cardEnergyColor;
+        energyRenderers = energyRotator.GetComponentsInChildren<SpriteRenderer>();
+        foreach (var rend in energyRenderers)
+            rend.color = Settings.main.elements[hero.elementId].cardEnergyColor;
 
         SetSortingOrders();
     }
@@ -72,7 +76,8 @@ public class HeroCardController : MonoBehaviour
         spriteMask.frontSortingOrder = battleIndex * layerCount + 50;
         spriteMask.backSortingOrder = battleIndex * layerCount + 10;
 
-        energyRenderer.sortingOrder = battleIndex * layerCount + 4;
+        foreach (var rend in energyRenderers)
+            rend.sortingOrder = battleIndex * layerCount + 4;
         energyMask.backSortingLayerID = energyMask.frontSortingLayerID = modelRenderers[0].sortingLayerID;
         energyMask.frontSortingOrder = battleIndex * layerCount + 5;
         energyMask.backSortingOrder = battleIndex * layerCount + 3;
@@ -83,22 +88,25 @@ public class HeroCardController : MonoBehaviour
     {
         UpdateStatusBars();
 
-        if(energy >= 100)
+        if(energy >= maxEnergy)
         {
-            energyRenderer.enabled = true;
-            energyRenderer.transform.rotation = Quaternion.AngleAxis(
+            foreach (var rend in energyRenderers)
+                rend.enabled = true;
+            energyRotator.rotation = Quaternion.AngleAxis(
                 Settings.main.heroCards.energyRotationSpeed * Time.time,
                 Vector3.forward);
         }
         else
         {
-            energyRenderer.enabled = false;
+            foreach (var rend in energyRenderers)
+                rend.enabled = false;
         }
 
     }
 
     private void UpdateStatusBars()
     {
+        energyBar.instantChange = (energy >= maxEnergy);
         healthBar.SetValue(1f * health / maxHealth);
         energyBar.SetValue(1f * energy / maxEnergy);
     }
@@ -113,7 +121,6 @@ public class HeroCardController : MonoBehaviour
         if (energy >= maxEnergy)
         {
             energy = 0;
-
             Activate();
         }
     }

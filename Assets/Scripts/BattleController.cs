@@ -8,6 +8,14 @@ public class BattleController : MonoBehaviour
     public BattleData data;
     public PuzzleController currentController;
 
+    public enum GamePhase
+    {
+        PlayerMove,
+        FindingMatches,
+
+    }
+
+
     [Header("To link")]
     public SwapController swapController;
     public Transform heroField;
@@ -29,8 +37,6 @@ public class BattleController : MonoBehaviour
     {
 
 
-
-
         /*
          WaitForPlayerMove()
          CheckMatches()
@@ -49,7 +55,7 @@ public class BattleController : MonoBehaviour
 
     public void CreateHeroCards()
     {
-        for(int i = 0; i < data.battlingTeam.size; i++)
+        for (int i = 0; i < data.battlingTeam.size; i++)
         {
             Vector3 pos = data.GetHeroCardPositionByIndex(i);
             GameObject card = Instantiate(Settings.main.heroCards.prefab, pos, Quaternion.identity, heroField);
@@ -58,6 +64,14 @@ public class BattleController : MonoBehaviour
             card.name = heroController.hero.name;
             data.heroesByElement[heroController.hero.elementId].heroes.Add(heroController);
         }
+    }
+
+
+    bool canPlayerMove()
+    {
+
+        return !swapController.grid.IsAnyTokenMoving() &&
+            !swapController.grid.IsAnyTokenAnimating();
     }
 
 
