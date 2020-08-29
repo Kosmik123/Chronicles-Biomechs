@@ -84,21 +84,22 @@ public class TroopMover : MonoBehaviour
             int index = 0;
             foreach (HeroCardController hero in BattleData.main.heroesByElement[troop.elementId].heroes)
             {
-                GameObject particle = Instantiate(Settings.main.particles.prefab,
-                    transform.position, Quaternion.identity);
-                particle.GetComponent<EnergyParticleController>().InitiateParticle(hero);
-                index++;
+                if (hero.energy < hero.maxEnergy)
+                {
+                    GameObject particle = Instantiate(Settings.main.particles.prefab,
+                            transform.position, Quaternion.identity);
+                    particle.GetComponent<EnergyParticleController>().InitiateParticle(hero);
+                    index++;
+                }
             }
         }
         Destroy(gameObject);
     }
 
 
-
     private void OnDrawGizmos()
     {
         UpdateSprite();
     }
-
 
 }

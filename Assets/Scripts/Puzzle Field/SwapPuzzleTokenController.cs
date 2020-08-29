@@ -140,7 +140,7 @@ public class SwapPuzzleTokenController : MonoBehaviour
 
             var troopObj = Instantiate(Settings.main.troops.prefab, transform.position, Quaternion.identity);
             troop = troopObj.GetComponent<TroopMover>();
-            troop.troop = BattleData.main.battlingTeam.maskSets[token.elementId].troop;
+            troop.troop = BattleData.main.heroTeam.maskSets[token.elementId].troop;
             troop.UpdateSprite();
 
             token.animator.SetTrigger("Reveal");

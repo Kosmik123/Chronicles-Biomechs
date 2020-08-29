@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 
-[CreateAssetMenu(fileName = "New Item", menuName = "RPG/Items")]
+[CreateAssetMenu(fileName = "New Item", menuName = "RPG/Item")]
 public class Item : ScriptableObject
 {    
     [Header("General")]
@@ -15,6 +15,9 @@ public class Item : ScriptableObject
     [Header("Effects")]
     public int healthRecovery;
     public int energyRecovery;
+
+    public int percentHealthRecovery;
+    public int percentEnergyRecovery;
 
     public int attackBonus;
     public int defenceBonus;

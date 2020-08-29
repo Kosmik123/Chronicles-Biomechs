@@ -5,16 +5,27 @@ using UnityEngine;
 public class BattleData : MonoBehaviour
 {
     public static BattleData main;
-    public Team battlingTeam;
+
+    [Header("Battle Properties")]
+    public Team heroTeam;
+    public int seasonIndex;
+    public int worldIndex;
+    public int levelIndex;
+
+    public LevelSettings levelSettings;
 
     [System.Serializable]
     public class HeroControllersList
     {
         public List<HeroCardController> heroes = new List<HeroCardController>();
     }
-    public HeroControllersList[] heroesByElement;
 
-    public List<EnemyController> enemies;
+    [Header("States")]
+    public bool isLevelLoaded;
+    public Enemy[] enemies;
+    public HeroControllersList[] heroesByElement;
+    public EnemyContainer currentContainer;
+    public List<EnemyController> battlingEnemies;
     public int waveIndex;
 
     // Start is called before the first frame update
@@ -33,9 +44,9 @@ public class BattleData : MonoBehaviour
     public List<Vector3> GetHeroCardPositions(int elemId)
     {
         List<Vector3> positions = new List<Vector3>();
-        for(int i = 0; i < battlingTeam.size; i++)
+        for(int i = 0; i < heroTeam.size; i++)
         {
-            if (battlingTeam.heroes[i].elementId == elemId)
+            if (heroTeam.heroes[i].elementId == elemId)
             {
                 positions.Add(GetHeroCardPositionByIndex(i));
             }
@@ -46,7 +57,7 @@ public class BattleData : MonoBehaviour
     {
         float center = 0;
         float dist = Settings.main.heroCards.horizontalDistance;
-        float firstCardX = center - dist * (battlingTeam.size - 1) / 2;
+        float firstCardX = center - dist * (heroTeam.size - 1) / 2;
 
         float cardX = firstCardX + index * dist;
 
@@ -63,6 +74,26 @@ public class BattleData : MonoBehaviour
         return result;
     }
 
+    public void AddEnemy(EnemyController newEnemy)
+    {
+        battlingEnemies.Add(newEnemy);
+    }
 
+    public bool AreAllEnemiesDead()
+    {
+        foreach (EnemyController enemy in battlingEnemies)
+            if (!enemy.isDead)
+                return false;
+
+        return true;
+    }
+
+
+    public void SetEnemies(EnemyController[] newEnemies)
+    {
+        foreach (var enemy in newEnemies)
+            battlingEnemies.Add(enemy);
+        isLevelLoaded = true;
+    }
 }
 

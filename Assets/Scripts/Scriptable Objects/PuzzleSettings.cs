@@ -56,6 +56,7 @@ public class PuzzleSettings : ScriptableObject
     [System.Serializable]
     public class EnemiesSettings
     {
+        public float appearSpeed;
         public float[] colliderWidths;
     }
     public EnemiesSettings enemies;
@@ -82,6 +83,31 @@ public class PuzzleSettings : ScriptableObject
     }
     public DamageTextSettings damageTextSettings;
 
+    [System.Serializable]
+    public class StagesSettings
+    {
+        public GameObject[] stagePanels;
+        public float panelXDistance;
+
+        public Gradient darkCensterGlowRange;
+        public float darkCensterGlowSpeed;
+        public float completedLevelScale;
+
+    }
+    public StagesSettings stagesSettings;
+
+
+    [System.Serializable]
+    public class LevelsLists
+    {
+        [System.Serializable]
+        public class LevelList
+        {
+            public LevelSettings[] levels;
+        }
+        public LevelList[] stages;
+    }
+    public LevelsLists levels;
 
 }
 

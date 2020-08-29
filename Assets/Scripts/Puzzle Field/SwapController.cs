@@ -106,11 +106,6 @@ public class SwapController : PuzzleController
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        DoUpdate();
-    }
 
     public override void DoUpdate()
     {

@@ -85,7 +85,7 @@ public class MaskToken : MonoBehaviour
         do
         {
             int elemId = Random.Range(0, allElementsCount);
-            mask = BattleData.main.battlingTeam.maskSets[elemId].mask;
+            mask = BattleData.main.heroTeam.maskSets[elemId].mask;
             hasBadElement = false;
             foreach (int id in exceptionIds)
             {
@@ -102,7 +102,7 @@ public class MaskToken : MonoBehaviour
     public void SetRandomElement()
     {
         int elemId = Random.Range(0, Settings.main.elements.Length);
-        mask = BattleData.main.battlingTeam.maskSets[elemId].mask;
+        mask = BattleData.main.heroTeam.maskSets[elemId].mask;
         UpdateSprite();
     }
 

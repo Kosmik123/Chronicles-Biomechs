@@ -9,11 +9,25 @@ public class Player : MonoBehaviour
     public int experience;
     public int level;
 
-    public List<Team> teams = new List<Team>();
+    [System.Serializable]
+    public class TeamsAndHeroes
+    {
+        public List<Team> teams = new List<Team>();
 
-    public List<Hero> ownedHeroes = new List<Hero>();
-    public List<Troop> ownedTroops = new List<Troop>();
-    public List<Mask> ownedMasks = new List<Mask>();
+        public List<Hero> ownedHeroes = new List<Hero>();
+        public List<Troop> ownedTroops = new List<Troop>();
+        public List<Mask> ownedMasks = new List<Mask>();
+    }
+    public TeamsAndHeroes teamsAndHeroes;
+
+    [System.Serializable]
+    public class Levels
+    {
+        public int stagesUnlocked = 1;
+        public int[] levelsCompletedByStage;
+
+    }
+    public Levels levels;
 
     void Awake()
     {

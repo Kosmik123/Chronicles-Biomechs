@@ -9,6 +9,7 @@ TagManager:
   - Grid
   - Hero Card
   - Energy Particles
+  - Battle Controller
   layers:
   - Default
   - TransparentFX

@@ -111,6 +111,7 @@ MonoBehaviour:
     modelLayerName: Heroes
     energyRotationSpeed: 200
   enemies:
+    appearSpeed: 4
     colliderWidths:
     - 2
     - 3.8
@@ -129,3 +130,42 @@ MonoBehaviour:
     strongFillColor: {r: 1, g: 0.40930235, b: 0, a: 1}
     strongOutlineColor: {r: 0.4056604, g: 0.09918195, b: 0, a: 1}
     strongFontSize: 25
+  stagesSettings:
+    stagePanels: []
+    panelXDistance: 11.25
+    darkCensterGlowRange:
+      serializedVersion: 2
+      key0: {r: 0.41799998, g: 0.41799998, b: 0.41799998, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 386
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    darkCensterGlowSpeed: 5
+    completedLevelScale: 0.7
+  levels:
+    stages:
+    - levels:
+      - {fileID: 11400000, guid: fdf8ded0e2d825641b27490a08eb2e1c, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}

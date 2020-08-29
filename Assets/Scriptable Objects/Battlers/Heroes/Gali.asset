@@ -100,4 +100,4 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     modifier: 70
-  energySpeed: 5
+  energySpeed: 6

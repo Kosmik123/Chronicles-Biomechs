@@ -40,6 +40,12 @@ public class PuzzleGrid : MonoBehaviour
     void Update()
     {
         Collapse();
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            WorldToGridPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        }
+
     }
 
     public void CreateGrid(bool avoidMatches = false, bool withMove = true)
@@ -124,27 +130,32 @@ public class PuzzleGrid : MonoBehaviour
 
     public Vector3 GridToWorldPosition(int xGrid, int yGrid)
     {
-        float relativeX = (1.0f * xGrid) / (gridSize.x - 1);
-        float relativeY = (1.0f * yGrid) / (gridSize.y - 1);
-
-        Vector3 center = transform.position;
-        float firstTokenX = center.x - tokenSize.x * (gridSize.x - 1) / 2;
-        float firstTokenY = center.y + tokenSize.y * (gridSize.y - 1) / 2;
+        float firstTokenX = transform.position.x - tokenSize.x * (gridSize.x - 1) / 2;
+        float firstTokenY = transform.position.y + tokenSize.y * (gridSize.y - 1) / 2;
 
         float x = firstTokenX + xGrid * tokenSize.x;
         float y = firstTokenY - yGrid * tokenSize.y;
 
-
-
-        /*
-        float x = Mathf.LerpUnclamped(fieldBounds.min.x + tokenSize.x,
-            fieldBounds.max.x - tokenSize.x, relativeX);
-        float y = Mathf.LerpUnclamped(fieldBounds.max.y - tokenSize.y,
-            fieldBounds.min.y + tokenSize.y, relativeY);
-            */
-
         return new Vector3(x, y);
     }
+
+    public Vector2 WorldToGridPosition(Vector3 worldPos)
+    {
+        float relativeX = worldPos.x - transform.position.x;
+        float relativeY = -worldPos.y + transform.position.y;
+
+        relativeX /= tokenSize.x;
+        relativeY /= tokenSize.y;
+
+        relativeX += 0.5f * gridSize.x;
+        relativeY += 0.5f * gridSize.y;
+
+        int gridX = Mathf.FloorToInt(relativeX);
+        int gridY = Mathf.FloorToInt(relativeY);
+
+        return new Vector2(gridX, gridY);
+    }
+
 
     public void SetTokenInGrid(MaskToken token, int xGrid, int yGrid)
     {
@@ -190,58 +201,6 @@ public class PuzzleGrid : MonoBehaviour
             }
         }
     }
-
-
-    //public bool CheckVerticalMatches(int x, int y, int offset = 0)
-    //{
-    //    int maxY = y + 1 + offset;
-    //    int minY = y - 1 + offset;
-    //    if (maxY >= gridSize.y || minY < 0 || x >= gridSize.x)
-    //        return false;
-
-    //    Token token0, token1, token2;
-    //    token0 = tokens[minY, x];
-    //    token1 = tokens[y + offset, x];
-    //    token2 = tokens[maxY, x];
-
-    //    if (token0 == null || token1 == null || token2 == null)
-    //        return false;
-
-    //    if (token1.elementId == token0.elementId &&
-    //        token1.elementId == token2.elementId)
-    //    {
-    //        token0.isMatched = token1.isMatched = token2.isMatched = true;
-    //        return true;
-    //    }
-    //    return false;
-    //}
-
-    //public bool CheckHorizontalMatches(int x, int y, int offset = 0)
-    //{
-    //    int maxX = x + 1 + offset;
-    //    int minX = x - 1 + offset;
-    //    if (maxX >= gridSize.x || minX < 0 || y >= gridSize.y)
-    //        return false;
-
-    //    Token token0, token1, token2;
-    //    token0 = tokens[y, minX];
-    //    token1 = tokens[y, x + offset];
-    //    token2 = tokens[y, maxX];
-
-    //    if (token0 == null || token1 == null || token2 == null)
-    //        return false;
-
-    //    if (token1.elementId == token0.elementId &&
-    //        token1.elementId == token2.elementId)
-    //    {
-    //        token0.isMatched = token1.isMatched = token2.isMatched = true;
-    //        return true;
-    //    }
-    //    return false;
-    //}
-
-
-
 
     public bool IsAnyTokenMoving()
     {
@@ -331,7 +290,6 @@ public class PuzzleGrid : MonoBehaviour
         }
         return nullCount;
     }
-
 
 #if UNITY_EDITOR
     public void Print()

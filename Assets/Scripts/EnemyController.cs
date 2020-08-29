@@ -5,30 +5,42 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public Enemy battler;
-
-    public GameObject characterModelObject;
-
     [Header("Settings")]
+    public Enemy battler;
+    public int level;
     public float flashSpeed;
     public float flash;
-    public SpriteRenderer[] renderers;
+    public SpriteRenderer[] modelRenderers;
 
     [Header("To Link")]
+    public GameObject characterModelObject;
     public StatusBarController hpBar;
     private DamageTextController damageTextController;
 
+    [Header("States")]
+    public bool isActive;
+    public bool isAppearing;
+    [SerializeField]
+    private float[] originalAlphas;
+    [SerializeField]
+    private float appearTimer;
+
+
     [Header("Battler State")]
     public int health;
+    public bool isDead;
+
 
     void Awake()
     {
-        UpdateModel();
-
+        Debug.Log("Enemy Awake");
     }
 
     void Start()
     {
+
+        Debug.Log("Enemy Start");
+
         // Collider
         BoxCollider2D collider = GetComponentInChildren<BoxCollider2D>();
         collider.size = new Vector2(
@@ -42,19 +54,41 @@ public class EnemyController : MonoBehaviour
             damageTextController.textGenerationBounds.extents.y);
 
         // Sprites
-        foreach (SpriteRenderer rend in renderers)
+        foreach (SpriteRenderer rend in modelRenderers)
             rend.sortingLayerName = "Enemies";
+
         flash = 1;
 
         // Battler
-        health = battler.maxHealth;
-        hpBar.SetValue(health, true);
+        health = battler.GetMaxHealth(level);
+        hpBar.SetValue(1.0f, true);
+    
+        UpdateModel();
     }
 
     // Update is called once per frame
     void Update()
     {
-        foreach (var rend in renderers)
+        if (!isActive && isAppearing)
+            UpdateAppearing();
+
+        if (isActive)
+            BattleUpdate();
+
+
+    }
+
+    public void SetBattler(LevelSettings.EnemySetting enemyStn)
+    {
+        battler = enemyStn.enemy;
+        level = enemyStn.level;
+        UpdateModel();
+    }
+
+
+    private void BattleUpdate()
+    {
+        foreach (var rend in modelRenderers)
             rend.color = new Color(1, flash, flash);
 
         if (flash < 1)
@@ -62,13 +96,46 @@ public class EnemyController : MonoBehaviour
 
         UpdateHealthBar();
 
-        if (hpBar.GetDisplayedValue() <= 0)
-            Destroy(gameObject);
+        if (!isDead && hpBar.GetDisplayedValue() <= 0)
+        {
+            isDead = true;
+
+            foreach (var rend in modelRenderers)
+                rend.enabled = false;
+            GetComponentInChildren<BoxCollider2D>().enabled = false;
+            hpBar.isActive = false;
+        }
     }
+
+    private void UpdateAppearing()
+    {
+        appearTimer += Time.deltaTime * Settings.main.enemies.appearSpeed;
+        if (appearTimer >= 1)
+        {
+            isActive = true;
+            isAppearing = false;
+            for (int i = 0; i < modelRenderers.Length; i++)
+                modelRenderers[i].color = new Color(
+                    modelRenderers[i].color.r,
+                    modelRenderers[i].color.g,
+                    modelRenderers[i].color.b,
+                    originalAlphas[i]);
+        }
+        else
+        {
+            for (int i = 0; i < modelRenderers.Length; i++)
+                modelRenderers[i].color = new Color(
+                    modelRenderers[i].color.r,
+                    modelRenderers[i].color.g,
+                    modelRenderers[i].color.b,
+                    Mathf.Lerp(0, originalAlphas[i], appearTimer));
+        }
+    }
+
 
     private void UpdateHealthBar()
     {
-        hpBar.SetValue(1.0f * health / battler.maxHealth);
+        hpBar.SetValue(1.0f * health / battler.GetMaxHealth(level));
     }
 
     private int CalculateDamage(Troop troop)
@@ -76,47 +143,59 @@ public class EnemyController : MonoBehaviour
         int heroAttack = BattleData.main.GetHeroesAttack(troop.elementId);    
     
         int damage = (int) (heroAttack * (1 + troop.attackBonus)) * 4;
-        damage -= 2 * battler.defence;
+        damage -= 2 * battler.GetDefence(level);
         damage = Mathf.Max(0, damage);
 
         DamageStrength type = DamageStrength.NORMAL;
         int elementCount = Settings.main.elements.Length;
+        int totalDamage = damage;
         if ((troop.elementId - 1) % elementCount == battler.elementId)
         {
             type = DamageStrength.STRONG;
-            damage *= 2;
+            totalDamage = 2 * damage;
         }
         else if ((troop.elementId + 1) % elementCount == battler.elementId)
         {
             type = DamageStrength.WEAK;
-            damage /= 2;
+            totalDamage = damage / 2;
         }
-        damage += Random.Range(-damage / 3, damage / 3 + 1);
+        totalDamage += Random.Range(-damage / 3, damage / 3 + 1);
 
-        damageTextController.ShowDamage(damage, type);
-        return damage;
+        damageTextController.ShowDamage(totalDamage, type);
+        return totalDamage;
     }
 
 
     public void UpdateModel()
     {
-        renderers = null;
+        modelRenderers = null;
         SpriteRenderer[] children = characterModelObject.GetComponentsInChildren<SpriteRenderer>();
         foreach (var rend in children)
             DestroyImmediate(rend.gameObject);
-
+        Debug.Log("Battler: " + battler + ", a level: " + level);
         GameObject model = Instantiate(battler.characterModel, characterModelObject.transform.position,
             Quaternion.identity, characterModelObject.transform);
         model.name = battler.name + " (Model)";
 
-        renderers = characterModelObject.GetComponentsInChildren<SpriteRenderer>();
-        foreach (SpriteRenderer rend in renderers)
+        modelRenderers = characterModelObject.GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer rend in modelRenderers)
             rend.sortingLayerName = "Enemies";
+
+        originalAlphas = new float[modelRenderers.Length];
+        for (int i = 0; i < modelRenderers.Length; i++)
+        {
+            originalAlphas[i] = modelRenderers[i].color.a;
+            modelRenderers[i].color = new Color(
+                modelRenderers[i].color.r,
+                modelRenderers[i].color.g,
+                modelRenderers[i].color.b,
+                0);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Troop"))
+        if (isActive && collision.CompareTag("Troop"))
         {
             flash = 0;
             TroopMover cont = collision.GetComponent<TroopMover>();
@@ -126,7 +205,8 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-#if UNITY_EDITOR
+#if FALSE
+    //UNITY_EDITOR
 
     [CustomEditor(typeof(EnemyController))]
     public class EnemyControllerEditor : Editor

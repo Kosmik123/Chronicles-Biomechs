@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 3986783779187461281}
   - component: {fileID: 6206940034197653823}
   m_Layer: 0
-  m_Name: Vezok
+  m_Name: Kohrak model
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,7 +272,7 @@ SpriteRenderer:
   m_SortingLayerID: 1961965759
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 50f37dec7e526dc44b48fff17ab98a7e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2638bd61a4ba0294084c4b98c1bb7755, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -445,7 +445,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1481327529937284940}
   - component: {fileID: 3960923575266627528}
-  - component: {fileID: 7996490525801219972}
+  - component: {fileID: 2651752587293115848}
   m_Layer: 0
   m_Name: Enemy Prefab
   m_TagString: Enemy
@@ -492,7 +492,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7996490525801219972
+--- !u!114 &2651752587293115848
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -504,13 +504,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320b7648ede31b4469cc5ca802603ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battler: {fileID: 0}
-  characterModelObject: {fileID: 3961155895331097700}
-  flashSpeed: 5
+  battler:
+    name: 
+    characterModel: {fileID: 0}
+    colliderSize: 1
+    elementId: 0
+    attack: 1
+    defence: 1
+    maxHealth: 100
+    loot:
+      experience: 0
+      gold: 0
+      items: []
+  flashSpeed: 4
   flash: 0
-  renderers: []
+  modelRenderers: []
+  characterModelObject: {fileID: 3961155895331097700}
   hpBar: {fileID: 9061153637545752088}
+  isActive: 0
+  isAppearing: 0
+  originalAlphas: []
+  appearTimer: 0
   health: 0
+  isDead: 0
 --- !u!1 &6748805570349897245
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,6 +780,16 @@ PrefabInstance:
       propertyPath: colorByValueGradient.key1.r
       value: 0.9926069
       objectReference: {fileID: 0}
+    - target: {fileID: 701483331648574880, guid: 3f2024c5f2b679b47be11ee88082c4a7,
+        type: 3}
+      propertyPath: riseSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 701483331648574880, guid: 3f2024c5f2b679b47be11ee88082c4a7,
+        type: 3}
+      propertyPath: fallSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1172937829719670333, guid: 3f2024c5f2b679b47be11ee88082c4a7,
         type: 3}
       propertyPath: m_Enabled
@@ -780,6 +806,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 148866691874820044, guid: 3f2024c5f2b679b47be11ee88082c4a7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922485648600494330, guid: 3f2024c5f2b679b47be11ee88082c4a7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680363679002932688, guid: 3f2024c5f2b679b47be11ee88082c4a7,
         type: 3}
       propertyPath: m_Enabled
       value: 0

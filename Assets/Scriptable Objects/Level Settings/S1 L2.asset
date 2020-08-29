@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b935457d903664b837894f0274d72d, type: 3}
+  m_Name: S1 L2
+  m_EditorClassIdentifier: 
+  background: {fileID: 21300000, guid: 09db11e099a12674bbddb38d166b6572, type: 3}
+  numberOfBasicWaves: 4
+  enemies:
+  - enemy: {fileID: 11400000, guid: 7fd9ed0ce6134e941af05c8a9d040096, type: 2}
+    level: 1
+  possibleConfigurations:
+  - {fileID: 1833629745508378678, guid: 009cbfc0fc152da4bb67468b3b78e923, type: 3}
+  - {fileID: 1833629745508378678, guid: 349809367974b7841ac9cdde52947048, type: 3}
+  boss:
+    bossEnemy:
+      enemy: {fileID: 11400000, guid: a2730d8dfe9f9fb4995d6b4f25d7bbe1, type: 2}
+      level: 1
+    helper:
+      enemy: {fileID: 11400000, guid: 7fd9ed0ce6134e941af05c8a9d040096, type: 2}
+      level: 1
+    configuration: {fileID: 1833629745508378678, guid: 349809367974b7841ac9cdde52947048,
+      type: 3}
+    bossIndexes: 01000000
+    helperIndexes: 0000000002000000

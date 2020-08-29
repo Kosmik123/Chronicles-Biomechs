@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
+[System.Serializable, CreateAssetMenu(fileName = "New Level", menuName = "Puzzles/Level Settings")]
 public class LevelSettings : ScriptableObject
 {
     [System.Serializable]
@@ -13,12 +13,28 @@ public class LevelSettings : ScriptableObject
         public int level;
     }
 
+    [System.Serializable]
+    public class BossSetting
+    {
+        [SerializeField]
+        public EnemySetting bossEnemy;
+        public EnemySetting helper;
+
+        public EnemyContainer configuration;
+
+        public int[] bossIndexes;
+        public int[] helperIndexes;
+    }
 
     [Header("General")]
     public Sprite background;
+    public int numberOfBasicWaves;
 
     [Header("Enemies")]
-    public EnemySetting[] enemies;    
+    public EnemySetting[] enemies;
+    public EnemyContainer[] possibleConfigurations;
+    public BossSetting boss;
+
 
 
 }
