@@ -138,7 +138,8 @@ public class SwapPuzzleTokenController : MonoBehaviour
                 isMatched = false;
             }
 
-            var troopObj = Instantiate(Settings.main.troops.prefab, transform.position, Quaternion.identity);
+            var troopObj = Instantiate(Settings.main.troops.prefab, 
+                transform.position, Quaternion.identity, transform.parent);
             troop = troopObj.GetComponent<TroopMover>();
             troop.troop = BattleData.main.heroTeam.maskSets[token.elementId].troop;
             troop.UpdateSprite();

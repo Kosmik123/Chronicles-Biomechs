@@ -14,10 +14,10 @@ public class EnemyContainer : MonoBehaviour
 
     void Start()
     {
-        BattleData.main.SetEnemies(enemies);
         foreach (var enemy in enemies)
             enemy.isAppearing = true;
     }
+
 
 
 #if UNITY_EDITOR

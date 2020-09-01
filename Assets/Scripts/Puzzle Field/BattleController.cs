@@ -42,6 +42,7 @@ public class BattleController : MonoBehaviour
         GenerateWave(0);
 
         CreateHeroCards();
+        data.isLevelLoaded = true;
     }
 
     // Update is called once per frame
@@ -62,9 +63,9 @@ public class BattleController : MonoBehaviour
 
         if (data.isLevelLoaded)
         {
-            if (data.AreAllEnemiesDead())
+            if (data.AreAllEnemiesDead() && !swapController.grid.AreTroopsPresent())
             {
-                Destroy(data.currentContainer.gameObject);
+                Destroy(data.currentEnemyContainer.gameObject);
                 GenerateWave(data.waveIndex + 1);
             }
         }
@@ -106,11 +107,11 @@ public class BattleController : MonoBehaviour
             GameObject randomEnemyConfig = data.levelSettings.possibleConfigurations[
                 Random.Range(0, configCount)].gameObject;
 
-            data.currentContainer = Instantiate(randomEnemyConfig, enemyField).GetComponent<EnemyContainer>();
+            data.currentEnemyContainer = Instantiate(randomEnemyConfig, enemyField).GetComponent<EnemyContainer>();
             Debug.Log("Tu ustawiam jacy są wrogowie");
 
             int enemyCount = data.levelSettings.enemies.Length;
-            foreach(EnemyController enemy in data.currentContainer.enemies)
+            foreach(EnemyController enemy in data.currentEnemyContainer.enemies)
             {
                 int randomBattlerIndex = Random.Range(0, enemyCount);
                 enemy.SetBattler(data.levelSettings.enemies[randomBattlerIndex]);
@@ -118,14 +119,14 @@ public class BattleController : MonoBehaviour
         }
         else //BOSS
         {
-            data.currentContainer = Instantiate(
+            data.currentEnemyContainer = Instantiate(
                 data.levelSettings.boss.configuration,
                 enemyField).GetComponent<EnemyContainer>();
 
             foreach (int i in data.levelSettings.boss.helperIndexes)
-                data.currentContainer.enemies[i].SetBattler(data.levelSettings.boss.helper);
+                data.currentEnemyContainer.enemies[i].SetBattler(data.levelSettings.boss.helper);
             foreach (int i in data.levelSettings.boss.bossIndexes)
-                data.currentContainer.enemies[i].SetBattler(data.levelSettings.boss.bossEnemy);
+                data.currentEnemyContainer.enemies[i].SetBattler(data.levelSettings.boss.bossEnemy);
         }
 
 

@@ -26,6 +26,12 @@ public class Hero
         return template.GetAttack(level);
     }
 
+    public int GetDefence()
+    {
+        return template.GetDefence(level);
+    }
+
+
     public Sprite GetBackground()
     {
         return Settings.main.elements[(int)template.elementId].defaultBackground;
@@ -36,6 +42,10 @@ public class Hero
         return template;
     }
 
+    public int CalculatePower()
+    {
+        return GetMaxHealth() + GetAttack() * 2 + GetDefence() + level;
+    }
 
 }
 

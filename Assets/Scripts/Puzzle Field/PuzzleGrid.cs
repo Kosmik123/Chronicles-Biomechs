@@ -292,6 +292,18 @@ public class PuzzleGrid : MonoBehaviour
         return nullCount;
     }
 
+    public bool AreTroopsPresent()
+    {
+        TroopMover[] troops = GetComponentsInChildren<TroopMover>();
+        if (troops != null && troops.Length > 0)
+            return true;
+        return false;
+    }
+
+
+
+
+
 #if UNITY_EDITOR
     public void Print()
     {

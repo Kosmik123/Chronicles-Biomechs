@@ -55,7 +55,6 @@ public class Battler : ScriptableObject
     {
         return baseDefence + defenceByLevel.Get(1.0f * lv / maxLevel);
     }
-
 }
 
 [System.Serializable]

@@ -24,8 +24,7 @@ public class BattleData : MonoBehaviour
     public bool isLevelLoaded;
     public Enemy[] enemies;
     public HeroControllersList[] heroesByElement;
-    public EnemyContainer currentContainer;
-    public List<EnemyController> battlingEnemies;
+    public EnemyContainer currentEnemyContainer;
     public int waveIndex;
 
     // Start is called before the first frame update
@@ -74,26 +73,16 @@ public class BattleData : MonoBehaviour
         return result;
     }
 
-    public void AddEnemy(EnemyController newEnemy)
-    {
-        battlingEnemies.Add(newEnemy);
-    }
-
     public bool AreAllEnemiesDead()
     {
-        foreach (EnemyController enemy in battlingEnemies)
+        foreach (EnemyController enemy in currentEnemyContainer.enemies)
             if (!enemy.isDead)
                 return false;
-
         return true;
     }
 
 
-    public void SetEnemies(EnemyController[] newEnemies)
-    {
-        foreach (var enemy in newEnemies)
-            battlingEnemies.Add(enemy);
-        isLevelLoaded = true;
-    }
+
+
 }
 
