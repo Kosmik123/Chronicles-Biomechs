@@ -9,6 +9,9 @@ public class StatusBarController : MonoBehaviour
     public bool showAlways = false;
     public bool instantChange;
 
+    public bool riseSpeedRelativeToValue;
+    public bool fallSpeedRelativeToValue;
+
     public float riseSpeed;
     public float fallSpeed;
 
@@ -90,9 +93,11 @@ public class StatusBarController : MonoBehaviour
     private void UpdateValues()
     {
         if (displayedValue > value + 0.005f)
-            displayedValue -= (displayedValue - value + 0.01f) * fallSpeed * Time.deltaTime;
+            displayedValue -= (fallSpeedRelativeToValue ? (displayedValue - value + 0.01f) : 1)
+                * fallSpeed * Time.deltaTime;
         else if (displayedValue < value - 0.005f)
-            displayedValue += (value - displayedValue + 0.01f) * riseSpeed * Time.deltaTime;
+            displayedValue += (riseSpeedRelativeToValue ? (value - displayedValue + 0.01f) : 1)
+                * riseSpeed * Time.deltaTime;
         else
             displayedValue = value;
 

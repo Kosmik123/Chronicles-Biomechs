@@ -760,7 +760,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1198108767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38ac2e2997d4c3540b36ffa1cd1f3b91, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c80ac080eccce5489bf6e7fc4d67339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 1198108770}
@@ -781,7 +781,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1198108767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbd5fc8f89655f744bc1f557c5dcae48, type: 3}
+  m_Script: {fileID: 11500000, guid: c36f930d8a668154f8f254862dcdc312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   heroTeam:

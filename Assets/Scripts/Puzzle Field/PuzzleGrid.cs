@@ -34,6 +34,7 @@ public class PuzzleGrid : MonoBehaviour
     void Start()
     {
         tokenSize = Settings.main.tokens.size;
+        Debug.Log("creating tokens in grid");
         CreateGrid(generateNonMatchedGrid);
     }
 
