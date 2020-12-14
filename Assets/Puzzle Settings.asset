@@ -133,9 +133,9 @@ MonoBehaviour:
   stagesSettings:
     stagePanels: []
     panelXDistance: 11.25
-    darkCensterGlowRange:
+    starCenterGlowRange:
       serializedVersion: 2
-      key0: {r: 0.41799998, g: 0.41799998, b: 0.41799998, a: 1}
+      key0: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -162,8 +162,10 @@ MonoBehaviour:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    darkCensterGlowSpeed: 5
-    completedLevelScale: 0.7
+    starCenterGlowSpeed: 4
+    lockedLevelScale: 1
+    unlockedLevelScale: 2
+    completedLevelScale: 1.5
   levels:
     stages:
     - levels:

@@ -89,8 +89,11 @@ public class PuzzleSettings : ScriptableObject
         public GameObject[] stagePanels;
         public float panelXDistance;
 
-        public Gradient darkCensterGlowRange;
-        public float darkCensterGlowSpeed;
+        public Gradient starCenterGlowRange;
+        public float starCenterGlowSpeed;
+
+        public float lockedLevelScale;
+        public float unlockedLevelScale;
         public float completedLevelScale;
 
     }
