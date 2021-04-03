@@ -28,7 +28,7 @@ public class LevelSettings : ScriptableObject
 
     [Header("General")]
     public Sprite background;
-    public int numberOfBasicWaves;
+    public int numberOfBasicWaves; // Waves before final wave with boss
 
     [Header("Enemies")]
     public EnemySetting[] enemies;

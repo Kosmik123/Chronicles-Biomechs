@@ -168,6 +168,88 @@ MonoBehaviour:
     completedLevelScale: 1.5
   levels:
     stages:
-    - levels:
+    - name: Arrival
+      panelPrefab: {fileID: 4686732928639208159, guid: a3c9e5d75458ca64a8fcaccdc783d1b5,
+        type: 3}
+      levels:
       - {fileID: 11400000, guid: fdf8ded0e2d825641b27490a08eb2e1c, type: 2}
       - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+    - name: Ta-Koro & Tahu
+      panelPrefab: {fileID: 4727723024853350575, guid: 6adebd9e15b1d09429411dfe3ba11bc0,
+        type: 3}
+      levels:
+      - {fileID: 11400000, guid: fdf8ded0e2d825641b27490a08eb2e1c, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+    - name: Ga-Koro & Gali
+      panelPrefab: {fileID: 4904977156968011813, guid: dd4adb79d4e6aa7498f06abab7906822,
+        type: 3}
+      levels:
+      - {fileID: 11400000, guid: fdf8ded0e2d825641b27490a08eb2e1c, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+    - name: Po-Koro & Nui Jaga
+      panelPrefab: {fileID: 6138714158553362239, guid: 7ba472e053e73114fb9965ba6f0ad90d,
+        type: 3}
+      levels:
+      - {fileID: 11400000, guid: fdf8ded0e2d825641b27490a08eb2e1c, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+    - name: Onu-Koro & Onua
+      panelPrefab: {fileID: 3047443174439461929, guid: cbdf17ba2de94804f98b3daa30f6f34c,
+        type: 3}
+      levels:
+      - {fileID: 11400000, guid: fdf8ded0e2d825641b27490a08eb2e1c, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+    - name: Le-Koro & Turaga Matau
+      panelPrefab: {fileID: 513184532535906030, guid: f9854898a34e0b14ca38e5e6a022b96c,
+        type: 3}
+      levels:
+      - {fileID: 11400000, guid: fdf8ded0e2d825641b27490a08eb2e1c, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+    - name: Ko-Koro & Kopaka
+      panelPrefab: {fileID: 1332425138052163140, guid: 8b6049fb574b43444b40b027d3e0d6f5,
+        type: 3}
+      levels:
+      - {fileID: 11400000, guid: fdf8ded0e2d825641b27490a08eb2e1c, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+      - {fileID: 11400000, guid: f70b98f092fe2ee4d8a4ce40cd27c526, type: 2}
+    - name: Final Defence & Toa Kaita
+      panelPrefab: {fileID: 0}
+      levels: []
+    - name: Battle of Kini-Nui & Makuta
+      panelPrefab: {fileID: 0}
+      levels: []
+    - name: Mata Nui & Bohrok
+      panelPrefab: {fileID: 0}
+      levels: []

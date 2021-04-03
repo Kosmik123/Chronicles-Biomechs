@@ -10,9 +10,9 @@ public class GameController : MonoBehaviour
     public bool debugMode;
     public Scene currentScene;
 
-    public int currentSceneIndex;
+    public SceneIndex currentSceneIndex;
 
-    public GameObject test;
+    public GameObject textToLoad;
 
     [Header("Level Loading")]
     public LevelSettings levelToLoad;
@@ -29,48 +29,41 @@ public class GameController : MonoBehaviour
 #if UNITY_EDITOR
         debugMode = true;
 #endif
-        test = Instantiate(Settings.main.damageTextSettings.prefab,
+        textToLoad = Instantiate(Settings.main.damageTextSettings.prefab,
             new Vector3(100,100), Quaternion.identity);
 
-        if (!debugMode) SceneManager.LoadSceneAsync(
-            SceneLoader.Puzzle, LoadSceneMode.Additive);
-    
+        if (!debugMode) SceneManager.LoadSceneAsync( (int)
+            SceneIndex.Puzzle, LoadSceneMode.Additive);
     }
 
     void Update()
     {
-        if(test != null && Time.time > 2f)
+        if(textToLoad != null && Time.time > 2f)
         {
-            Destroy(test);
-            test = null;
+            Destroy(textToLoad);
+            textToLoad = null;
         }
-
-
     }
     
     public static void LoadLevel(LevelSettings lvToLoad)
     {
         main.levelToLoad = lvToLoad;
-        ChangeScene(SceneLoader.Puzzle);
+        ChangeScene(SceneIndex.Puzzle);
     }
 
-    private static void ChangeScene(int newSceneIndex)
+    private static void ChangeScene(SceneIndex newSceneIndex)
     {
-        SceneManager.LoadSceneAsync(newSceneIndex, LoadSceneMode.Additive);
-        SceneManager.UnloadSceneAsync(main.currentSceneIndex);
+        SceneManager.LoadSceneAsync((int)newSceneIndex, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync((int)main.currentSceneIndex);
         main.currentSceneIndex = newSceneIndex;
     }
 
 }
 
-public class SceneLoader
+public enum SceneIndex
 {
-    public const int
-        Global = 0,
-        Map = 1,
-        Puzzle = 2,
-        Dialogue = 3
-        ;
-
-
+    Global = 0,
+    Map = 1,
+    Puzzle = 2,
+    Dialogue = 3
 }

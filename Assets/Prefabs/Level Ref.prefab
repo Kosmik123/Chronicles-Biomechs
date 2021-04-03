@@ -172,8 +172,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6546651072630276444}
-  - component: {fileID: 8276491242118501362}
   - component: {fileID: 6824813950214442140}
+  - component: {fileID: 5528924090371796109}
   m_Layer: 0
   m_Name: Level Ref
   m_TagString: Untagged
@@ -196,22 +196,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &8276491242118501362
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6546651072630276447}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.21
 --- !u!114 &6824813950214442140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,8 +214,26 @@ MonoBehaviour:
   lightCenterRenderer: {fileID: 3436470843294882907}
   stageNumber: 0
   levelNumber: 0
+  colliderRadius: 0.42
+  clicked: 0
   currentState: 0
   lastState: 0
+--- !u!58 &5528924090371796109
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6546651072630276447}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.42
 --- !u!1 &6708488609224562978
 GameObject:
   m_ObjectHideFlags: 0

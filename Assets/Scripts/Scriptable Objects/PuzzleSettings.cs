@@ -104,11 +104,13 @@ public class PuzzleSettings : ScriptableObject
     public class LevelsLists
     {
         [System.Serializable]
-        public class LevelList
+        public class StageSettings
         {
+            public string name;
+            public GameObject panelPrefab;
             public LevelSettings[] levels;
         }
-        public LevelList[] stages;
+        public StageSettings[] stages;
     }
     public LevelsLists levels;
 

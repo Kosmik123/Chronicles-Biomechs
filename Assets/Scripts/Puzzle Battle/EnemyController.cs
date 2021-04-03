@@ -25,11 +25,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float appearTimer;
 
-
     [Header("Battler State")]
     public int health;
     public bool isDead;
-
 
     void Awake()
     {
@@ -38,7 +36,6 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-
         Debug.Log("Enemy Start");
 
         // Collider

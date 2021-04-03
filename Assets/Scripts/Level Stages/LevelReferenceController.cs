@@ -10,21 +10,27 @@ public class LevelReferenceController : MonoBehaviour
     }
 
     [Header("To Link")]
-
     public SpriteRenderer star;
     public SpriteRenderer circleRenderer;
     public SpriteRenderer darkCenterRenderer;
     public SpriteRenderer lightCenterRenderer;
+    private CircleCollider2D collider;
 
     [Header("Properties")]
     public int stageNumber;
     public int levelNumber;
     private Gradient glowRange;
     private float glowSpeed;
+    public float colliderRadius;
 
     [Header("States")]
     public bool clicked;
     public State currentState, lastState;
+
+    private void Awake()
+    {
+        collider = GetComponent<CircleCollider2D>();
+    }
 
     public void Start()
     {
