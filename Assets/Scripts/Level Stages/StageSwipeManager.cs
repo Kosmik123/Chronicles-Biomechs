@@ -6,17 +6,15 @@ public class StageSwipeManager : MonoBehaviour
 {
     const int MODE_STAGES = 0;
     const int MODE_TEAMS = 1;
-    
-
 
     public enum SwipeDirection
     {
         NOT_DECIDED, VERTICAL, HORIZONTAL
     }
 
-
     [Header("To link")]
     public Camera camera;
+    public Transform stageContainer;
 
     [Header("Settings")]
     public Sprite panelSprite;
@@ -27,6 +25,7 @@ public class StageSwipeManager : MonoBehaviour
     public int stagesAmount;
 
     [Header("States")]
+    public Transform swipedTransform;
     public int currentStage;
     public int currentMode;
     //private Vector3 moveDirection;
@@ -34,7 +33,7 @@ public class StageSwipeManager : MonoBehaviour
 
     [Header("Swipe states")]
     private Vector3 mousePressWorldPosition;
-    private Vector3 lastPosition;
+    public Vector3 lastPosition;
     private SwipeDirection swipeDirection;
     private float timer;
     private Vector3 mouseShift;
@@ -69,6 +68,7 @@ public class StageSwipeManager : MonoBehaviour
 
     void Start()
     {
+        swipedTransform = transform;
         swipeDistances = panelSpriteScale * panelSprite.rect.size / panelSprite.pixelsPerUnit; 
     }
 
@@ -86,9 +86,9 @@ public class StageSwipeManager : MonoBehaviour
         {
             isPressed = false;
             currentStage = Mathf.Clamp(
-                -Mathf.RoundToInt(transform.position.x / swipeDistances.x),
+                -Mathf.RoundToInt(swipedTransform.position.x / swipeDistances.x),
                 0, stagesAmount - 1);
-            currentMode = -Mathf.RoundToInt(transform.position.y / swipeDistances.y);
+            currentMode = -Mathf.RoundToInt(swipedTransform.position.y / swipeDistances.y);
             SnapToGrid();
         }
 
@@ -107,13 +107,21 @@ public class StageSwipeManager : MonoBehaviour
                     {
                         if (Mathf.Abs(mousePosDiff.x) > Mathf.Abs(mousePosDiff.y))
                         {
+                            swipedTransform = stageContainer;
                             swipeDirection = SwipeDirection.HORIZONTAL;
                         }
                         else
                         {
+                            swipedTransform = transform;
                             swipeDirection = SwipeDirection.VERTICAL;
                         }
+                        Debug.Log("Controller position: " + transform.position);
+                        Debug.Log("Container position: " + stageContainer.position);
+                        Debug.Log("Ustawianie lastPosition na: " + lastPosition);
+
+                        lastPosition = swipedTransform.position;
                     }
+
                     if (swipeDirection == SwipeDirection.HORIZONTAL)
                     {
                         float mousePosDiffX = mousePosDiff.x;
@@ -132,30 +140,35 @@ public class StageSwipeManager : MonoBehaviour
                         mouseShift = Vector3.up * mousePosDiffY;
                     }
                 }
+
+                if (swipeDirection != SwipeDirection.NOT_DECIDED)
+                {
+                    swipedTransform.position = lastPosition + mouseShift;
+                }
             }
-            transform.position = lastPosition + mouseShift;
         }
         else if (snapping.isActive)
-            transform.position = snapping.GetPosition();
+            swipedTransform.position = snapping.GetPosition();
     }
 
     void SnapToGrid()
     {
-        Vector2 gridPosition = new Vector2(transform.position.x / swipeDistances.x, transform.position.y / swipeDistances.y);
+        Vector2 gridPosition = new Vector2(
+            swipedTransform.position.x / swipeDistances.x,
+            swipedTransform.position.y / swipeDistances.y);
         int xGridPos = (int) Mathf.Round(gridPosition.x);
         int yGridPos = (int) Mathf.Round(gridPosition.y);
 
-        snapping.SetNewTarget(transform.position, new Vector3(
+        snapping.SetNewTarget(swipedTransform.position, new Vector3(
             xGridPos * swipeDistances.x,
             yGridPos * swipeDistances.y,
-            transform.position.z));
+            swipedTransform.position.z));
     }
 
     private void OnMousePressed()
     {
         isPressed = true;
         mousePressWorldPosition = camera.ScreenToWorldPoint(Input.mousePosition);
-        lastPosition =  transform.position;
     }
 
     private void OnMouseDown()

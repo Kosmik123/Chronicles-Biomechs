@@ -96,6 +96,9 @@ public class PuzzleSettings : ScriptableObject
         public float unlockedLevelScale;
         public float completedLevelScale;
 
+        public float unlockedLvColiderRadius;
+        public float completedLvColiderRadius;
+
     }
     public StagesSettings stagesSettings;
 

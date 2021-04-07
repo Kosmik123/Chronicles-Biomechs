@@ -23,6 +23,8 @@ public class LevelReferenceController : MonoBehaviour
     private float glowSpeed;
     public float colliderRadius;
 
+    private PuzzleSettings.StagesSettings settings;
+
     [Header("States")]
     public bool clicked;
     public State currentState, lastState;
@@ -34,8 +36,10 @@ public class LevelReferenceController : MonoBehaviour
 
     public void Start()
     {
-        glowRange = Settings.main.stagesSettings.starCenterGlowRange;
-        glowSpeed = Settings.main.stagesSettings.starCenterGlowSpeed;
+        settings = Settings.main.stagesSettings;
+
+        glowRange = settings.starCenterGlowRange;
+        glowSpeed = settings.starCenterGlowSpeed;
 
         UpdateState();
         UpdateGraphics();
@@ -81,29 +85,32 @@ public class LevelReferenceController : MonoBehaviour
         {
             case State.LOCKED:
                 star.transform.localScale =
-                    Vector3.one * Settings.main.stagesSettings.lockedLevelScale;
+                    Vector3.one * settings.lockedLevelScale;
 
                 circleRenderer.enabled = false;
                 darkCenterRenderer.enabled = false;
                 lightCenterRenderer.enabled = false;
+                collider.radius = 0;
                 break;
 
             case State.UNLOCKED:
                 star.transform.localScale =
-                    Vector3.one * Settings.main.stagesSettings.unlockedLevelScale;
+                    Vector3.one * settings.unlockedLevelScale;
 
                 circleRenderer.enabled = true;
                 darkCenterRenderer.enabled = false;
                 lightCenterRenderer.enabled = true;
+                collider.radius = settings.unlockedLvColiderRadius;
                 break;
 
             case State.COMPLETED:
                 star.transform.localScale = 
-                    Vector3.one * Settings.main.stagesSettings.completedLevelScale;
+                    Vector3.one * settings.completedLevelScale;
 
                 circleRenderer.enabled = true;
                 darkCenterRenderer.enabled = true;
                 lightCenterRenderer.enabled = false;
+                collider.radius = settings.completedLvColiderRadius;
                 break;
         }
     }

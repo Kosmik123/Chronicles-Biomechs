@@ -44,7 +44,7 @@ public class TokenChain
                     break;
                 }  
             }
-            changedToken.type = TokenType.BOMB;
+            changedToken.type = TokenType.SPECIAL4;
             changedToken.hasJustChangedType = true;
             changedToken.token.wasMoved = false;
         }
@@ -59,7 +59,7 @@ public class TokenChain
                     break;
                 }
             }
-            changedToken.type = TokenType.COLOR;
+            changedToken.type = TokenType.SPECIAL5;
             changedToken.hasJustChangedType = true;
             changedToken.token.wasMoved = false;
         }

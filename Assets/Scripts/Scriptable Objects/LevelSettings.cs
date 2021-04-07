@@ -9,6 +9,7 @@ public class LevelSettings : ScriptableObject
     [System.Serializable]
     public class EnemySetting
     {
+        public string name;
         public Enemy enemy;
         public int level;
     }

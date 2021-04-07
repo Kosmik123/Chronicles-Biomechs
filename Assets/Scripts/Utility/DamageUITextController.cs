@@ -14,13 +14,15 @@ public abstract class DamageTextController : MonoBehaviour
 
     [Header("Settings")]
     public Bounds textGenerationBounds;
+    protected int strongFontSize, normalFontSize, weakFontSize;
+    protected Color strongFillColor, normalFillColor, weakFillColor;
+    protected Color strongOutlineColor, normalOutlineColor, weakOutlineColor;
 
     [Header("States")]
     public bool isWeak;
     public bool isStrong;
 
     abstract public void ShowDamage(int damage, DamageStrength type);
-
 }
 
 
@@ -32,21 +34,32 @@ public class DamageUITextController : DamageTextController
 
     public List<Text> damageIndicators = new List<Text>();
 
+    
+
+
     // Start is called before the first frame update
     void Start()
     {
+        strongFontSize = Settings.main.damageTextSettings.strongFontSize;
+        normalFontSize = Settings.main.damageTextSettings.normalFontSize;
+        weakFontSize = Settings.main.damageTextSettings.weakFontSize;
+        strongFillColor = Settings.main.damageTextSettings.strongFillColor;
+        normalFillColor = Settings.main.damageTextSettings.normalFillColor;
+        weakFillColor = Settings.main.damageTextSettings.weakFillColor;
+        strongOutlineColor = Settings.main.damageTextSettings.strongOutlineColor;
+        normalOutlineColor = Settings.main.damageTextSettings.normalOutlineColor;
+        weakOutlineColor = Settings.main.damageTextSettings.weakOutlineColor;
+
         weakDamageText = weakTextAnimation.GetComponentInChildren<Text>();
         strongDamageText = strongTextAnimation.GetComponentInChildren<Text>();
 
         weakDamageText.enabled = false;
-        weakDamageText.color = Settings.main.damageTextSettings.weakFillColor;
-        weakDamageText.GetComponent<Outline>().effectColor = 
-            Settings.main.damageTextSettings.weakOutlineColor;
+        weakDamageText.color = weakFillColor;
+        weakDamageText.GetComponent<Outline>().effectColor = weakOutlineColor;
 
         strongDamageText.enabled = false;
-        strongDamageText.color = Settings.main.damageTextSettings.strongFillColor;
-        strongDamageText.GetComponent<Outline>().effectColor =
-            Settings.main.damageTextSettings.strongOutlineColor;
+        strongDamageText.color = strongFillColor;
+        strongDamageText.GetComponent<Outline>().effectColor = strongOutlineColor;
 
         RectTransform tf = GetComponent<RectTransform>();
         tf.localScale = 0.1f * Vector3.one;
@@ -93,9 +106,9 @@ public class DamageUITextController : DamageTextController
         switch (type)
         {
             case DamageStrength.WEAK:
-                damageText.fontSize = Settings.main.damageTextSettings.weakFontSize;
-                damageText.color = Settings.main.damageTextSettings.weakFillColor;
-                outline.effectColor = Settings.main.damageTextSettings.weakOutlineColor;
+                damageText.fontSize = weakFontSize;
+                damageText.color = weakFillColor;
+                outline.effectColor = weakOutlineColor;
                 if (!isWeak)
                 {
                     weakDamageText.enabled = true;
@@ -105,9 +118,9 @@ public class DamageUITextController : DamageTextController
                 break;
             case DamageStrength.STRONG:
                 damageText.fontStyle = FontStyle.Bold;
-                damageText.fontSize = Settings.main.damageTextSettings.strongFontSize;
-                damageText.color = Settings.main.damageTextSettings.strongFillColor;
-                outline.effectColor = Settings.main.damageTextSettings.strongOutlineColor;
+                damageText.fontSize = strongFontSize;
+                damageText.color = strongFillColor;
+                outline.effectColor = strongOutlineColor;
                 if(!isStrong)
                 {
                     strongDamageText.enabled = true;
@@ -116,9 +129,9 @@ public class DamageUITextController : DamageTextController
                 }
                 break;
             default:
-                damageText.fontSize = Settings.main.damageTextSettings.normalFontSize;
-                damageText.color = Settings.main.damageTextSettings.normalFillColor;
-                outline.effectColor = Settings.main.damageTextSettings.normalOutlineColor;
+                damageText.fontSize = normalFontSize;
+                damageText.color = normalFillColor;
+                outline.effectColor = normalOutlineColor;
                 break;
         }
     }

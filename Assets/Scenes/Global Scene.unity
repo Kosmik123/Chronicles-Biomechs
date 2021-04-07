@@ -645,3 +645,42 @@ MonoBehaviour:
   currentSceneIndex: 1
   textToLoad: {fileID: 0}
   levelToLoad: {fileID: 11400000, guid: fdf8ded0e2d825641b27490a08eb2e1c, type: 2}
+  initialPath: C:\Users\gosia\Documents\Unity\Chronicles & Biomechs\Assets\Scripts\
+  filenames:
+  - GameController.cs
+  - GameData.cs
+  - Player.cs
+  - Settings.cs
+  - Dialogue\DialogueManager.cs
+  - Level Stages\LevelReferenceController.cs
+  - Level Stages\StagePanelController.cs
+  - Level Stages\StageSwipeManager.cs
+  - Puzzle Battle\BattleController.cs
+  - Puzzle Battle\BattleData.cs
+  - Puzzle Battle\BattleViewController.cs
+  - Puzzle Battle\EnemyContainer.cs
+  - Puzzle Battle\EnemyController.cs
+  - Puzzle Battle\EnergyParticleController.cs
+  - Puzzle Battle\HeroCardController.cs
+  - Puzzle Battle\MaskToken.cs
+  - Puzzle Battle\PuzzleGrid.cs
+  - Puzzle Battle\SwapController.cs
+  - Puzzle Battle\SwapPuzzleTokenController.cs
+  - Puzzle Battle\TroopMover.cs
+  - RPG\Hero.cs
+  - RPG\PuzzleElement.cs
+  - RPG\Team.cs
+  - Scriptable Objects\Dialogue.cs
+  - Scriptable Objects\LevelSettings.cs
+  - Scriptable Objects\PuzzleSettings.cs
+  - Scriptable Objects\Troop.cs
+  - Scriptable Objects\RPG\Battler.cs
+  - Scriptable Objects\RPG\Enemy.cs
+  - Scriptable Objects\RPG\HeroTemplate.cs
+  - Scriptable Objects\RPG\Item.cs
+  - Scriptable Objects\RPG\Kanohi.cs
+  - Utility\DamageTextMeshController.cs
+  - Utility\DamageUITextController.cs
+  - Utility\LevelLoader.cs
+  - Utility\StatusBarController.cs
+  numberOfLines: 3562

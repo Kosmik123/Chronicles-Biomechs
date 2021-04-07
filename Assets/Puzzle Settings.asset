@@ -166,6 +166,8 @@ MonoBehaviour:
     lockedLevelScale: 1
     unlockedLevelScale: 2
     completedLevelScale: 1.5
+    unlockedLvColiderRadius: 0.72
+    completedLvColiderRadius: 0.42
   levels:
     stages:
     - name: Arrival

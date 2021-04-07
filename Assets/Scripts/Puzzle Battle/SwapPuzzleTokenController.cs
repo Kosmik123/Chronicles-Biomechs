@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum TokenType
 {
-    NONE, NORMAL, BOMB, COLOR
+    NONE, NORMAL, SPECIAL4, SPECIAL5
 }
 [RequireComponent(typeof(MaskToken))]
 public class SwapPuzzleTokenController : MonoBehaviour
@@ -30,7 +30,15 @@ public class SwapPuzzleTokenController : MonoBehaviour
     public Vector3 pressWorldPosition;
     public Vector3 releaseWorldPosition;
 
+    [Header("Special Color")]
+    Color normalColor;
+    Color highlightColor;
+
+    
+    
     private TroopMover troop;
+
+
 
 
     public void Awake()
@@ -51,8 +59,8 @@ public class SwapPuzzleTokenController : MonoBehaviour
             ManageDisappearing();
 
         normalSprite.transform.localScale = new Vector3(
-            1 + (type == TokenType.BOMB ? 0.5f : 0),
-            1 + (type == TokenType.COLOR ? 0.5f : 0),
+            1 + (type == TokenType.SPECIAL4 ? 0.5f : 0),
+            1 + (type == TokenType.SPECIAL5 ? 0.5f : 0),
             1);
         if(!hasJustChangedType)
             ManageSprites();
@@ -75,8 +83,8 @@ public class SwapPuzzleTokenController : MonoBehaviour
     private void ManageSprites()
     {
         normalSprite.enabled = (type == TokenType.NORMAL);
-        bombSprite.enabled = (type == TokenType.BOMB);
-        colorSprite.enabled = (type == TokenType.COLOR);
+        bombSprite.enabled = (type == TokenType.SPECIAL4);
+        colorSprite.enabled = (type == TokenType.SPECIAL5);
 
         normalSprite.color = colorSprite.color = bombSprite.color =
              Settings.main.elements[token.elementId].maskColor;
@@ -112,12 +120,12 @@ public class SwapPuzzleTokenController : MonoBehaviour
     {
         if (!hasJustChangedType)
         {
-            if (type == TokenType.BOMB)
+            if (type == TokenType.SPECIAL4)
             {
                 SwapController.main.DestroyNeighbours(token.gridPosition);
                 wasActivated = true;
             }
-            else if (type == TokenType.COLOR)
+            else if (type == TokenType.SPECIAL5)
             {
                 SwapController.main.DestroyTokensOfElement(token.elementId);
                 wasActivated = true;
